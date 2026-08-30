@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Punto de Partida · Familias</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<style>
+  :root{
+    --paper:#FBFAF5; --ink:#26231C; --soft:#6E6857; --line:#E4E0D2;
+    --bic:#2743C0; --bic-soft:#EEF1FC; --red:#C64F4A;
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    font-size:17px; line-height:1.5;
+    background-image:linear-gradient(var(--paper) 0 0),repeating-linear-gradient(to bottom,transparent 0 27px,rgba(39,67,192,.055) 27px 28px);
+    background-blend-mode:normal; background-color:var(--paper);
+  }
+  body{background:repeating-linear-gradient(to bottom,transparent 0 27px,rgba(39,67,192,.05) 27px 28px) var(--paper)}
+  .wrap{max-width:620px;margin:0 auto;padding:28px 18px 120px}
+  header{margin-bottom:26px}
+  .brand{display:flex;align-items:center;gap:11px;margin-bottom:20px}
+  .logo{font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:19px;color:#FFFFFF;background:var(--bic);width:42px;height:42px;border-radius:11px;display:grid;place-items:center}
+  .brand-name{font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:17px;line-height:1.15;color:var(--ink)}
+  .brand-sub{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--soft)}
+  .kicker{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--bic)}
+  h1{font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:34px;line-height:1.1;margin:6px 0 10px;text-wrap:balance}
+  .lead{color:var(--soft);margin:0;max-width:52ch}
+  .lead b{color:var(--ink)}
+  section{background:#FFFFFF;border:1px solid var(--line);border-radius:var(--radius);padding:18px 16px 20px;margin:14px 0;box-shadow:0 1px 0 rgba(38,35,28,.04)}
+  .qnum{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--bic);margin-bottom:2px}
+  h2{font-family:Georgia,"Times New Roman",serif;font-weight:600;font-size:21px;margin:2px 0 4px;line-height:1.25}
+  .hint{font-size:14.5px;color:var(--soft);margin:0 0 12px}
+  .req{color:var(--red)}
+  .field{margin:14px 0 0}
+  .field>label.txt{display:block;font-weight:700;font-size:15.5px;margin-bottom:7px}
+  input[type=text],textarea{
+    width:100%;padding:12px 13px;border:1.5px solid var(--line);border-radius:10px;
+    font:inherit;color:var(--ink);background:#FFFFFF;
+  }
+  input[type=text]:focus,textarea:focus{outline:2px solid var(--bic);outline-offset:1px;border-color:var(--bic)}
+  textarea{min-height:84px;resize:vertical}
+  .chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:8px}
+  .chips label{
+    display:inline-flex;align-items:center;min-height:44px;padding:9px 15px;
+    border:1.5px solid var(--line);border-radius:999px;background:#FFFFFF;
+    font-size:15.5px;font-weight:400;cursor:pointer;user-select:none;color:var(--ink);
+  }
+  .chips input{position:absolute;opacity:0;width:1px;height:1px}
+  .chips label:has(input:checked){background:var(--bic);border-color:var(--bic);color:#FFFFFF;font-weight:700}
+  .chips label:has(input:focus-visible){outline:2px solid var(--bic);outline-offset:2px}
+  .send{
+    position:fixed;left:0;right:0;bottom:0;background:rgba(251,250,245,.96);
+    border-top:1px solid var(--line);padding:12px 18px calc(12px + env(safe-area-inset-bottom));
+    backdrop-filter:blur(4px);
+  }
+  .send-in{max-width:620px;margin:0 auto;display:flex;gap:10px}
+  button{
+    font:inherit;font-weight:700;border-radius:12px;cursor:pointer;min-height:52px;
+  }
+  #btn-wa{flex:1;background:var(--bic);color:#FFFFFF;border:none;font-size:17px;display:grid;place-items:center;text-decoration:none;font-weight:700;border-radius:12px;min-height:52px}
+  #btn-wa:active{transform:translateY(1px)}
+  #btn-copy{background:#FFFFFF;color:var(--ink);border:1.5px solid var(--line);padding:0 16px}
+  #msg{font-size:14px;color:var(--red);margin:6px 2px 0;display:none}
+  .foot{color:var(--soft);font-size:13.5px;margin-top:22px}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="brand"><span class="logo">sv.</span><div><div class="brand-name">sergio vega.</div><div class="brand-sub">formación</div></div></div>
+  <div class="kicker">Punto de partida · Curso 2026-27</div>
+  <h1>Cuestionario para la familia</h1>
+  <p class="lead">Son <b>3-4 minutos</b> desde el móvil. Con esto preparo las clases a medida desde el primer día. Al terminar, el botón de abajo abre WhatsApp con tus respuestas ya escritas — solo tienes que darle a enviar. <span class="req">*</span> = imprescindible.</p>
+</header>
+
+<section>
+  <div class="qnum">1 · Quién es quién</div>
+  <h2>Datos básicos</h2>
+  <div class="field"><label class="txt" for="f-alumno">Nombre del alumno/a <span class="req">*</span></label>
+    <input type="text" id="f-alumno" data-k="Alumno/a" autocomplete="off"></div>
+  <div class="field"><label class="txt">Curso que empieza <span class="req">*</span></label>
+    <div class="chips" data-k="Curso" data-type="radio">
+      <label><input type="radio" name="curso" value="2º ESO">2º ESO</label>
+      <label><input type="radio" name="curso" value="3º ESO">3º ESO</label>
+      <label><input type="radio" name="curso" value="Otro">Otro</label>
+    </div></div>
+  <div class="field"><label class="txt" for="f-quien">Quién responde (nombre y parentesco)</label>
+    <input type="text" id="f-quien" data-k="Responde" autocomplete="off" placeholder="Ej.: Marta, madre"></div>
+  <div class="field"><label class="txt">¿Quién lleva el día a día del cole?</label>
+    <p class="hint">Agenda, deberes, notas, reuniones — para saber con quién coordino.</p>
+    <div class="chips" data-k="Quién lleva el cole" data-type="radio">
+      <label><input type="radio" name="lleva" value="La madre">La madre</label>
+      <label><input type="radio" name="lleva" value="El padre">El padre</label>
+      <label><input type="radio" name="lleva" value="Repartido">Repartido</label>
+      <label><input type="radio" name="lleva" value="Según el día">Según el día</label>
+    </div></div>
+</section>
+
+<section>
+  <div class="qnum">2 · Foto académica</div>
+  <h2>Cómo llegó a junio</h2>
+  <div class="field"><label class="txt">En general, sus notas del curso pasado fueron…</label>
+    <div class="chips" data-k="Notas curso pasado" data-type="radio">
+      <label><input type="radio" name="notas" value="Buenas (notable o más)">Buenas</label>
+      <label><input type="radio" name="notas" value="Correctas (aprueba casi todo)">Correctas</label>
+      <label><input type="radio" name="notas" value="Justas (algún suspenso)">Justas</label>
+      <label><input type="radio" name="notas" value="Flojas (varios suspensos)">Flojas</label>
+    </div></div>
+  <div class="field"><label class="txt">Asignaturas que os preocupan <span class="req">*</span></label>
+    <p class="hint">Marca todas las que toquen.</p>
+    <div class="chips" data-k="Asignaturas que preocupan" data-type="multi">
+      <label><input type="checkbox" value="Matemáticas">Matemáticas</label>
+      <label><input type="checkbox" value="Lengua">Lengua</label>
+      <label><input type="checkbox" value="Inglés">Inglés</label>
+      <label><input type="checkbox" value="Física y Química">Física y Química</label>
+      <label><input type="checkbox" value="Biología y Geología">Biología y Geología</label>
+      <label><input type="checkbox" value="Geografía e Historia">Geografía e Historia</label>
+      <label><input type="checkbox" value="Ninguna en especial">Ninguna en especial</label>
+    </div></div>
+  <div class="field"><label class="txt" for="f-pend">¿Quedó algo pendiente o repetido? ¿Recuperaciones?</label>
+    <input type="text" id="f-pend" data-k="Pendientes" placeholder="Ej.: recuperó Mates en junio / nada"></div>
+</section>
+
+<section>
+  <div class="qnum">3 · Historial</div>
+  <h2>Lo que ya habéis probado</h2>
+  <div class="field"><label class="txt">¿Ha tenido antes clases particulares o academia?</label>
+    <div class="chips" data-k="Refuerzo anterior" data-type="radio">
+      <label><input type="radio" name="ref" value="No, nunca">No, nunca</label>
+      <label><input type="radio" name="ref" value="Sí, particular">Sí, particular</label>
+      <label><input type="radio" name="ref" value="Sí, academia">Sí, academia</label>
+      <label><input type="radio" name="ref" value="Sí, ambas">Ambas</label>
+    </div></div>
+  <div class="field"><label class="txt" for="f-funciono">Si lo hubo: ¿qué funcionó y qué no?</label>
+    <textarea id="f-funciono" data-k="Qué funcionó / qué no"></textarea></div>
+  <div class="field"><label class="txt" for="f-diag">¿Algo que deba conocer para ayudarle mejor?</label>
+    <p class="hint">Diagnósticos (TDAH, dislexia…), gafas pendientes, algo del centro, una época difícil… Es opcional y queda entre nosotros.</p>
+    <textarea id="f-diag" data-k="A tener en cuenta"></textarea></div>
+</section>
+
+<section>
+  <div class="qnum">4 · En casa</div>
+  <h2>Hábitos de estudio</h2>
+  <div class="field"><label class="txt">Entre semana, estudia (fuera de deberes)…</label>
+    <div class="chips" data-k="Tiempo de estudio diario" data-type="radio">
+      <label><input type="radio" name="tiempo" value="Casi nada">Casi nada</label>
+      <label><input type="radio" name="tiempo" value="Menos de 30 min">&lt;30 min</label>
+      <label><input type="radio" name="tiempo" value="30-60 min">30-60 min</label>
+      <label><input type="radio" name="tiempo" value="Más de 1 hora">+1 hora</label>
+    </div></div>
+  <div class="field"><label class="txt">¿Tiene un sitio fijo y tranquilo para estudiar?</label>
+    <div class="chips" data-k="Sitio de estudio" data-type="radio">
+      <label><input type="radio" name="sitio" value="Sí">Sí</label>
+      <label><input type="radio" name="sitio" value="A ratos">A ratos</label>
+      <label><input type="radio" name="sitio" value="No">No</label>
+    </div></div>
+  <div class="field"><label class="txt" for="f-zona">¿Dónde suele estudiar?</label>
+    <input type="text" id="f-zona" data-k="Zona de estudio" placeholder="Ej.: su cuarto, el salón, la cocina…"></div>
+  <div class="field"><label class="txt">A partir de ahora, ¿cuánto tiempo PUEDE dedicarle al día?</label>
+    <p class="hint">Contando extraescolares, deberes y vida real.</p>
+    <div class="chips" data-k="Tiempo disponible al día" data-type="radio">
+      <label><input type="radio" name="dispo" value="Unos 30 min">30 min</label>
+      <label><input type="radio" name="dispo" value="Unos 45 min">45 min</label>
+      <label><input type="radio" name="dispo" value="Una hora">1 hora</label>
+      <label><input type="radio" name="dispo" value="Hora y media">1 h 30</label>
+      <label><input type="radio" name="dispo" value="Dos horas o más">2 h o más</label>
+    </div></div>
+  <div class="field"><label class="txt">¿Los fines de semana puede estudiar?</label>
+    <div class="chips" data-k="Fines de semana" data-type="radio">
+      <label><input type="radio" name="finde" value="Sí, sin problema">Sí, sin problema</label>
+      <label><input type="radio" name="finde" value="Solo un rato">Solo un rato</label>
+      <label><input type="radio" name="finde" value="Depende del fin de semana">Depende</label>
+      <label><input type="radio" name="finde" value="Mejor no">Mejor no</label>
+    </div></div>
+  <div class="field"><label class="txt">Herramientas que tiene en casa para estudiar</label>
+    <p class="hint">Marca todas las que haya disponibles para él/ella.</p>
+    <div class="chips" data-k="Herramientas en casa" data-type="multi">
+      <label><input type="checkbox" value="Ordenador">Ordenador</label>
+      <label><input type="checkbox" value="Tablet">Tablet</label>
+      <label><input type="checkbox" value="Móvil propio">Móvil propio</label>
+      <label><input type="checkbox" value="Impresora">Impresora</label>
+      <label><input type="checkbox" value="Buena conexión a internet">Buen internet</label>
+    </div></div>
+  <div class="field"><label class="txt">El móvil mientras estudia…</label>
+    <div class="chips" data-k="Móvil al estudiar" data-type="radio">
+      <label><input type="radio" name="movil" value="Lo tiene delante">Lo tiene delante</label>
+      <label><input type="radio" name="movil" value="A veces">A veces</label>
+      <label><input type="radio" name="movil" value="Fuera de la habitación">Fuera</label>
+      <label><input type="radio" name="movil" value="No lo sé">No lo sé</label>
+    </div></div>
+  <div class="field"><label class="txt">Su actitud ante los estudios, siendo sinceros…</label>
+    <div class="chips" data-k="Actitud" data-type="radio">
+      <label><input type="radio" name="actitud" value="Motivado/a">Motivado/a</label>
+      <label><input type="radio" name="actitud" value="Cumple sin más">Cumple sin más</label>
+      <label><input type="radio" name="actitud" value="Le cuesta arrancar">Le cuesta arrancar</label>
+      <label><input type="radio" name="actitud" value="Lo rechaza">Lo rechaza</label>
+    </div></div>
+  <div class="field"><label class="txt">¿A qué hora se duerme normalmente entre semana?</label>
+    <div class="chips" data-k="Hora de dormir" data-type="radio">
+      <label><input type="radio" name="dormir" value="Antes de las 22:30">Antes de 22:30</label>
+      <label><input type="radio" name="dormir" value="Hacia las 23:00">~23:00</label>
+      <label><input type="radio" name="dormir" value="Hacia las 24:00">~24:00</label>
+      <label><input type="radio" name="dormir" value="Más tarde">Más tarde</label>
+      <label><input type="radio" name="dormir" value="No lo sabemos seguro">No lo sabemos</label>
+    </div></div>
+  <div class="field"><label class="txt">Los deberes en casa suelen acabar…</label>
+    <div class="chips" data-k="Clima de deberes" data-type="radio">
+      <label><input type="radio" name="clima" value="Sin dramas">Sin dramas</label>
+      <label><input type="radio" name="clima" value="Con discusión de vez en cuando">Discusión a veces</label>
+      <label><input type="radio" name="clima" value="En guerra casi a diario">Guerra casi diaria</label>
+    </div></div>
+  <div class="field"><label class="txt" for="f-motiva">¿Qué le motiva actualmente?</label>
+    <p class="hint">Lo que sea: un deporte, un juego, una serie, un amigo, sacarse el carnet algún día… Es la palanca de las clases.</p>
+    <textarea id="f-motiva" data-k="Qué le motiva ahora"></textarea></div>
+  <div class="field"><label class="txt">¿Cuánto hay que estar encima?</label>
+    <div class="chips" data-k="Autonomía" data-type="radio">
+      <label><input type="radio" name="auto" value="Va solo/a">Va solo/a</label>
+      <label><input type="radio" name="auto" value="Un empujón de vez en cuando">Algún empujón</label>
+      <label><input type="radio" name="auto" value="Hay que estar encima siempre">Siempre encima</label>
+    </div></div>
+</section>
+
+<section>
+  <div class="qnum">5 · Premios y motivación</div>
+  <h2>El sistema de recompensas</h2>
+  <p class="hint">Las clases funcionan mejor cuando el esfuerzo tiene premios pactados — pero solo si en casa se cumplen: un premio prometido que no llega hace más daño que no prometer nada.</p>
+  <div class="field"><label class="txt">¿Estáis dispuestos a participar y cumplir vuestra parte en un sistema de premios? <span class="req">*</span></label>
+    <div class="chips" data-k="Sistema de premios" data-type="radio">
+      <label><input type="radio" name="premios" value="Sí, comprometidos">Sí, comprometidos</label>
+      <label><input type="radio" name="premios" value="Sí, según qué premios">Según qué premios</label>
+      <label><input type="radio" name="premios" value="Queremos saber más antes">Queremos saber más</label>
+      <label><input type="radio" name="premios" value="No lo vemos">No lo vemos</label>
+    </div></div>
+  <div class="field"><label class="txt">¿Qué tipo de recompensa encaja con vuestra familia y con él/ella?</label>
+    <p class="hint">Marca las que veáis viables.</p>
+    <div class="chips" data-k="Recompensas que encajan" data-type="multi">
+      <label><input type="checkbox" value="Paga o dinero">Paga / dinero</label>
+      <label><input type="checkbox" value="Tiempo de pantalla o videojuegos">Tiempo de pantalla</label>
+      <label><input type="checkbox" value="Planes (cine, salida, excursión)">Planes y salidas</label>
+      <label><input type="checkbox" value="Algo material (ropa, juego, equipación)">Algo material</label>
+      <label><input type="checkbox" value="Privilegios (horarios, amigos)">Privilegios</label>
+      <label><input type="checkbox" value="Celebrarlo en familia">Celebrarlo</label>
+    </div></div>
+  <div class="field"><label class="txt" for="f-premio">El premio que sabéis que le movería DE VERDAD</label>
+    <input type="text" id="f-premio" data-k="El premio que le mueve" placeholder="Ese que os pide siempre…"></div>
+  <div class="field"><label class="txt" for="f-nopremio">¿Algún premio que prefiráis NO usar?</label>
+    <input type="text" id="f-nopremio" data-k="Premios vetados" placeholder="Ej.: más pantallas, dinero…"></div>
+  <div class="field"><label class="txt">¿Estáis dispuestos a ponerle fácil el hábito? <span class="req">*</span></label>
+    <p class="hint">Significa: un mismo sitio de estudio siempre, mantenerlo ordenado VOSOTROS (no él/ella, al principio), y con las herramientas a la vista y listas.</p>
+    <div class="chips" data-k="Ponerle fácil el hábito" data-type="radio">
+      <label><input type="radio" name="habitofacil" value="Sí, nos comprometemos">Sí, nos comprometemos</label>
+      <label><input type="radio" name="habitofacil" value="Podemos intentarlo">Podemos intentarlo</label>
+      <label><input type="radio" name="habitofacil" value="Difícil en nuestra casa">Difícil en casa</label>
+    </div></div>
+  <div class="field"><label class="txt">¿Estáis dispuestos a leer todos juntos 2 minutos al día?</label>
+    <p class="hint">Cada uno con su libro, el que sea — también vosotros. Dos minutos, todos a la vez.</p>
+    <div class="chips" data-k="Lectura familiar 2 min" data-type="radio">
+      <label><input type="radio" name="lectura2" value="Sí">Sí</label>
+      <label><input type="radio" name="lectura2" value="Lo intentaremos">Lo intentaremos</label>
+      <label><input type="radio" name="lectura2" value="No nos vemos capaces">No nos vemos</label>
+    </div></div>
+</section>
+
+<section>
+  <div class="qnum">6 · La meta</div>
+  <h2>Qué sería un éxito</h2>
+  <div class="field"><label class="txt" for="f-exito">En junio, ¿qué tendría que haber pasado para decir «ha merecido la pena»? <span class="req">*</span></label>
+    <textarea id="f-exito" data-k="Éxito en junio" placeholder="Ej.: aprobar todo a la primera y que estudie sin guerras"></textarea></div>
+  <div class="field"><label class="txt">Días que os vienen bien</label>
+    <div class="chips" data-k="Disponibilidad" data-type="multi">
+      <label><input type="checkbox" value="Lunes">L</label>
+      <label><input type="checkbox" value="Martes">M</label>
+      <label><input type="checkbox" value="Miércoles">X</label>
+      <label><input type="checkbox" value="Jueves">J</label>
+      <label><input type="checkbox" value="Viernes">V</label>
+      <label><input type="checkbox" value="Fin de semana">Finde</label>
+    </div></div>
+  <div class="field"><label class="txt" for="f-extra">Algo más que quieras contarme</label>
+    <textarea id="f-extra" data-k="Notas de la familia"></textarea></div>
+</section>
+
+<p class="foot">Tus respuestas van directas a Sergio por WhatsApp y no se guardan en ningún otro sitio.</p>
+</div>
+
+<div class="send"><div class="send-in" style="flex-direction:column">
+  <div style="display:flex;gap:10px">
+    <a id="btn-wa" href="https://wa.me/34694918102" target="_blank" rel="noopener">Enviar respuestas por WhatsApp</a>
+    <button id="btn-copy" type="button">Copiar</button>
+  </div>
+  <div id="msg"></div>
+</div></div>
+
+<script>
+(function(){
+  var WA="34694918102";
+  function collect(){
+    var out=["CUESTIONARIO FAMILIA — Punto de partida"], missing=[];
+    var alumno=document.getElementById("f-alumno").value.trim();
+    if(!alumno) missing.push("el nombre del alumno/a");
+    document.querySelectorAll("[data-k]").forEach(function(el){
+      var k=el.getAttribute("data-k"), v="";
+      if(el.classList && el.classList.contains("chips")){
+        var sel=[].slice.call(el.querySelectorAll("input:checked")).map(function(i){return i.value});
+        v=sel.join(", ");
+        if(k==="Curso" && !v) missing.push("el curso");
+        if(k==="Asignaturas que preocupan" && !v) missing.push("las asignaturas");
+      } else { v=el.value.trim(); }
+      if(k==="Éxito en junio" && !v) missing.push("qué sería un éxito en junio");
+      if(v) out.push("· "+k+": "+v);
+    });
+    return {text:out.join("\n"), missing:missing};
+  }
+  function warn(t){var m=document.getElementById("msg");m.textContent=t;m.style.display=t?"block":"none";}
+  var btn=document.getElementById("btn-wa");
+  function refresh(){
+    var r=collect();
+    if(r.missing.length){btn.setAttribute("href","#faltan");}
+    else{btn.setAttribute("href","https://wa.me/"+WA+"?text="+encodeURIComponent(r.text));}
+  }
+  document.addEventListener("input",refresh,true);
+  document.addEventListener("change",refresh,true);
+  refresh();
+  btn.addEventListener("click",function(e){
+    var r=collect();
+    if(r.missing.length){e.preventDefault();warn("Falta "+r.missing[0]+".");return;}
+    warn("");
+  });
+  document.getElementById("btn-copy").addEventListener("click",function(){
+    var r=collect();
+    try{navigator.clipboard.writeText(r.text);warn("");this.textContent="Copiado ✓";
+      var b=this;setTimeout(function(){b.textContent="Copiar"},1600);}catch(e){warn("No se pudo copiar; usa el botón de WhatsApp.");}
+  });
+})();
+</script>
+
+</body>
+</html>
