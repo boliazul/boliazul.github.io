@@ -2,342 +2,694 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<title>Punto de Partida · Familias</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Punto de Partida · Familias</title>
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://formacion.sergiovega.es/familias.html">
+<meta property="og:title" content="Nadie le ha enseñado a estudiar">
+<meta property="og:description" content="Unas preguntas antes de empezar con vuestro hijo. Diez minutos desde el móvil.">
+<meta property="og:image" content="https://formacion.sergiovega.es/og-familias.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Sergio Vega">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="description" content="Unas preguntas antes de empezar con vuestro hijo. Diez minutos desde el móvil.">
+<meta name="theme-color" content="#FBF8F2">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Inter:wght@400;500;600&display=swap">
+<style>
+:root{
+  --papel:#FBF8F2;
+  --verde:#1F4D3A;
+  --verde-claro:#2E6B51;
+  --tinta:#17170F;
+  --tinte:#E8EDE6;
+  --gris:#8A8A80;
+  --linea:#DCD8CE;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --sans:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--papel);color:var(--tinta);
+  font-family:var(--serif);font-size:17px;line-height:1.55;
+  padding-bottom:96px;
+}
+.wrap{max-width:660px;margin:0 auto;padding:0 22px}
+
+/* ---- cabecera ---- */
+header{padding:38px 0 30px}
+.wordmark{font-family:var(--serif);font-size:23px;font-weight:600;letter-spacing:-.01em;margin:0}
+.wordmark::after{content:"";display:block;width:34px;height:3px;background:var(--verde);margin-top:9px}
+.eyebrow{font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--gris);margin:16px 0 0}
+h1{font-family:var(--serif);font-size:37px;line-height:1.12;font-weight:600;letter-spacing:-.02em;margin:8px 0 0;text-wrap:balance}
+.intro{margin:18px 0 0;max-width:52ch;color:#3A3A30}
+.intro em{font-style:italic;color:var(--verde)}
+.meta{font-family:var(--sans);font-size:13.5px;color:var(--gris);margin:14px 0 0}
+
+/* ---- secciones ---- */
+main{position:relative}
+@media(min-width:760px){
+  main::before{content:"";position:absolute;left:calc(50% - 330px + 22px);top:0;bottom:0;width:1px;background:var(--linea)}
+}
+section{padding:34px 0 4px;border-top:1px solid var(--linea);margin-top:34px}
+section:first-child{border-top:none;margin-top:6px}
+.s-label{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--verde);margin:0}
+.s-title{font-family:var(--serif);font-size:25px;font-weight:600;letter-spacing:-.01em;margin:5px 0 0}
+.s-note{font-family:var(--sans);font-size:14px;color:var(--gris);margin:8px 0 0;max-width:48ch}
+
+/* ---- preguntas ---- */
+.q{margin-top:28px}
+.q-head{display:flex;gap:12px;align-items:baseline}
+.q-num{font-family:var(--sans);font-size:12px;font-weight:600;color:var(--gris);min-width:20px;font-variant-numeric:tabular-nums;padding-top:2px}
+.q-text{font-family:var(--serif);font-size:18.5px;font-weight:600;margin:0;line-height:1.35;text-wrap:balance}
+.q-hint{font-family:var(--sans);font-size:13.5px;color:var(--gris);margin:5px 0 0 32px;max-width:46ch}
+.q-body{margin:12px 0 0 32px}
+@media(max-width:520px){.q-hint,.q-body{margin-left:0}}
+.req{color:var(--verde);font-weight:600}
+
+/* ---- chips ---- */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{
+  font-family:var(--sans);font-size:14.5px;font-weight:500;
+  background:transparent;color:var(--tinta);
+  border:1px solid var(--linea);border-radius:999px;
+  padding:9px 15px;cursor:pointer;
+  transition:background .13s ease,border-color .13s ease,color .13s ease;
+}
+.chip:hover{border-color:var(--verde);color:var(--verde)}
+.chip[aria-pressed="true"]{background:var(--verde);border-color:var(--verde);color:var(--papel)}
+.chip:focus-visible,.dot:focus-visible,.txt:focus-visible,.send:focus-visible,.copy:focus-visible{
+  outline:2px solid var(--verde);outline-offset:2px
+}
+
+/* ---- escala tipo boletín ---- */
+.scale-head{display:flex;justify-content:flex-end;gap:0;margin-bottom:4px}
+.scale-head span{font-family:var(--sans);font-size:11px;color:var(--gris);width:40px;text-align:center}
+.row{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--linea)}
+.row:last-of-type{border-bottom:none}
+.row-name{flex:1;font-family:var(--serif);font-size:17px}
+.dots.ten{display:flex;gap:5px;flex-wrap:wrap}
+.dots.ten .dot{width:auto;flex:1 0 40px;height:44px;border:1px solid var(--linea)}
+.ends{display:flex;justify-content:space-between;font-family:var(--sans);font-size:12.5px;color:var(--gris);margin-top:8px}
+.row-name small{display:block;font-family:var(--sans);font-size:12.5px;color:var(--gris);line-height:1.3}
+.dots{display:flex;gap:0}
+.dot{
+  width:40px;height:36px;background:transparent;border:none;cursor:pointer;
+  font-family:var(--sans);font-size:14px;font-weight:500;color:var(--gris);
+  border-radius:8px;transition:background .13s ease,color .13s ease;
+  font-variant-numeric:tabular-nums;
+}
+.dot:hover{background:var(--tinte);color:var(--verde)}
+.dot[aria-pressed="true"]{background:var(--verde);color:var(--papel)}
+@media(max-width:420px){
+  .dot{width:34px}
+  .scale-head span{width:34px}
+}
+
+/* ---- texto libre ---- */
+.txt{
+  width:100%;font-family:var(--serif);font-size:17px;color:var(--tinta);
+  background:transparent;border:none;border-bottom:1.5px solid var(--linea);
+  padding:8px 2px;transition:border-color .13s ease;
+}
+.txt::placeholder{color:#B6B2A8}
+.txt:focus{border-bottom-color:var(--verde);outline:none}
+textarea.txt{border:1.5px solid var(--linea);border-radius:10px;padding:11px 13px;resize:vertical;min-height:74px;line-height:1.5}
+textarea.txt:focus{border-color:var(--verde)}
+
+/* ---- cierre ---- */
+.privacy{
+  margin:44px 0 0;padding:20px 22px;background:var(--tinte);border-radius:12px;
+  font-family:var(--sans);font-size:14px;line-height:1.6;color:#3A3A30;
+}
+.privacy strong{font-weight:600;color:var(--verde)}
+footer{padding:34px 0 40px;font-family:var(--sans);font-size:13px;color:var(--gris)}
+
+/* ---- barra fija ---- */
+.bar{
+  position:fixed;left:0;right:0;bottom:0;z-index:20;
+  background:rgba(251,248,242,.94);backdrop-filter:blur(8px);
+  border-top:1px solid var(--linea);
+}
+.bar-in{max-width:660px;margin:0 auto;padding:11px 22px 14px;display:flex;align-items:center;gap:14px}
+.progress{flex:1;min-width:0}
+.progress-track{height:4px;background:var(--tinte);border-radius:99px;overflow:hidden}
+.progress-fill{height:100%;width:0;background:var(--verde);border-radius:99px;transition:width .3s ease}
+.progress-txt{font-family:var(--sans);font-size:12.5px;color:var(--gris);margin-top:5px;font-variant-numeric:tabular-nums}
+.send{
+  font-family:var(--sans);font-size:15px;font-weight:600;
+  background:var(--verde);color:var(--papel);border:none;border-radius:999px;
+  padding:13px 22px;cursor:pointer;white-space:nowrap;
+  transition:background .13s ease;
+}
+.send:hover{background:var(--verde-claro)}
+.copy{
+  font-family:var(--sans);font-size:13px;font-weight:500;color:var(--verde);
+  background:transparent;border:1px solid var(--linea);border-radius:999px;
+  padding:12px 14px;cursor:pointer;transition:border-color .13s ease;
+}
+.copy:hover{border-color:var(--verde)}
+@media(max-width:520px){
+  .copy{display:none}
+  .send{padding:13px 18px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style><style>
+.consent{margin-top:26px;display:flex;flex-direction:column;gap:10px}
+.cbox{display:flex;gap:13px;align-items:flex-start;text-align:left;background:transparent;border:1px solid var(--linea);border-radius:12px;padding:14px 16px;cursor:pointer;font-family:var(--sans);font-size:14.5px;line-height:1.5;color:var(--tinta);transition:border-color .13s ease,background .13s ease}
+.cbox:hover{border-color:var(--verde)}
+.cbox .tick{flex:none;width:21px;height:21px;border:1.5px solid var(--linea);border-radius:6px;margin-top:1px;position:relative;transition:background .13s ease,border-color .13s ease}
+.cbox[aria-pressed="true"]{border-color:var(--verde);background:var(--tinte)}
+.cbox[aria-pressed="true"] .tick{background:var(--verde);border-color:var(--verde)}
+.cbox[aria-pressed="true"] .tick::after{content:"";position:absolute;left:6.5px;top:2.5px;width:5px;height:10px;border:solid var(--papel);border-width:0 2px 2px 0;transform:rotate(45deg)}
+.cbox:focus-visible{outline:2px solid var(--verde);outline-offset:2px}
+</style>
 </head>
 <body>
-
-<style>
-  :root{
-    --paper:#FBFAF5; --ink:#26231C; --soft:#6E6857; --line:#E4E0D2;
-    --bic:#2743C0; --bic-soft:#EEF1FC; --red:#C64F4A;
-    --radius:14px;
-  }
-  *{box-sizing:border-box}
-  body{
-    margin:0; background:var(--paper); color:var(--ink);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-    font-size:17px; line-height:1.5;
-    background-image:linear-gradient(var(--paper) 0 0),repeating-linear-gradient(to bottom,transparent 0 27px,rgba(39,67,192,.055) 27px 28px);
-    background-blend-mode:normal; background-color:var(--paper);
-  }
-  body{background:repeating-linear-gradient(to bottom,transparent 0 27px,rgba(39,67,192,.05) 27px 28px) var(--paper)}
-  .wrap{max-width:620px;margin:0 auto;padding:28px 18px 120px}
-  header{margin-bottom:26px}
-  .brand{display:flex;align-items:center;gap:11px;margin-bottom:20px}
-  .logo{font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:19px;color:#FFFFFF;background:var(--bic);width:42px;height:42px;border-radius:11px;display:grid;place-items:center}
-  .brand-name{font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:17px;line-height:1.15;color:var(--ink)}
-  .brand-sub{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--soft)}
-  .kicker{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--bic)}
-  h1{font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:34px;line-height:1.1;margin:6px 0 10px;text-wrap:balance}
-  .lead{color:var(--soft);margin:0;max-width:52ch}
-  .lead b{color:var(--ink)}
-  section{background:#FFFFFF;border:1px solid var(--line);border-radius:var(--radius);padding:18px 16px 20px;margin:14px 0;box-shadow:0 1px 0 rgba(38,35,28,.04)}
-  .qnum{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--bic);margin-bottom:2px}
-  h2{font-family:Georgia,"Times New Roman",serif;font-weight:600;font-size:21px;margin:2px 0 4px;line-height:1.25}
-  .hint{font-size:14.5px;color:var(--soft);margin:0 0 12px}
-  .req{color:var(--red)}
-  .field{margin:14px 0 0}
-  .field>label.txt{display:block;font-weight:700;font-size:15.5px;margin-bottom:7px}
-  input[type=text],textarea{
-    width:100%;padding:12px 13px;border:1.5px solid var(--line);border-radius:10px;
-    font:inherit;color:var(--ink);background:#FFFFFF;
-  }
-  input[type=text]:focus,textarea:focus{outline:2px solid var(--bic);outline-offset:1px;border-color:var(--bic)}
-  textarea{min-height:84px;resize:vertical}
-  .chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:8px}
-  .chips label{
-    display:inline-flex;align-items:center;min-height:44px;padding:9px 15px;
-    border:1.5px solid var(--line);border-radius:999px;background:#FFFFFF;
-    font-size:15.5px;font-weight:400;cursor:pointer;user-select:none;color:var(--ink);
-  }
-  .chips input{position:absolute;opacity:0;width:1px;height:1px}
-  .chips label:has(input:checked){background:var(--bic);border-color:var(--bic);color:#FFFFFF;font-weight:700}
-  .chips label:has(input:focus-visible){outline:2px solid var(--bic);outline-offset:2px}
-  .send{
-    position:fixed;left:0;right:0;bottom:0;background:rgba(251,250,245,.96);
-    border-top:1px solid var(--line);padding:12px 18px calc(12px + env(safe-area-inset-bottom));
-    backdrop-filter:blur(4px);
-  }
-  .send-in{max-width:620px;margin:0 auto;display:flex;gap:10px}
-  button{
-    font:inherit;font-weight:700;border-radius:12px;cursor:pointer;min-height:52px;
-  }
-  #btn-wa{flex:1;background:var(--bic);color:#FFFFFF;border:none;font-size:17px;display:grid;place-items:center;text-decoration:none;font-weight:700;border-radius:12px;min-height:52px}
-  #btn-wa:active{transform:translateY(1px)}
-  #btn-copy{background:#FFFFFF;color:var(--ink);border:1.5px solid var(--line);padding:0 16px}
-  #msg{font-size:14px;color:var(--red);margin:6px 2px 0;display:none}
-  .foot{color:var(--soft);font-size:13.5px;margin-top:22px}
-  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
-</style>
-
 <div class="wrap">
-<header>
-  <div class="brand"><span class="logo">sv.</span><div><div class="brand-name">sergio vega.</div><div class="brand-sub">formación</div></div></div>
-  <div class="kicker">Punto de partida · Curso 2026-27</div>
-  <h1>Cuestionario para la familia</h1>
-  <p class="lead">Son <b>3-4 minutos</b> desde el móvil. Con esto preparo las clases a medida desde el primer día. Al terminar, el botón de abajo abre WhatsApp con tus respuestas ya escritas — solo tienes que darle a enviar. <span class="req">*</span> = imprescindible.</p>
-</header>
+  <header>
+    <p class="wordmark">sergio vega.</p>
+    <p class="eyebrow">Punto de partida · Curso 2026-27</p>
+    <h1>Antes de empezar con vuestro hijo</h1>
+    <p class="intro">Unas cuantas preguntas para no empezar a ciegas. Algunas son incómodas a propósito: cuanto más sincero seáis, menos tiempo perdemos los tres. <em>No hay respuestas que me hagan pensar mal de nadie.</em></p>
+    <p class="meta">Unos 10 minutos desde el móvil · Al terminar, el botón verde manda las respuestas por WhatsApp · <span class="req">*</span> = imprescindible</p>
+  </header>
 
-<section>
-  <div class="qnum">1 · Quién es quién</div>
-  <h2>Datos básicos</h2>
-  <div class="field"><label class="txt" for="f-alumno">Nombre del alumno/a <span class="req">*</span></label>
-    <input type="text" id="f-alumno" data-k="Alumno/a" autocomplete="off"></div>
-  <div class="field"><label class="txt">Curso que empieza <span class="req">*</span></label>
-    <div class="chips" data-k="Curso" data-type="radio">
-      <label><input type="radio" name="curso" value="2º ESO">2º ESO</label>
-      <label><input type="radio" name="curso" value="3º ESO">3º ESO</label>
-      <label><input type="radio" name="curso" value="Otro">Otro</label>
-    </div></div>
-  <div class="field"><label class="txt" for="f-quien">Quién responde (nombre y parentesco)</label>
-    <input type="text" id="f-quien" data-k="Responde" autocomplete="off" placeholder="Ej.: Marta, madre"></div>
-  <div class="field"><label class="txt">¿Quién lleva el día a día del cole?</label>
-    <p class="hint">Agenda, deberes, notas, reuniones — para saber con quién coordino.</p>
-    <div class="chips" data-k="Quién lleva el cole" data-type="radio">
-      <label><input type="radio" name="lleva" value="La madre">La madre</label>
-      <label><input type="radio" name="lleva" value="El padre">El padre</label>
-      <label><input type="radio" name="lleva" value="Repartido">Repartido</label>
-      <label><input type="radio" name="lleva" value="Según el día">Según el día</label>
-    </div></div>
-</section>
+  <main>
+    <section>
+      <p class="s-label">Uno</p>
+      <h2 class="s-title">Quién es quién</h2>
 
-<section>
-  <div class="qnum">2 · Foto académica</div>
-  <h2>Cómo llegó a junio</h2>
-  <div class="field"><label class="txt">En general, sus notas del curso pasado fueron…</label>
-    <div class="chips" data-k="Notas curso pasado" data-type="radio">
-      <label><input type="radio" name="notas" value="Buenas (notable o más)">Buenas</label>
-      <label><input type="radio" name="notas" value="Correctas (aprueba casi todo)">Correctas</label>
-      <label><input type="radio" name="notas" value="Justas (algún suspenso)">Justas</label>
-      <label><input type="radio" name="notas" value="Flojas (varios suspensos)">Flojas</label>
-    </div></div>
-  <div class="field"><label class="txt">Asignaturas que os preocupan <span class="req">*</span></label>
-    <p class="hint">Marca todas las que toquen.</p>
-    <div class="chips" data-k="Asignaturas que preocupan" data-type="multi">
-      <label><input type="checkbox" value="Matemáticas">Matemáticas</label>
-      <label><input type="checkbox" value="Lengua">Lengua</label>
-      <label><input type="checkbox" value="Inglés">Inglés</label>
-      <label><input type="checkbox" value="Física y Química">Física y Química</label>
-      <label><input type="checkbox" value="Biología y Geología">Biología y Geología</label>
-      <label><input type="checkbox" value="Geografía e Historia">Geografía e Historia</label>
-      <label><input type="checkbox" value="Ninguna en especial">Ninguna en especial</label>
-    </div></div>
-  <div class="field"><label class="txt" for="f-pend">¿Quedó algo pendiente o repetido? ¿Recuperaciones?</label>
-    <input type="text" id="f-pend" data-k="Pendientes" placeholder="Ej.: recuperó Mates en junio / nada"></div>
-</section>
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">Nombre del alumno/a <span class="req">*</span></p></div>
+        <div class="q-body"><input class="txt" type="text" data-label="Alumno" placeholder="Nombre y apellido"></div>
+      </div>
 
-<section>
-  <div class="qnum">3 · Historial</div>
-  <h2>Lo que ya habéis probado</h2>
-  <div class="field"><label class="txt">¿Ha tenido antes clases particulares o academia?</label>
-    <div class="chips" data-k="Refuerzo anterior" data-type="radio">
-      <label><input type="radio" name="ref" value="No, nunca">No, nunca</label>
-      <label><input type="radio" name="ref" value="Sí, particular">Sí, particular</label>
-      <label><input type="radio" name="ref" value="Sí, academia">Sí, academia</label>
-      <label><input type="radio" name="ref" value="Sí, ambas">Ambas</label>
-    </div></div>
-  <div class="field"><label class="txt" for="f-funciono">Si lo hubo: ¿qué funcionó y qué no?</label>
-    <textarea id="f-funciono" data-k="Qué funcionó / qué no"></textarea></div>
-  <div class="field"><label class="txt" for="f-diag">¿Algo que deba conocer para ayudarle mejor?</label>
-    <p class="hint">Diagnósticos (TDAH, dislexia…), gafas pendientes, algo del centro, una época difícil… Es opcional y queda entre nosotros.</p>
-    <textarea id="f-diag" data-k="A tener en cuenta"></textarea></div>
-</section>
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">¿Qué curso empieza? <span class="req">*</span></p></div>
+        <div class="q-body">
+          <div class="chips" data-label="Curso">
+            <button type="button" class="chip" aria-pressed="false">1º ESO</button>
+            <button type="button" class="chip" aria-pressed="false">2º ESO</button>
+            <button type="button" class="chip" aria-pressed="false">3º ESO</button>
+            <button type="button" class="chip" aria-pressed="false">4º ESO</button>
+            <button type="button" class="chip" aria-pressed="false">1º Bach</button>
+            <button type="button" class="chip" aria-pressed="false">2º Bach</button>
+          </div>
+        </div>
+      </div>
 
-<section>
-  <div class="qnum">4 · En casa</div>
-  <h2>Hábitos de estudio</h2>
-  <div class="field"><label class="txt">Entre semana, estudia (fuera de deberes)…</label>
-    <div class="chips" data-k="Tiempo de estudio diario" data-type="radio">
-      <label><input type="radio" name="tiempo" value="Casi nada">Casi nada</label>
-      <label><input type="radio" name="tiempo" value="Menos de 30 min">&lt;30 min</label>
-      <label><input type="radio" name="tiempo" value="30-60 min">30-60 min</label>
-      <label><input type="radio" name="tiempo" value="Más de 1 hora">+1 hora</label>
-    </div></div>
-  <div class="field"><label class="txt">¿Tiene un sitio fijo y tranquilo para estudiar?</label>
-    <div class="chips" data-k="Sitio de estudio" data-type="radio">
-      <label><input type="radio" name="sitio" value="Sí">Sí</label>
-      <label><input type="radio" name="sitio" value="A ratos">A ratos</label>
-      <label><input type="radio" name="sitio" value="No">No</label>
-    </div></div>
-  <div class="field"><label class="txt" for="f-zona">¿Dónde suele estudiar?</label>
-    <input type="text" id="f-zona" data-k="Zona de estudio" placeholder="Ej.: su cuarto, el salón, la cocina…"></div>
-  <div class="field"><label class="txt">A partir de ahora, ¿cuánto tiempo PUEDE dedicarle al día?</label>
-    <p class="hint">Contando extraescolares, deberes y vida real.</p>
-    <div class="chips" data-k="Tiempo disponible al día" data-type="radio">
-      <label><input type="radio" name="dispo" value="Unos 30 min">30 min</label>
-      <label><input type="radio" name="dispo" value="Unos 45 min">45 min</label>
-      <label><input type="radio" name="dispo" value="Una hora">1 hora</label>
-      <label><input type="radio" name="dispo" value="Hora y media">1 h 30</label>
-      <label><input type="radio" name="dispo" value="Dos horas o más">2 h o más</label>
-    </div></div>
-  <div class="field"><label class="txt">¿Los fines de semana puede estudiar?</label>
-    <div class="chips" data-k="Fines de semana" data-type="radio">
-      <label><input type="radio" name="finde" value="Sí, sin problema">Sí, sin problema</label>
-      <label><input type="radio" name="finde" value="Solo un rato">Solo un rato</label>
-      <label><input type="radio" name="finde" value="Depende del fin de semana">Depende</label>
-      <label><input type="radio" name="finde" value="Mejor no">Mejor no</label>
-    </div></div>
-  <div class="field"><label class="txt">Herramientas que tiene en casa para estudiar</label>
-    <p class="hint">Marca todas las que haya disponibles para él/ella.</p>
-    <div class="chips" data-k="Herramientas en casa" data-type="multi">
-      <label><input type="checkbox" value="Ordenador">Ordenador</label>
-      <label><input type="checkbox" value="Tablet">Tablet</label>
-      <label><input type="checkbox" value="Móvil propio">Móvil propio</label>
-      <label><input type="checkbox" value="Impresora">Impresora</label>
-      <label><input type="checkbox" value="Buena conexión a internet">Buen internet</label>
-    </div></div>
-  <div class="field"><label class="txt">El móvil mientras estudia…</label>
-    <div class="chips" data-k="Móvil al estudiar" data-type="radio">
-      <label><input type="radio" name="movil" value="Lo tiene delante">Lo tiene delante</label>
-      <label><input type="radio" name="movil" value="A veces">A veces</label>
-      <label><input type="radio" name="movil" value="Fuera de la habitación">Fuera</label>
-      <label><input type="radio" name="movil" value="No lo sé">No lo sé</label>
-    </div></div>
-  <div class="field"><label class="txt">Su actitud ante los estudios, siendo sinceros…</label>
-    <div class="chips" data-k="Actitud" data-type="radio">
-      <label><input type="radio" name="actitud" value="Motivado/a">Motivado/a</label>
-      <label><input type="radio" name="actitud" value="Cumple sin más">Cumple sin más</label>
-      <label><input type="radio" name="actitud" value="Le cuesta arrancar">Le cuesta arrancar</label>
-      <label><input type="radio" name="actitud" value="Lo rechaza">Lo rechaza</label>
-    </div></div>
-  <div class="field"><label class="txt">¿A qué hora se duerme normalmente entre semana?</label>
-    <div class="chips" data-k="Hora de dormir" data-type="radio">
-      <label><input type="radio" name="dormir" value="Antes de las 22:30">Antes de 22:30</label>
-      <label><input type="radio" name="dormir" value="Hacia las 23:00">~23:00</label>
-      <label><input type="radio" name="dormir" value="Hacia las 24:00">~24:00</label>
-      <label><input type="radio" name="dormir" value="Más tarde">Más tarde</label>
-      <label><input type="radio" name="dormir" value="No lo sabemos seguro">No lo sabemos</label>
-    </div></div>
-  <div class="field"><label class="txt">Los deberes en casa suelen acabar…</label>
-    <div class="chips" data-k="Clima de deberes" data-type="radio">
-      <label><input type="radio" name="clima" value="Sin dramas">Sin dramas</label>
-      <label><input type="radio" name="clima" value="Con discusión de vez en cuando">Discusión a veces</label>
-      <label><input type="radio" name="clima" value="En guerra casi a diario">Guerra casi diaria</label>
-    </div></div>
-  <div class="field"><label class="txt" for="f-motiva">¿Qué le motiva actualmente?</label>
-    <p class="hint">Lo que sea: un deporte, un juego, una serie, un amigo, sacarse el carnet algún día… Es la palanca de las clases.</p>
-    <textarea id="f-motiva" data-k="Qué le motiva ahora"></textarea></div>
-  <div class="field"><label class="txt">¿Cuánto hay que estar encima?</label>
-    <div class="chips" data-k="Autonomía" data-type="radio">
-      <label><input type="radio" name="auto" value="Va solo/a">Va solo/a</label>
-      <label><input type="radio" name="auto" value="Un empujón de vez en cuando">Algún empujón</label>
-      <label><input type="radio" name="auto" value="Hay que estar encima siempre">Siempre encima</label>
-    </div></div>
-</section>
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">¿Quién contesta esto?</p></div>
+        <div class="q-body"><input class="txt" type="text" data-label="Responde" placeholder="Nombre y si eres madre, padre o tutor/a"></div>
+      </div>
 
-<section>
-  <div class="qnum">5 · Premios y motivación</div>
-  <h2>El sistema de recompensas</h2>
-  <p class="hint">Las clases funcionan mejor cuando el esfuerzo tiene premios pactados — pero solo si en casa se cumplen: un premio prometido que no llega hace más daño que no prometer nada.</p>
-  <div class="field"><label class="txt">¿Estáis dispuestos a participar y cumplir vuestra parte en un sistema de premios? <span class="req">*</span></label>
-    <div class="chips" data-k="Sistema de premios" data-type="radio">
-      <label><input type="radio" name="premios" value="Sí, comprometidos">Sí, comprometidos</label>
-      <label><input type="radio" name="premios" value="Sí, según qué premios">Según qué premios</label>
-      <label><input type="radio" name="premios" value="Queremos saber más antes">Queremos saber más</label>
-      <label><input type="radio" name="premios" value="No lo vemos">No lo vemos</label>
-    </div></div>
-  <div class="field"><label class="txt">¿Qué tipo de recompensa encaja con vuestra familia y con él/ella?</label>
-    <p class="hint">Marca las que veáis viables.</p>
-    <div class="chips" data-k="Recompensas que encajan" data-type="multi">
-      <label><input type="checkbox" value="Paga o dinero">Paga / dinero</label>
-      <label><input type="checkbox" value="Tiempo de pantalla o videojuegos">Tiempo de pantalla</label>
-      <label><input type="checkbox" value="Planes (cine, salida, excursión)">Planes y salidas</label>
-      <label><input type="checkbox" value="Algo material (ropa, juego, equipación)">Algo material</label>
-      <label><input type="checkbox" value="Privilegios (horarios, amigos)">Privilegios</label>
-      <label><input type="checkbox" value="Celebrarlo en familia">Celebrarlo</label>
-    </div></div>
-  <div class="field"><label class="txt" for="f-premio">El premio que sabéis que le movería DE VERDAD</label>
-    <input type="text" id="f-premio" data-k="El premio que le mueve" placeholder="Ese que os pide siempre…"></div>
-  <div class="field"><label class="txt" for="f-nopremio">¿Algún premio que prefiráis NO usar?</label>
-    <input type="text" id="f-nopremio" data-k="Premios vetados" placeholder="Ej.: más pantallas, dinero…"></div>
-  <div class="field"><label class="txt">¿Estáis dispuestos a ponerle fácil el hábito? <span class="req">*</span></label>
-    <p class="hint">Significa: un mismo sitio de estudio siempre, mantenerlo ordenado VOSOTROS (no él/ella, al principio), y con las herramientas a la vista y listas.</p>
-    <div class="chips" data-k="Ponerle fácil el hábito" data-type="radio">
-      <label><input type="radio" name="habitofacil" value="Sí, nos comprometemos">Sí, nos comprometemos</label>
-      <label><input type="radio" name="habitofacil" value="Podemos intentarlo">Podemos intentarlo</label>
-      <label><input type="radio" name="habitofacil" value="Difícil en nuestra casa">Difícil en casa</label>
-    </div></div>
-  <div class="field"><label class="txt">¿Estáis dispuestos a leer todos juntos 2 minutos al día?</label>
-    <p class="hint">Cada uno con su libro, el que sea — también vosotros. Dos minutos, todos a la vez.</p>
-    <div class="chips" data-k="Lectura familiar 2 min" data-type="radio">
-      <label><input type="radio" name="lectura2" value="Sí">Sí</label>
-      <label><input type="radio" name="lectura2" value="Lo intentaremos">Lo intentaremos</label>
-      <label><input type="radio" name="lectura2" value="No nos vemos capaces">No nos vemos</label>
-    </div></div>
-</section>
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">¿Quién lleva el día a día del colegio?</p></div>
+        <p class="q-hint">Agenda, deberes, notas, reuniones. Para saber con quién me coordino.</p>
+        <div class="q-body">
+          <div class="chips" data-label="Lleva el cole">
+            <button type="button" class="chip" aria-pressed="false">La madre</button>
+            <button type="button" class="chip" aria-pressed="false">El padre</button>
+            <button type="button" class="chip" aria-pressed="false">Repartido</button>
+            <button type="button" class="chip" aria-pressed="false">Según el día</button>
+            <button type="button" class="chip" aria-pressed="false">Otra persona</button>
+          </div>
+        </div>
+      </div>
 
-<section>
-  <div class="qnum">6 · La meta</div>
-  <h2>Qué sería un éxito</h2>
-  <div class="field"><label class="txt" for="f-exito">En junio, ¿qué tendría que haber pasado para decir «ha merecido la pena»? <span class="req">*</span></label>
-    <textarea id="f-exito" data-k="Éxito en junio" placeholder="Ej.: aprobar todo a la primera y que estudie sin guerras"></textarea></div>
-  <div class="field"><label class="txt">Días que os vienen bien</label>
-    <div class="chips" data-k="Disponibilidad" data-type="multi">
-      <label><input type="checkbox" value="Lunes">L</label>
-      <label><input type="checkbox" value="Martes">M</label>
-      <label><input type="checkbox" value="Miércoles">X</label>
-      <label><input type="checkbox" value="Jueves">J</label>
-      <label><input type="checkbox" value="Viernes">V</label>
-      <label><input type="checkbox" value="Fin de semana">Finde</label>
-    </div></div>
-  <div class="field"><label class="txt" for="f-extra">Algo más que quieras contarme</label>
-    <textarea id="f-extra" data-k="Notas de la familia"></textarea></div>
-</section>
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">¿Cuántos años tiene?</p></div>
+        <p class="q-hint">Lo necesito por un tema de permisos: a partir de los 14 hay cosas que firma él o ella.</p>
+        <div class="q-body">
+          <div class="chips" data-label="Edad">
+            <button type="button" class="chip" aria-pressed="false">11 o 12</button>
+            <button type="button" class="chip" aria-pressed="false">13</button>
+            <button type="button" class="chip" aria-pressed="false">14</button>
+            <button type="button" class="chip" aria-pressed="false">15</button>
+            <button type="button" class="chip" aria-pressed="false">16</button>
+            <button type="button" class="chip" aria-pressed="false">17 o más</button>
+          </div>
+        </div>
+      </div>
 
-<p class="foot">Tus respuestas van directas a Sergio por WhatsApp y no se guardan en ningún otro sitio.</p>
+    </section>
+
+    <section>
+      <p class="s-label">Dos</p>
+      <h2 class="s-title">De dónde venimos</h2>
+      <p class="s-note">Esto es la línea de salida. Sin ella, en diciembre no sabremos si algo ha cambiado.</p>
+
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">El boletín de junio de 2026 <span class="req">*</span></p></div>
+        <p class="q-hint">Una foto basta. Es el único dato con el que después podré comparar de verdad.</p>
+        <div class="q-body">
+          <div class="chips" data-label="Boletín de junio">
+            <button type="button" class="chip" aria-pressed="false">Lo mando ahora por WhatsApp</button>
+            <button type="button" class="chip" aria-pressed="false">Lo busco y te lo mando esta semana</button>
+            <button type="button" class="chip" aria-pressed="false">No lo tengo a mano</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">En junio, ¿hubo alguna sorpresa? Para bien o para mal.</p></div>
+        <p class="q-hint">Una sorpresa suele señalar exactamente el punto donde nadie estaba mirando.</p>
+        <div class="q-body"><textarea class="txt" data-label="Sorpresa de junio" rows="2" placeholder="Una asignatura que no esperabais, una nota que os descolocó…"></textarea></div>
+      </div>
+
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">¿Qué asignaturas os preocupan? <span class="req">*</span></p></div>
+        <div class="q-body">
+          <div class="chips" data-multi="true" data-label="Preocupan">
+            <button type="button" class="chip" aria-pressed="false">Matemáticas</button>
+            <button type="button" class="chip" aria-pressed="false">Lengua</button>
+            <button type="button" class="chip" aria-pressed="false">Inglés</button>
+            <button type="button" class="chip" aria-pressed="false">Física y Química</button>
+            <button type="button" class="chip" aria-pressed="false">Biología y Geología</button>
+            <button type="button" class="chip" aria-pressed="false">Geografía e Historia</button>
+            <button type="button" class="chip" aria-pressed="false">Valencià</button>
+            <button type="button" class="chip" aria-pressed="false">Tecnología</button>
+            <button type="button" class="chip" aria-pressed="false">Ninguna en concreto</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">¿Quedó algo pendiente, repetido o recuperado?</p></div>
+        <div class="q-body"><input class="txt" type="text" data-label="Pendientes" placeholder="Si no hay nada, escribe «nada»"></div>
+      </div>
+
+    </section>
+
+    <section>
+      <p class="s-label">Tres</p>
+      <h2 class="s-title">Lo que ya habéis probado</h2>
+
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">¿Ha tenido antes clases particulares o academia?</p></div>
+        <div class="q-body">
+          <div class="chips" data-label="Refuerzo anterior">
+            <button type="button" class="chip" aria-pressed="false">No, nunca</button>
+            <button type="button" class="chip" aria-pressed="false">Sí, particular</button>
+            <button type="button" class="chip" aria-pressed="false">Sí, academia</button>
+            <button type="button" class="chip" aria-pressed="false">Las dos cosas</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">Si lo hubo: ¿qué funcionó y qué no?</p></div>
+        <div class="q-body"><textarea class="txt" data-label="Qué funcionó y qué no" rows="2" placeholder="Sed concretos, esto me ahorra meses"></textarea></div>
+      </div>
+
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">¿Hay algo que deba saber para ayudarle mejor?</p></div>
+        <p class="q-hint">Cualquier cosa del centro, de una época difícil, de algo que le esté costando. Si es algo delicado o de salud, mejor no lo escribas aquí: lo hablamos en la entrevista y no queda por escrito.</p>
+        <div class="q-body"><textarea class="txt" data-label="Algo que deba saber" rows="2" placeholder="Si prefieres contármelo hablando, escribe «lo hablamos» y lo dejamos para la entrevista"></textarea></div>
+      </div>
+
+    </section>
+
+    <section>
+      <p class="s-label">Cuatro</p>
+      <h2 class="s-title">El día a día en casa</h2>
+
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">Entre semana, y fuera de los deberes, estudia…</p></div>
+        <div class="q-body">
+          <div class="chips" data-label="Estudia entre semana">
+            <button type="button" class="chip" aria-pressed="false">Casi nada</button>
+            <button type="button" class="chip" aria-pressed="false">Menos de 30 min</button>
+            <button type="button" class="chip" aria-pressed="false">Entre 30 y 60 min</button>
+            <button type="button" class="chip" aria-pressed="false">Más de 1 hora</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">¿Tiene un sitio fijo y tranquilo para estudiar?</p></div>
+        <div class="q-body">
+          <div class="chips" data-label="Sitio fijo">
+            <button type="button" class="chip" aria-pressed="false">Sí</button>
+            <button type="button" class="chip" aria-pressed="false">A ratos</button>
+            <button type="button" class="chip" aria-pressed="false">No</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">¿Dónde estudia normalmente?</p></div>
+        <div class="q-body"><input class="txt" type="text" data-label="Dónde estudia" placeholder="Su cuarto, el salón, la cocina…"></div>
+      </div>
+
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">A partir de ahora, ¿cuánto tiempo PUEDE dedicarle al día?</p></div>
+        <p class="q-hint">Contando extraescolares, deberes y vida real. Prefiero que os quedéis cortos.</p>
+        <div class="q-body">
+          <div class="chips" data-label="Tiempo disponible">
+            <button type="button" class="chip" aria-pressed="false">30 min</button>
+            <button type="button" class="chip" aria-pressed="false">45 min</button>
+            <button type="button" class="chip" aria-pressed="false">1 hora</button>
+            <button type="button" class="chip" aria-pressed="false">1 h 30</button>
+            <button type="button" class="chip" aria-pressed="false">2 h o más</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">¿Y los fines de semana?</p></div>
+        <div class="q-body">
+          <div class="chips" data-label="Fines de semana">
+            <button type="button" class="chip" aria-pressed="false">Sí, sin problema</button>
+            <button type="button" class="chip" aria-pressed="false">Solo un rato</button>
+            <button type="button" class="chip" aria-pressed="false">Depende</button>
+            <button type="button" class="chip" aria-pressed="false">Mejor no</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">¿Qué tiene en casa para estudiar?</p></div>
+        <div class="q-body">
+          <div class="chips" data-multi="true" data-label="Herramientas">
+            <button type="button" class="chip" aria-pressed="false">Ordenador</button>
+            <button type="button" class="chip" aria-pressed="false">Tablet</button>
+            <button type="button" class="chip" aria-pressed="false">Móvil propio</button>
+            <button type="button" class="chip" aria-pressed="false">Impresora</button>
+            <button type="button" class="chip" aria-pressed="false">Buena conexión</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">El móvil mientras estudia…</p></div>
+        <div class="q-body">
+          <div class="chips" data-label="Móvil al estudiar">
+            <button type="button" class="chip" aria-pressed="false">Lo tiene delante</button>
+            <button type="button" class="chip" aria-pressed="false">A veces</button>
+            <button type="button" class="chip" aria-pressed="false">Fuera de la habitación</button>
+            <button type="button" class="chip" aria-pressed="false">No lo sé</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">¿A qué hora se duerme entre semana?</p></div>
+        <p class="q-hint">En la adolescencia el reloj biológico se retrasa de verdad. No es solo el móvil.</p>
+        <div class="q-body">
+          <div class="chips" data-label="Hora de dormir">
+            <button type="button" class="chip" aria-pressed="false">Antes de 22:30</button>
+            <button type="button" class="chip" aria-pressed="false">Sobre las 23:00</button>
+            <button type="button" class="chip" aria-pressed="false">Sobre las 24:00</button>
+            <button type="button" class="chip" aria-pressed="false">Más tarde</button>
+            <button type="button" class="chip" aria-pressed="false">No lo sabemos</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">¿Quién decide cuándo se pone a estudiar?</p></div>
+        <div class="q-body">
+          <div class="chips" data-label="Quién decide">
+            <button type="button" class="chip" aria-pressed="false">Lo decide él/ella</button>
+            <button type="button" class="chip" aria-pressed="false">Se lo recordamos y va</button>
+            <button type="button" class="chip" aria-pressed="false">Hay que insistir bastante</button>
+            <button type="button" class="chip" aria-pressed="false">Solo se pone si nos sentamos</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">Cuando se sienta a estudiar, ¿qué suele pasar?</p></div>
+        <p class="q-hint">Marca lo que veáis, sin suavizarlo.</p>
+        <div class="q-body">
+          <div class="chips" data-multi="true" data-label="Qué pasa al sentarse">
+            <button type="button" class="chip" aria-pressed="false">Se pone y no para</button>
+            <button type="button" class="chip" aria-pressed="false">Tarda un buen rato en arrancar</button>
+            <button type="button" class="chip" aria-pressed="false">Se levanta cada poco</button>
+            <button type="button" class="chip" aria-pressed="false">Aguanta poco y se cansa</button>
+            <button type="button" class="chip" aria-pressed="false">No llega a sentarse</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">Los deberes en casa suelen acabar…</p></div>
+        <div class="q-body">
+          <div class="chips" data-label="Clima de deberes">
+            <button type="button" class="chip" aria-pressed="false">Sin dramas</button>
+            <button type="button" class="chip" aria-pressed="false">Con alguna discusión</button>
+            <button type="button" class="chip" aria-pressed="false">En guerra casi diaria</button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <section>
+      <p class="s-label">Cinco</p>
+      <h2 class="s-title">Vosotros</h2>
+      <p class="s-note">Esta parte va de vosotros, no de él. Es la que más me sirve y la que nadie suele preguntar.</p>
+
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">Cuando os pide ayuda con los deberes, ¿qué hacéis?</p></div>
+        <p class="q-hint">No hay respuesta mala. Cada una lleva a un plan distinto.</p>
+        <div class="q-body">
+          <div class="chips" data-multi="true" data-label="Cuando pide ayuda">
+            <button type="button" class="chip" aria-pressed="false">Se lo explico</button>
+            <button type="button" class="chip" aria-pressed="false">Se lo reviso al final</button>
+            <button type="button" class="chip" aria-pressed="false">Le digo que lo intente solo primero</button>
+            <button type="button" class="chip" aria-pressed="false">Acabamos haciéndolo entre los dos</button>
+            <button type="button" class="chip" aria-pressed="false">No suele pedirlo</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">Cuando algo se le da mal, ¿qué soléis decirle?</p></div>
+        <p class="q-hint">Tal cual, aunque suene mal escrito. Lo que oye en casa pesa más que lo que le diga yo.</p>
+        <div class="q-body"><textarea class="txt" data-label="Qué le decimos" rows="2" placeholder="Lo que de verdad se dice en casa, con esas palabras"></textarea></div>
+      </div>
+
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">Si esto funciona, ¿qué os gustaría dejar de hacer?</p></div>
+        <p class="q-hint">Casi siempre esto vale más que la nota.</p>
+        <div class="q-body"><textarea class="txt" data-label="Qué queremos dejar de hacer" rows="2" placeholder="Perseguirle, preguntar por las notas, sentarnos con él cada tarde…"></textarea></div>
+      </div>
+
+    </section>
+
+    <section>
+      <p class="s-label">Seis</p>
+      <h2 class="s-title">Motivación y premios</h2>
+      <p class="s-note">Un premio prometido que no llega hace más daño que no prometer nada. Por eso pregunto antes.</p>
+
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">¿Qué le motiva ahora mismo?</p></div>
+        <p class="q-hint">Es la palanca de todo lo demás.</p>
+        <div class="q-body"><textarea class="txt" data-label="Qué le motiva" rows="2" placeholder="Un deporte, un juego, una serie, un amigo, un plan…"></textarea></div>
+      </div>
+
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">¿Estaríais dispuestos a premiar el ESFUERZO y no la nota? <span class="req">*</span></p></div>
+        <p class="q-hint">Es importante: premiar la nota le enseña a jugar a la nota. Premiar lo que sí controla —sentarse, intentarlo, pedir ayuda— es lo que sostiene el hábito.</p>
+        <div class="q-body">
+          <div class="chips" data-label="Premiar proceso">
+            <button type="button" class="chip" aria-pressed="false">Sí, lo vemos</button>
+            <button type="button" class="chip" aria-pressed="false">Nos cuesta, pero sí</button>
+            <button type="button" class="chip" aria-pressed="false">Preferimos premiar resultados</button>
+            <button type="button" class="chip" aria-pressed="false">No lo vemos</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">Cuando a vuestro hijo/a le sale algo bien, ¿qué pasa en casa?</p></div>
+        <p class="q-hint">Hoy, sin cambiar nada. Pregunto porque lo que ya funciona en vuestra casa vale más que cualquier premio que yo me invente.</p>
+        <div class="q-body">
+          <div class="chips" data-multi="true" data-label="Cuando algo sale bien en casa">
+            <button type="button" class="chip" aria-pressed="false">Lo celebramos con algo (una comida, un plan, un capricho)</button>
+            <button type="button" class="chip" aria-pressed="false">Se lo decimos y se nota que nos alegramos</button>
+            <button type="button" class="chip" aria-pressed="false">Se comenta de pasada</button>
+            <button type="button" class="chip" aria-pressed="false">Lo contamos a la familia o a los abuelos</button>
+            <button type="button" class="chip" aria-pressed="false">La verdad es que no hacemos nada especial</button>
+            <button type="button" class="chip" aria-pressed="false">Depende de lo importante que sea</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">¿Hay algún premio que prefiráis NO usar?</p></div>
+        <div class="q-body"><input class="txt" type="text" data-label="Premio vetado" placeholder="Si no hay ninguno, escribe «ninguno»"></div>
+      </div>
+
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">¿Os comprometéis a ponerle fácil el hábito? <span class="req">*</span></p></div>
+        <p class="q-hint">Significa: un mismo sitio siempre, mantenerlo recogido VOSOTROS al principio, y las cosas a la vista y listas. Es lo que más rinde de todo lo que os voy a pedir.</p>
+        <div class="q-body">
+          <div class="chips" data-label="Facilitar el hábito">
+            <button type="button" class="chip" aria-pressed="false">Sí, nos comprometemos</button>
+            <button type="button" class="chip" aria-pressed="false">Podemos intentarlo</button>
+            <button type="button" class="chip" aria-pressed="false">Va a ser difícil en casa</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">¿Os animáis a leer todos juntos 2 minutos al día?</p></div>
+        <p class="q-hint">Cada uno con su libro, el que sea, vosotros también. Dos minutos.</p>
+        <div class="q-body">
+          <div class="chips" data-label="Leer 2 minutos">
+            <button type="button" class="chip" aria-pressed="false">Sí</button>
+            <button type="button" class="chip" aria-pressed="false">Lo intentaremos</button>
+            <button type="button" class="chip" aria-pressed="false">No nos vemos</button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <section>
+      <p class="s-label">Siete</p>
+      <h2 class="s-title">Adónde vamos</h2>
+
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">En junio, ¿qué tendría que haber pasado para decir «ha merecido la pena»? <span class="req">*</span></p></div>
+        <div class="q-body"><textarea class="txt" data-label="Éxito en junio" rows="2" placeholder="Con vuestras palabras"></textarea></div>
+      </div>
+
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">¿Y qué os gustaría notar en noviembre, mucho antes de las notas?</p></div>
+        <p class="q-hint">Esto es lo único que puedo prometer honestamente el primer trimestre. La nota llega después, si llega.</p>
+        <div class="q-body"><textarea class="txt" data-label="Qué notar en noviembre" rows="2" placeholder="Que se sienta antes, que pregunte, que se discuta menos…"></textarea></div>
+      </div>
+
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">¿Qué es lo que más dudas os genera de todo esto?</p></div>
+        <p class="q-hint">Por ejemplo: que no le enganche y lo deje a las tres semanas · que sea una cosa más en una semana que ya va llena · que a distancia no funcione igual · que ya probasteis algo parecido y no sirvió · que no se note en las notas. Prefiero saberlo hoy y hablarlo, no en enero.</p>
+        <div class="q-body"><textarea class="txt" data-label="Lo que más dudas nos genera" rows="3" placeholder="Con total franqueza"></textarea></div>
+      </div>
+
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">¿Qué tardes tenéis más libres?</p></div>
+        <p class="q-hint">Orientativo. Buena parte del trabajo no depende de una hora fija.</p>
+        <div class="q-body">
+          <div class="chips" data-multi="true" data-label="Tardes libres">
+            <button type="button" class="chip" aria-pressed="false">Lunes</button>
+            <button type="button" class="chip" aria-pressed="false">Martes</button>
+            <button type="button" class="chip" aria-pressed="false">Miércoles</button>
+            <button type="button" class="chip" aria-pressed="false">Jueves</button>
+            <button type="button" class="chip" aria-pressed="false">Viernes</button>
+            <button type="button" class="chip" aria-pressed="false">Fin de semana</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">¿Algo más que queráis contarme?</p></div>
+        <div class="q-body"><textarea class="txt" data-label="Algo más" rows="2" placeholder=""></textarea></div>
+      </div>
+
+    </section>
+
+    <section>
+      <p class="s-label">Ocho · última</p>
+      <h2 class="s-title">Cómo trabajo y qué guardo</h2>
+      <p class="s-note">Marcad las dos casillas. No es letra pequeña: es cómo funciona esto.</p>
+
+      <div class="q">
+        <div class="q-body" style="margin-left:0">
+          <div class="consent">
+            <button type="button" class="cbox" aria-pressed="false" data-label="Acepta canal directo"><span class="tick"></span><span><strong>Sé que mi hijo/a tendrá un canal directo conmigo</strong> (WhatsApp), sé cuál es y puedo pedir verlo cuando quiera. Yo no leo su día a día —eso es lo que le hace ganar autonomía— pero nunca estoy a ciegas.</span></button>
+            <button type="button" class="cbox" aria-pressed="false" data-label="Acepta tratamiento de datos"><span class="tick"></span><span><strong>Sé qué se guarda y dónde.</strong> Sergio guarda estas respuestas, el boletín y un resumen de las sesiones en una ficha de su ordenador, solo para preparar el trabajo con mi hijo/a. No se comparte con nadie, no va al colegio y se borra si lo pido.</span></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="privacy">
+      <strong>Lo que no prometo.</strong> No prometo aprobados. Nadie que sea honesto puede prometer una nota, porque no la pone él. Lo que sí me comprometo a hacer es enseñarle a estudiar y contaros la verdad cada mes, incluso cuando la verdad sea que vamos lentos.
+    </div>
+
+    <footer>sergio vega · enseño a estudiar · Punto de partida, curso 2026-27</footer>
+  </main>
 </div>
 
-<div class="send"><div class="send-in" style="flex-direction:column">
-  <div style="display:flex;gap:10px">
-    <a id="btn-wa" href="https://wa.me/34694918102" target="_blank" rel="noopener">Enviar respuestas por WhatsApp</a>
-    <button id="btn-copy" type="button">Copiar</button>
+<div class="bar">
+  <div class="bar-in">
+    <div class="progress">
+      <div class="progress-track"><div class="progress-fill" id="fill"></div></div>
+      <p class="progress-txt" id="ptxt">0 contestadas</p>
+    </div>
+    <button type="button" class="copy" id="copy">Copiar</button>
+    <button type="button" class="send" id="send">Enviar por WhatsApp</button>
   </div>
-  <div id="msg"></div>
-</div></div>
+</div>
 
 <script>
 (function(){
-  var WA="34694918102";
-  function collect(){
-    var out=["CUESTIONARIO FAMILIA — Punto de partida"], missing=[];
-    var alumno=document.getElementById("f-alumno").value.trim();
-    if(!alumno) missing.push("el nombre del alumno/a");
-    document.querySelectorAll("[data-k]").forEach(function(el){
-      var k=el.getAttribute("data-k"), v="";
-      if(el.classList && el.classList.contains("chips")){
-        var sel=[].slice.call(el.querySelectorAll("input:checked")).map(function(i){return i.value});
-        v=sel.join(", ");
-        if(k==="Curso" && !v) missing.push("el curso");
-        if(k==="Asignaturas que preocupan" && !v) missing.push("las asignaturas");
-      } else { v=el.value.trim(); }
-      if(k==="Éxito en junio" && !v) missing.push("qué sería un éxito en junio");
-      if(v) out.push("· "+k+": "+v);
+  var TEL="34694918102";
+  var TOTAL=document.querySelectorAll(".q").length;
+
+  document.querySelectorAll(".chips").forEach(function(box){
+    var multi=box.dataset.multi==="true";
+    box.addEventListener("click",function(e){
+      var t=e.target.closest(".chip"); if(!t) return;
+      var on=t.getAttribute("aria-pressed")==="true";
+      if(!multi) box.querySelectorAll(".chip").forEach(function(c){c.setAttribute("aria-pressed","false");});
+      t.setAttribute("aria-pressed",on?"false":"true");
+      update();
     });
-    return {text:out.join("\n"), missing:missing};
-  }
-  function warn(t){var m=document.getElementById("msg");m.textContent=t;m.style.display=t?"block":"none";}
-  var btn=document.getElementById("btn-wa");
-  function refresh(){
-    var r=collect();
-    if(r.missing.length){btn.setAttribute("href","#faltan");}
-    else{btn.setAttribute("href","https://wa.me/"+WA+"?text="+encodeURIComponent(r.text));}
-  }
-  document.addEventListener("input",refresh,true);
-  document.addEventListener("change",refresh,true);
-  refresh();
-  btn.addEventListener("click",function(e){
-    var r=collect();
-    if(r.missing.length){e.preventDefault();warn("Falta "+r.missing[0]+".");return;}
-    warn("");
   });
-  document.getElementById("btn-copy").addEventListener("click",function(){
-    var r=collect();
-    try{navigator.clipboard.writeText(r.text);warn("");this.textContent="Copiado ✓";
-      var b=this;setTimeout(function(){b.textContent="Copiar"},1600);}catch(e){warn("No se pudo copiar; usa el botón de WhatsApp.");}
+  document.querySelectorAll(".cbox").forEach(function(b){
+    b.addEventListener("click",function(){
+      b.setAttribute("aria-pressed",b.getAttribute("aria-pressed")==="true"?"false":"true");update();
+    });
   });
+  document.querySelectorAll(".txt").forEach(function(el){el.addEventListener("input",update);});
+
+  function answers(){
+    var out=[];
+    document.querySelectorAll(".q").forEach(function(qq){
+      qq.querySelectorAll(".txt").forEach(function(el){var v=el.value.trim();if(v)out.push([el.dataset.label,v]);});
+      qq.querySelectorAll(".chips").forEach(function(box){
+        var sel=[].slice.call(box.querySelectorAll('.chip[aria-pressed="true"]')).map(function(c){return c.textContent;});
+        if(sel.length)out.push([box.dataset.label,sel.join(", ")]);
+      });
+      qq.querySelectorAll(".cbox").forEach(function(b){
+        if(b.getAttribute("aria-pressed")==="true")out.push([b.dataset.label,"Sí"]);
+      });
+    });
+    return out;
+  }
+  function update(){
+    var n=answers().length;
+    fill.style.width=Math.min(100,Math.round(n/TOTAL*100))+"%";
+    ptxt.textContent=n+(n===1?" contestada":" contestadas");
+  }
+  function build(){
+    var a=answers();
+    var al=(a.find(function(x){return x[0]==="Alumno";})||["","(sin nombre)"])[1];
+    var t="CUESTIONARIO FAMILIA — Punto de partida\n"+al+"\n\n";
+    a.forEach(function(x){ if(x[0]!=="Alumno") t+="· "+x[0]+": "+x[1]+"\n"; });
+    return t;
+  }
+  document.getElementById("send").onclick=function(){
+    window.open("https://wa.me/"+TEL+"?text="+encodeURIComponent(build()),"_blank");
+  };
+  document.getElementById("copy").onclick=function(){
+    var b=this;navigator.clipboard.writeText(build()).then(function(){
+      b.textContent="Copiado";setTimeout(function(){b.textContent="Copiar";},1800);});
+  };
+  var k=0;document.querySelectorAll(".q-num").forEach(function(n){k++;n.textContent=k;});
+  update();
 })();
 </script>
-
 </body>
 </html>

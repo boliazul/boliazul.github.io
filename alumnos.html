@@ -2,365 +2,394 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Punto de Partida · Alumnos</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://formacion.sergiovega.es/alumnos.html">
+<meta property="og:title" content="No es un examen">
+<meta property="og:description" content="Cuestionario de punto de partida. No puntúa, no lo ve nadie más y son unos minutos.">
+<meta property="og:image" content="https://formacion.sergiovega.es/og-alumnos.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Sergio Vega">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="description" content="Cuestionario de punto de partida. No puntúa, no lo ve nadie más y son unos minutos.">
+<meta name="theme-color" content="#0F241B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,500;12..96,75..100,700;12..96,75..100,800&family=Inter:wght@400;500;600&family=Source+Serif+4:wght@600&display=swap">
+<style>
+:root{
+  --fondo:#0F241B;
+  --carta:#163326;
+  --verde:#1F4D3A;
+  --borde:#285C46;
+  --crema:#FBF8F2;
+  --apagado:#8FAE9E;
+  --sol:#F2C879;
+  --display:"Bricolage Grotesque",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --ui:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{
+  margin:0;background:var(--fondo);color:var(--crema);
+  font-family:var(--ui);font-size:16px;line-height:1.5;
+  overflow:hidden;
+}
+#app{
+  height:100dvh;display:flex;flex-direction:column;
+  max-width:560px;margin:0 auto;padding:0 20px;
+}
+
+/* ---- barra superior ---- */
+.top{padding:16px 0 0;flex:none}
+.top-row{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:11px}
+.mark{font-family:"Source Serif 4",Georgia,serif;font-weight:600;font-size:15px;color:var(--apagado)}
+.count{font-family:var(--ui);font-size:13px;font-weight:600;color:var(--apagado);font-variant-numeric:tabular-nums}
+.track{height:5px;background:rgba(251,248,242,.12);border-radius:99px;overflow:hidden}
+.fill{height:100%;width:0;background:var(--sol);border-radius:99px;transition:width .32s cubic-bezier(.4,0,.2,1)}
+
+/* ---- carta ---- */
+.stage{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0;overflow-y:auto;padding:22px 0}
+.card{animation:in .34s cubic-bezier(.16,1,.3,1) both}
+@keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.kicker{font-family:var(--ui);font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--sol);margin:0 0 12px}
+h1{
+  font-family:var(--display);font-weight:800;
+  font-size:clamp(27px,7.2vw,38px);line-height:1.1;letter-spacing:-.025em;
+  margin:0;text-wrap:balance;
+}
+.hint{font-size:15px;color:var(--apagado);margin:12px 0 0;max-width:40ch;line-height:1.45}
+
+/* ---- opciones ---- */
+.opts{display:flex;flex-direction:column;gap:9px;margin-top:26px}
+.opts.wrap{flex-direction:row;flex-wrap:wrap}
+.opt{
+  font-family:var(--ui);font-size:16.5px;font-weight:500;text-align:left;
+  background:var(--carta);color:var(--crema);
+  border:1.5px solid var(--borde);border-radius:15px;
+  padding:15px 18px;cursor:pointer;
+  transition:transform .1s ease,background .13s ease,border-color .13s ease,color .13s ease;
+}
+.opts.wrap .opt{flex:0 1 auto;padding:12px 17px;border-radius:99px;font-size:15.5px}
+.opt:active{transform:scale(.975)}
+.opt[aria-pressed="true"]{background:var(--crema);border-color:var(--crema);color:var(--fondo);font-weight:600}
+.opt:focus-visible,.nav button:focus-visible,.field:focus-visible,.dot:focus-visible{outline:2px solid var(--sol);outline-offset:3px}
+
+/* ---- escala ---- */
+.dots{display:flex;gap:8px;margin-top:26px}
+.dot{
+  flex:1;aspect-ratio:1/1;max-height:66px;
+  background:var(--carta);border:1.5px solid var(--borde);border-radius:15px;
+  color:var(--crema);font-family:var(--display);font-weight:700;font-size:21px;
+  cursor:pointer;transition:transform .1s ease,background .13s ease,color .13s ease,border-color .13s ease;
+}
+.dot:active{transform:scale(.94)}
+.dot[aria-pressed="true"]{background:var(--sol);border-color:var(--sol);color:var(--fondo)}
+.dots.ten{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:24px}
+.dots.ten .dot{aspect-ratio:auto;height:54px;font-size:18px;border-radius:13px}
+.ends{display:flex;justify-content:space-between;font-size:12.5px;color:var(--apagado);margin-top:9px}
+
+/* ---- filas de notas ---- */
+.rows{margin-top:22px;display:flex;flex-direction:column;gap:2px}
+.rw{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid rgba(251,248,242,.09)}
+.rw:last-child{border-bottom:none}
+.rw-name{flex:1;font-size:16px;font-weight:500;min-width:0}
+.rw-name small{display:block;font-size:12px;color:var(--apagado);font-weight:400}
+.rw-dots{display:flex;gap:5px}
+.mini{
+  width:37px;height:37px;background:var(--carta);border:1.5px solid var(--borde);
+  border-radius:11px;color:var(--apagado);font-family:var(--display);font-weight:700;font-size:15px;
+  cursor:pointer;transition:background .13s ease,color .13s ease,border-color .13s ease;
+  font-variant-numeric:tabular-nums;
+}
+.mini[aria-pressed="true"]{background:var(--sol);border-color:var(--sol);color:var(--fondo)}
+@media(max-width:400px){.mini{width:32px;height:34px}}
+
+/* ---- texto ---- */
+.field{
+  width:100%;margin-top:26px;
+  font-family:var(--display);font-weight:500;font-size:20px;color:var(--crema);
+  background:transparent;border:none;border-bottom:2px solid var(--borde);
+  padding:10px 2px;transition:border-color .15s ease;
+}
+.field::placeholder{color:rgba(143,174,158,.65);font-weight:500}
+.field:focus{border-bottom-color:var(--sol);outline:none}
+textarea.field{border:1.5px solid var(--borde);border-radius:15px;padding:14px 16px;font-size:18px;line-height:1.45;resize:none}
+textarea.field:focus{border-color:var(--sol)}
+
+/* ---- navegación ---- */
+.nav{flex:none;display:flex;gap:11px;padding:14px 0 calc(18px + env(safe-area-inset-bottom))}
+.nav button{
+  font-family:var(--ui);font-size:16px;font-weight:600;
+  border-radius:99px;padding:15px 24px;cursor:pointer;border:1.5px solid var(--borde);
+  background:transparent;color:var(--apagado);transition:opacity .15s ease,background .15s ease}
+.nav .next{flex:1;background:var(--crema);border-color:var(--crema);color:var(--fondo)}
+.nav .next.quiet{background:transparent;border-color:var(--borde);color:var(--apagado);font-weight:500}
+.nav .next.go{background:var(--sol);border-color:var(--sol)}
+.nav button[disabled]{opacity:.32;cursor:default}
+.back{min-width:60px;text-align:center}
+
+/* ---- pantallas de inicio y fin ---- */
+.big{font-family:var(--display);font-weight:800;font-size:clamp(34px,10vw,52px);line-height:1.02;letter-spacing:-.03em;margin:0;text-wrap:balance}
+.lead{font-size:17px;color:var(--crema);margin:20px 0 0;max-width:34ch;line-height:1.5}
+.lead b{color:var(--sol);font-weight:600}
+.small{font-size:14px;color:var(--apagado);margin:18px 0 0;max-width:38ch;line-height:1.5}
+.chk{display:flex;gap:10px;align-items:flex-start;margin-top:14px;font-size:14.5px;color:var(--apagado);line-height:1.45}
+.chk span{color:var(--sol);font-weight:700}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
 </head>
 <body>
-
-<style>
-  :root{
-    --paper:#FBFAF5; --ink:#26231C; --soft:#6E6857; --line:#E4E0D2;
-    --verde:#1E7A5A; --verde-soft:#E9F4EF; --red:#C64F4A;
-  }
-  *{box-sizing:border-box}
-  body{
-    margin:0;color:var(--ink);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-    font-size:17px;line-height:1.5;
-    background:repeating-linear-gradient(to bottom,transparent 0 27px,rgba(30,122,90,.05) 27px 28px) var(--paper);
-  }
-  .wrap{max-width:620px;margin:0 auto;padding:28px 18px 120px}
-  .brand{display:flex;align-items:center;gap:11px;margin-bottom:20px}
-  .logo{font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:19px;color:#FFFFFF;background:var(--verde);width:42px;height:42px;border-radius:11px;display:grid;place-items:center}
-  .brand-name{font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:17px;line-height:1.15;color:var(--ink)}
-  .brand-sub{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--soft)}
-  .kicker{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--verde)}
-  h1{font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:34px;line-height:1.1;margin:6px 0 10px;text-wrap:balance}
-  .lead{color:var(--soft);margin:0 0 4px;max-width:52ch}
-  .lead b{color:var(--ink)}
-  section{background:#FFFFFF;border:1px solid var(--line);border-radius:14px;padding:18px 16px 20px;margin:14px 0;box-shadow:0 1px 0 rgba(38,35,28,.04)}
-  .qnum{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--verde);margin-bottom:2px}
-  h2{font-family:Georgia,"Times New Roman",serif;font-weight:600;font-size:21px;margin:2px 0 4px;line-height:1.25}
-  .hint{font-size:14.5px;color:var(--soft);margin:0 0 12px}
-  .field{margin:14px 0 0}
-  .field>label.txt{display:block;font-weight:700;font-size:15.5px;margin-bottom:7px}
-  input[type=text],textarea{width:100%;padding:12px 13px;border:1.5px solid var(--line);border-radius:10px;font:inherit;color:var(--ink);background:#FFFFFF}
-  input[type=text]:focus,textarea:focus{outline:2px solid var(--verde);outline-offset:1px;border-color:var(--verde)}
-  textarea{min-height:74px;resize:vertical}
-  .chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:8px}
-  .chips label{display:inline-flex;align-items:center;min-height:44px;padding:9px 15px;border:1.5px solid var(--line);border-radius:999px;background:#FFFFFF;font-size:15.5px;cursor:pointer;user-select:none;color:var(--ink)}
-  .chips input{position:absolute;opacity:0;width:1px;height:1px}
-  .chips label:has(input:checked){background:var(--verde);border-color:var(--verde);color:#FFFFFF;font-weight:700}
-  .chips label:has(input:focus-visible){outline:2px solid var(--verde);outline-offset:2px}
-  .grade{display:grid;grid-template-columns:1fr auto;gap:6px 10px;align-items:center;margin-top:10px}
-  .grade .sub{font-weight:700;font-size:15.5px}
-  .stars{display:flex;gap:5px}
-  .stars label{width:40px;height:40px;display:grid;place-items:center;border:1.5px solid var(--line);border-radius:10px;cursor:pointer;font-weight:700;color:var(--soft);background:#FFFFFF}
-  .stars input{position:absolute;opacity:0;width:1px;height:1px}
-  .stars label:has(input:checked){background:var(--verde);border-color:var(--verde);color:#FFFFFF}
-  .send{position:fixed;left:0;right:0;bottom:0;background:rgba(251,250,245,.96);border-top:1px solid var(--line);padding:12px 18px calc(12px + env(safe-area-inset-bottom));backdrop-filter:blur(4px)}
-  .send-in{max-width:620px;margin:0 auto;display:flex;flex-direction:column;gap:0}
-  button{font:inherit;font-weight:700;border-radius:12px;cursor:pointer;min-height:52px}
-  #btn-wa{flex:1;background:var(--verde);color:#FFFFFF;border:none;font-size:17px;display:grid;place-items:center;text-decoration:none;font-weight:700;border-radius:12px;min-height:52px}
-  #btn-copy{background:#FFFFFF;color:var(--ink);border:1.5px solid var(--line);padding:0 16px}
-  #msg{font-size:14px;color:var(--red);margin:6px 2px 0;display:none}
-  .foot{color:var(--soft);font-size:13.5px;margin-top:22px}
-  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
-</style>
-
-<div class="wrap">
-<header>
-  <div class="brand"><span class="logo">sv.</span><div><div class="brand-name">sergio vega.</div><div class="brand-sub">formación</div></div></div>
-  <div class="kicker">Punto de partida · Curso 2026-27</div>
-  <h1>Tu cuestionario</h1>
-  <p class="lead">Son <b>2 minutos</b> y no hay respuestas buenas ni malas — esto no es un examen y no puntúa. Cuanto más sincero seas, mejores (y más cortas) serán las clases. Al acabar, el botón verde manda tus respuestas por WhatsApp.</p>
-</header>
-
-<section>
-  <div class="qnum">1</div>
-  <h2>Tú</h2>
-  <div class="field"><label class="txt" for="a-nombre">Tu nombre</label>
-    <input type="text" id="a-nombre" data-k="Nombre" autocomplete="off"></div>
-</section>
-
-<section>
-  <div class="qnum">2</div>
-  <h2>Asignaturas</h2>
-  <div class="field"><label class="txt">¿Cuál te gusta más?</label>
-    <div class="chips" data-k="La que más me gusta" data-type="radio">
-      <label><input type="radio" name="fav" value="Matemáticas">Mates</label>
-      <label><input type="radio" name="fav" value="Lengua">Lengua</label>
-      <label><input type="radio" name="fav" value="Inglés">Inglés</label>
-      <label><input type="radio" name="fav" value="Física y Química">Física y Química</label>
-      <label><input type="radio" name="fav" value="Biología">Bio</label>
-      <label><input type="radio" name="fav" value="Historia">Historia</label>
-      <label><input type="radio" name="fav" value="Educación Física">EF</label>
-      <label><input type="radio" name="fav" value="Ninguna">Ninguna</label>
-    </div></div>
-  <div class="field"><label class="txt">¿Y cuál llevas peor?</label>
-    <div class="chips" data-k="La que peor llevo" data-type="radio">
-      <label><input type="radio" name="peor" value="Matemáticas">Mates</label>
-      <label><input type="radio" name="peor" value="Lengua">Lengua</label>
-      <label><input type="radio" name="peor" value="Inglés">Inglés</label>
-      <label><input type="radio" name="peor" value="Física y Química">Física y Química</label>
-      <label><input type="radio" name="peor" value="Biología">Bio</label>
-      <label><input type="radio" name="peor" value="Historia">Historia</label>
-      <label><input type="radio" name="peor" value="Varias">Varias</label>
-    </div></div>
-  <div class="field"><label class="txt">¿Por qué esa va peor?</label>
-    <p class="hint">Puedes marcar varias. Sé sincero, nadie se enfada.</p>
-    <div class="chips" data-k="Por qué va mal" data-type="multi">
-      <label><input type="checkbox" value="No entiendo las explicaciones">No la entiendo</label>
-      <label><input type="checkbox" value="Me aburre">Me aburre</label>
-      <label><input type="checkbox" value="Hay que memorizar mucho">Mucho de memoria</label>
-      <label><input type="checkbox" value="Me pierdo desde hace tiempo">Me perdí hace tiempo</label>
-      <label><input type="checkbox" value="El profesor y yo no conectamos">El profe</label>
-      <label><input type="checkbox" value="En los exámenes me bloqueo">Me bloqueo en exámenes</label>
-    </div></div>
-</section>
-
-<section>
-  <div class="qnum">3</div>
-  <h2>Ponte nota</h2>
-  <p class="hint">Del 1 (fatal) al 5 (me lo sé). Cómo te ves TÚ, no la nota del boletín.</p>
-  <div class="grade" id="grades">
-    <span class="sub">Mates</span><span class="stars" data-k="Me veo en Mates" data-type="radio">
-      <label><input type="radio" name="g1" value="1">1</label><label><input type="radio" name="g1" value="2">2</label><label><input type="radio" name="g1" value="3">3</label><label><input type="radio" name="g1" value="4">4</label><label><input type="radio" name="g1" value="5">5</label></span>
-    <span class="sub">Lengua</span><span class="stars" data-k="Me veo en Lengua" data-type="radio">
-      <label><input type="radio" name="g2" value="1">1</label><label><input type="radio" name="g2" value="2">2</label><label><input type="radio" name="g2" value="3">3</label><label><input type="radio" name="g2" value="4">4</label><label><input type="radio" name="g2" value="5">5</label></span>
-    <span class="sub">Inglés</span><span class="stars" data-k="Me veo en Inglés" data-type="radio">
-      <label><input type="radio" name="g3" value="1">1</label><label><input type="radio" name="g3" value="2">2</label><label><input type="radio" name="g3" value="3">3</label><label><input type="radio" name="g3" value="4">4</label><label><input type="radio" name="g3" value="5">5</label></span>
-    <span class="sub">Física y Química</span><span class="stars" data-k="Me veo en Física y Química" data-type="radio">
-      <label><input type="radio" name="g4" value="1">1</label><label><input type="radio" name="g4" value="2">2</label><label><input type="radio" name="g4" value="3">3</label><label><input type="radio" name="g4" value="4">4</label><label><input type="radio" name="g4" value="5">5</label></span>
-    <span class="sub">Valencià</span><span class="stars" data-k="Me veo en Valencià" data-type="radio">
-      <label><input type="radio" name="g5" value="1">1</label><label><input type="radio" name="g5" value="2">2</label><label><input type="radio" name="g5" value="3">3</label><label><input type="radio" name="g5" value="4">4</label><label><input type="radio" name="g5" value="5">5</label></span>
-    <span class="sub">Cálculo (operaciones de cabeza)</span><span class="stars" data-k="Me veo en Cálculo" data-type="radio">
-      <label><input type="radio" name="g6" value="1">1</label><label><input type="radio" name="g6" value="2">2</label><label><input type="radio" name="g6" value="3">3</label><label><input type="radio" name="g6" value="4">4</label><label><input type="radio" name="g6" value="5">5</label></span>
-    <span class="sub">Lectura (leer y enterarme)</span><span class="stars" data-k="Me veo en Lectura" data-type="radio">
-      <label><input type="radio" name="g7" value="1">1</label><label><input type="radio" name="g7" value="2">2</label><label><input type="radio" name="g7" value="3">3</label><label><input type="radio" name="g7" value="4">4</label><label><input type="radio" name="g7" value="5">5</label></span>
+<div id="app">
+  <div class="top">
+    <div class="top-row"><span class="mark">sergio vega.</span><span class="count" id="count"></span></div>
+    <div class="track"><div class="fill" id="fill"></div></div>
   </div>
-</section>
-
-<section>
-  <div class="qnum">4</div>
-  <h2>Cómo estudias</h2>
-  <div class="field"><label class="txt">Cuando estudias, ¿qué haces de verdad?</label>
-    <div class="chips" data-k="Cómo estudio" data-type="multi">
-      <label><input type="checkbox" value="Releer los apuntes">Releer</label>
-      <label><input type="checkbox" value="Subrayar">Subrayar</label>
-      <label><input type="checkbox" value="Hacer resúmenes o esquemas">Resúmenes</label>
-      <label><input type="checkbox" value="Hacer ejercicios">Ejercicios</label>
-      <label><input type="checkbox" value="Ver vídeos de YouTube">Vídeos de YouTube</label>
-      <label><input type="checkbox" value="Estudiar a última hora">Todo a última hora</label>
-    </div></div>
-  <div class="field"><label class="txt">Cuando te sientas a estudiar o hacer deberes, ¿dónde lo haces?</label>
-    <div class="chips" data-k="Dónde estudio" data-type="radio">
-      <label><input type="radio" name="donde" value="En mi cuarto">Mi cuarto</label>
-      <label><input type="radio" name="donde" value="En el salón">Salón</label>
-      <label><input type="radio" name="donde" value="En la cocina">Cocina</label>
-      <label><input type="radio" name="donde" value="Donde pillo, cada día un sitio">Donde pillo</label>
-    </div></div>
-  <div class="field"><label class="txt">¿Tienes un hábito? ¿Siempre haces lo mismo al ponerte?</label>
-    <div class="chips" data-k="Hábito de estudio" data-type="radio">
-      <label><input type="radio" name="habito" value="Sí, siempre igual">Sí, siempre igual</label>
-      <label><input type="radio" name="habito" value="A veces">A veces</label>
-      <label><input type="radio" name="habito" value="Cada día es distinto">Cada día distinto</label>
-    </div></div>
-  <div class="field"><label class="txt">¿Llevas agenda?</label>
-    <div class="chips" data-k="Agenda" data-type="radio">
-      <label><input type="radio" name="agenda" value="En papel">En papel</label>
-      <label><input type="radio" name="agenda" value="En el calendario del móvil">En el móvil</label>
-      <label><input type="radio" name="agenda" value="Las dos">Las dos</label>
-      <label><input type="radio" name="agenda" value="Ninguna, lo llevo de cabeza">De cabeza</label>
-    </div></div>
-  <div class="field"><label class="txt">¿Te ayuda alguien a estudiar?</label>
-    <div class="chips" data-k="Quién me ayuda" data-type="multi">
-      <label><input type="checkbox" value="Nadie, voy solo">Nadie</label>
-      <label><input type="checkbox" value="Mi madre o mi padre">Madre / padre</label>
-      <label><input type="checkbox" value="Hermanos">Hermanos</label>
-      <label><input type="checkbox" value="Amigos o compañeros">Amigos</label>
-      <label><input type="checkbox" value="Un profesor particular">Profe particular</label>
-    </div></div>
-  <div class="field"><label class="txt">En los trabajos en equipo, ¿sabes cómo empezar?</label>
-    <div class="chips" data-k="Trabajos en equipo" data-type="radio">
-      <label><input type="radio" name="equipo" value="Sí, suelo organizar yo">Sí, organizo yo</label>
-      <label><input type="radio" name="equipo" value="Me cuesta arrancar">Me cuesta arrancar</label>
-      <label><input type="radio" name="equipo" value="Me dejo llevar por el grupo">Me dejo llevar</label>
-    </div></div>
-  <div class="field"><label class="txt">¿Cómo prefieres que te expliquen algo difícil?</label>
-    <div class="chips" data-k="Cómo prefiero aprender" data-type="multi">
-      <label><input type="checkbox" value="Con ejemplos de la vida real">Ejemplos reales</label>
-      <label><input type="checkbox" value="Con vídeos">Con vídeos</label>
-      <label><input type="checkbox" value="Haciendo ejercicios juntos">Practicando juntos</label>
-      <label><input type="checkbox" value="Paso a paso en papel">Paso a paso</label>
-      <label><input type="checkbox" value="Como un reto o juego">Retos y juegos</label>
-    </div></div>
-</section>
-
-<section>
-  <div class="qnum">5</div>
-  <h2>En clase</h2>
-  <div class="field"><label class="txt">¿Quieres mejorar tus notas?</label>
-    <div class="chips" data-k="Quiero mejorar mis notas" data-type="radio">
-      <label><input type="radio" name="mejorar" value="Sí, claramente">Sí</label>
-      <label><input type="radio" name="mejorar" value="Sí, pero no sé cómo">Sí, pero no sé cómo</label>
-      <label><input type="radio" name="mejorar" value="Me da un poco igual">Me da un poco igual</label>
-      <label><input type="radio" name="mejorar" value="No">No</label>
-    </div></div>
-  <div class="field"><label class="txt">En clase, ¿te cuesta retener los conceptos?</label>
-    <div class="chips" data-k="Me cuesta retener" data-type="radio">
-      <label><input type="radio" name="retener" value="Casi nunca">Casi nunca</label>
-      <label><input type="radio" name="retener" value="A veces">A veces</label>
-      <label><input type="radio" name="retener" value="Muchas veces">Muchas veces</label>
-    </div></div>
-  <div class="field"><label class="txt">Cuando haces ejercicios, ¿lees el enunciado y sabes por dónde empezar?</label>
-    <div class="chips" data-k="Ante un enunciado" data-type="radio">
-      <label><input type="radio" name="enunciado" value="Casi siempre sé por dónde empezar">Casi siempre</label>
-      <label><input type="radio" name="enunciado" value="A veces me pierdo">A veces me pierdo</label>
-      <label><input type="radio" name="enunciado" value="Casi nunca sé por dónde empezar">Casi nunca</label>
-    </div></div>
-  <div class="field"><label class="txt">En un examen, ¿qué te pasa?</label>
-    <div class="chips" data-k="En un examen" data-type="radio">
-      <label><input type="radio" name="examen" value="Voy tranquilo">Voy tranquilo</label>
-      <label><input type="radio" name="examen" value="Nervios normales">Nervios normales</label>
-      <label><input type="radio" name="examen" value="Me bloqueo aunque me lo sepa">Me bloqueo aunque me lo sepa</label>
-    </div></div>
-  <div class="field"><label class="txt">¿A qué hora te duermes entre semana? (sinceridad, esto no llega al cole)</label>
-    <div class="chips" data-k="A qué hora me duermo" data-type="radio">
-      <label><input type="radio" name="sueno" value="Antes de las 22:30">Antes de 22:30</label>
-      <label><input type="radio" name="sueno" value="Hacia las 23:00">~23:00</label>
-      <label><input type="radio" name="sueno" value="Hacia las 24:00">~24:00</label>
-      <label><input type="radio" name="sueno" value="Con el móvil hasta que me duermo">Con el móvil hasta caer</label>
-    </div></div>
-  <div class="field"><label class="txt">Si mejorar tus notas no te costara mucho esfuerzo, ¿estarías dispuesto?</label>
-    <div class="chips" data-k="Dispuesto sin mucho esfuerzo" data-type="radio">
-      <label><input type="radio" name="dispuesto" value="Sí, claro">Sí, claro</label>
-      <label><input type="radio" name="dispuesto" value="Depende de cuánto esfuerzo">Depende</label>
-      <label><input type="radio" name="dispuesto" value="Ni así">Ni así</label>
-    </div></div>
-</section>
-
-<section>
-  <div class="qnum">6</div>
-  <h2>Tú por dentro</h2>
-  <p class="hint">Aquí no hay trampa. Contesta lo primero que te salga.</p>
-  <div class="field"><label class="txt">¿Crees que eres listo/a?</label>
-    <div class="chips" data-k="Creo que soy listo" data-type="radio">
-      <label><input type="radio" name="listo" value="Sí">Sí</label>
-      <label><input type="radio" name="listo" value="A ratos">A ratos</label>
-      <label><input type="radio" name="listo" value="No">No</label>
-      <label><input type="radio" name="listo" value="Ni idea">Ni idea</label>
-    </div></div>
-  <div class="field"><label class="txt" for="a-piensan">¿Qué crees que piensan los demás de ti?</label>
-    <input type="text" id="a-piensan" data-k="Qué piensan los demás de mí"></div>
-  <div class="field"><label class="txt">Los compañeros que sacan mejores notas… ¿son marcianos? O sea, ¿son verdes y tienen antenas?</label>
-    <div class="chips" data-k="Los de buenas notas son" data-type="radio">
-      <label><input type="radio" name="marcianos" value="Sí, verdes y con antenas">Sí, verdes y con antenas</label>
-      <label><input type="radio" name="marcianos" value="No, son como yo">No, son como yo</label>
-      <label><input type="radio" name="marcianos" value="Nunca lo he pensado">Nunca lo pensé</label>
-    </div></div>
-  <div class="field"><label class="txt" for="a-inspira">¿Tienes algo o alguien que te inspire?</label>
-    <input type="text" id="a-inspira" data-k="Me inspira" placeholder="Un deportista, un youtuber, alguien de tu familia…"></div>
-</section>
-
-<section>
-  <div class="qnum">7</div>
-  <h2>Tus cosas</h2>
-  <div class="field"><label class="txt">Fuera de clase, ¿qué te gusta?</label>
-    <div class="chips" data-k="Me gusta" data-type="multi">
-      <label><input type="checkbox" value="Deporte">Deporte</label>
-      <label><input type="checkbox" value="Videojuegos">Videojuegos</label>
-      <label><input type="checkbox" value="Música">Música</label>
-      <label><input type="checkbox" value="Dibujar o crear">Dibujar / crear</label>
-      <label><input type="checkbox" value="Series y pelis">Series</label>
-      <label><input type="checkbox" value="Salir con amigos">Amigos</label>
-      <label><input type="checkbox" value="Leer">Leer</label>
-    </div></div>
-  <div class="field"><label class="txt" for="a-detalle">¿A qué juegas, qué ves, qué equipo sigues…?</label>
-    <p class="hint">Para explicarte las cosas con TUS ejemplos.</p>
-    <input type="text" id="a-detalle" data-k="En concreto" placeholder="Ej.: Clash Royale, el Elche CF, One Piece…"></div>
-  <div class="field"><label class="txt" for="a-libre">¿Qué te gusta hacer cuando nadie te mira?</label>
-    <p class="hint">Lo que haces por gusto, sin que nadie te lo mande.</p>
-    <input type="text" id="a-libre" data-k="Si nadie me mira"></div>
-  <div class="field"><label class="txt" for="a-motiva">¿Qué te motiva?</label>
-    <input type="text" id="a-motiva" data-k="Me motiva" placeholder="Lo que te haga levantarte con ganas"></div>
-  <div class="field"><label class="txt">Si hubiera premios por cumplir tus metas, ¿te pondrías más las pilas?</label>
-    <div class="chips" data-k="Premios: me activarían" data-type="radio">
-      <label><input type="radio" name="premact" value="Sí, mucho">Sí, mucho</label>
-      <label><input type="radio" name="premact" value="Algo">Algo</label>
-      <label><input type="radio" name="premact" value="No creo">No creo</label>
-    </div></div>
-  <div class="field"><label class="txt" for="a-premio">¿Qué premio te haría estudiar con ganas DE VERDAD?</label>
-    <p class="hint">Pide en grande, luego se negocia.</p>
-    <input type="text" id="a-premio" data-k="Mi premio soñado"></div>
-  <div class="field"><label class="txt" for="a-pelis">¿Qué películas te gustan?</label>
-    <input type="text" id="a-pelis" data-k="Películas"></div>
-  <div class="field"><label class="txt" for="a-comida">¿Qué comida te gusta?</label>
-    <input type="text" id="a-comida" data-k="Comida favorita"></div>
-  <div class="field"><label class="txt" for="a-vacas">¿Qué te gusta hacer en vacaciones?</label>
-    <input type="text" id="a-vacas" data-k="En vacaciones"></div>
-  <div class="field"><label class="txt" for="a-feliz">¿Qué te hace feliz cuando estás con otras personas?</label>
-    <input type="text" id="a-feliz" data-k="Me hace feliz con gente"></div>
-  <div class="field"><label class="txt" for="a-horas">¿Qué podrías hacer durante horas si nadie te molesta?</label>
-    <p class="hint">Aparte de tele, móvil y consola — añade algo más.</p>
-    <input type="text" id="a-horas" data-k="Podría hacerlo durante horas"></div>
-  <div class="field"><label class="txt" for="a-mayor">De mayor… ¿alguna idea de qué quieres ser?</label>
-    <input type="text" id="a-mayor" data-k="De mayor" placeholder="Vale poner «ni idea»"></div>
-  <div class="field"><label class="txt" for="a-verte">Y de mayor, ¿cómo te gustaría verte?</label>
-    <p class="hint">No el trabajo — la vida: cómo te imaginas de mayor si todo va bien.</p>
-    <input type="text" id="a-verte" data-k="Cómo me gustaría verme de mayor"></div>
-  <div class="field"><label class="txt" for="a-meta">Si este curso consiguieras UNA cosa, ¿cuál sería?</label>
-    <input type="text" id="a-meta" data-k="Mi meta del curso"></div>
-  <div class="field"><label class="txt">¿Cuántas ganas tienes de estas clases? (sinceridad total)</label>
-    <div class="chips" data-k="Ganas de estas clases" data-type="radio">
-      <label><input type="radio" name="ganas" value="1 - Cero">1</label>
-      <label><input type="radio" name="ganas" value="2 - Pocas">2</label>
-      <label><input type="radio" name="ganas" value="3 - Ni fu ni fa">3</label>
-      <label><input type="radio" name="ganas" value="4 - Bastantes">4</label>
-      <label><input type="radio" name="ganas" value="5 - Muchas">5</label>
-    </div></div>
-</section>
-
-<p class="foot">Esto lo lee solo Sergio. No es un examen, no puntúa y no sale de aquí.</p>
+  <div class="stage" id="stage"></div>
+  <div class="nav" id="nav"></div>
 </div>
-
-<div class="send"><div class="send-in">
-  <div style="display:flex;gap:10px">
-    <a id="btn-wa" href="https://wa.me/34694918102" target="_blank" rel="noopener">Enviar mis respuestas</a>
-    <button id="btn-copy" type="button">Copiar</button>
-  </div>
-  <div id="msg"></div>
-</div></div>
 
 <script>
 (function(){
-  var WA="34694918102";
-  function collect(){
-    var out=["CUESTIONARIO ALUMNO — Punto de partida"], missing=[];
-    var nombre=document.getElementById("a-nombre").value.trim();
-    if(!nombre) missing.push("tu nombre");
-    document.querySelectorAll("[data-k]").forEach(function(el){
-      var k=el.getAttribute("data-k"), v="";
-      if(el.querySelector && el.querySelector("input[type=radio],input[type=checkbox]")){
-        var sel=[].slice.call(el.querySelectorAll("input:checked")).map(function(i){return i.value});
-        v=sel.join(", ");
-      } else { v=el.value.trim(); }
-      if(v) out.push("· "+k+": "+v);
+var TEL="34694918102";
+
+var Q=[
+ {t:"intro"},
+ {k:"Nombre",type:"text",q:"Para empezar, ¿cómo te llamas?",ph:"Tu nombre"},
+ {k:"Curso",type:"single",q:"¿Qué curso empiezas?",wrap:1,o:["1º ESO","2º ESO","3º ESO","4º ESO","1º Bach","2º Bach"]},
+ {k:"Me gusta más",type:"single",q:"¿Qué asignatura te gusta más?",wrap:1,o:["Mates","Lengua","Inglés","Física y Química","Biología","Historia","Valencià","Tecnología","EF","Ninguna"]},
+ {k:"Llevo peor",type:"single",q:"¿Y cuál llevas peor?",wrap:1,o:["Mates","Lengua","Inglés","Física y Química","Biología","Historia","Valencià","Tecnología","Varias"]},
+ {k:"Por qué va peor",type:"multi",q:"¿Por qué esa va peor?",h:"Marca las que quieras. Nadie se enfada.",o:["No la entiendo","Me aburre","Es mucho de memoria","Me perdí hace tiempo","El profe","Me bloqueo en los exámenes"]},
+ {k:"Ponte nota",type:"rows",q:"Ponte nota tú mismo",h:"Del 1 (fatal) al 5 (me lo sé). Cómo te ves TÚ, no lo que pone el boletín.",
+  r:[["Mates"],["Lengua"],["Inglés"],["Física y Química"],["Valencià"],["Cálculo","de cabeza"],["Lectura","leer y enterarme"]]},
+ {k:"Cuando me atasco",type:"multi",q:"Estás con un ejercicio y no sabes seguir. ¿Qué haces?",h:"Lo que haces DE VERDAD, no lo que se supone que hay que hacer.",
+  o:["Lo dejo y paso al siguiente","Pregunto en casa","Se lo pregunto a un amigo","Lo busco en internet","Se lo pido a una IA","Sigo intentándolo","Lo dejo para mañana"]},
+ {k:"Uso de IA",type:"single",q:"¿Usas ChatGPT u otra IA para los deberes?",h:"Da igual lo que contestes, esto no se lo cuento a nadie.",
+  o:["Nunca","A veces, para entender algo","Para que me lo haga","Lo probé y no me sirvió"]},
+ {k:"Cómo estudio",type:"multi",q:"Cuando estudias, ¿qué haces de verdad?",o:["Releer","Subrayar","Resúmenes o esquemas","Hacer ejercicios","Vídeos de YouTube","Todo a última hora"]},
+ {k:"Días antes del examen",type:"single",q:"¿Cuántos días antes de un examen empiezas a estudiar?",o:["El mismo día","El día antes","2 o 3 días antes","Una semana antes","Lo llevo al día"]},
+ {k:"Dónde estudio",type:"single",q:"¿Dónde estudias?",wrap:1,o:["Mi cuarto","El salón","La cocina","Donde pillo"]},
+ {k:"Hábito",type:"single",q:"¿Siempre haces lo mismo al ponerte?",o:["Sí, siempre igual","A veces","Cada día distinto"]},
+ {k:"Apuntes",type:"single",q:"¿Tienes los apuntes completos?",h:"Sin trampa: si falta media libreta, mejor saberlo ahora.",wrap:1,o:["Sí, todo","Casi todo","A trozos","Poca cosa"]},
+ {k:"Agenda",type:"single",q:"¿Llevas agenda?",wrap:1,o:["En papel","En el móvil","Las dos","De cabeza"]},
+ {k:"Quién me ayuda",type:"multi",q:"¿Te ayuda alguien a estudiar?",o:["Nadie","Mi madre o mi padre","Hermanos","Amigos","Profe particular"]},
+ {k:"Trabajos en equipo",type:"single",q:"En los trabajos en grupo, ¿sabes cómo empezar?",o:["Sí, organizo yo","Me cuesta arrancar","Me dejo llevar"]},
+ {k:"Cómo prefiero que me expliquen",type:"multi",q:"¿Cómo prefieres que te expliquen algo difícil?",o:["Con ejemplos reales","Con vídeos","Practicando juntos","Paso a paso en papel","Con retos y juegos"]},
+ {k:"Quiero mejorar",type:"single",q:"¿Quieres mejorar tus notas?",o:["Sí","Sí, pero no sé cómo","Me da un poco igual","No"]},
+ {k:"Pregunto en clase",type:"single",q:"Cuando no entiendes algo en clase, ¿preguntas?",o:["Sí, en el momento","Al profe, pero al acabar","Se lo pregunto a un compañero","Lo dejo pasar","Me da corte delante de todos"]},
+ {k:"Retener",type:"single",q:"¿Te cuesta retener lo que explican en clase?",o:["Casi nunca","A veces","Muchas veces"]},
+ {k:"Enunciados",type:"single",q:"Lees el enunciado de un ejercicio. ¿Sabes por dónde empezar?",o:["Casi siempre","A veces me pierdo","Casi nunca"]},
+ {k:"En un examen",type:"single",q:"En un examen, ¿qué te pasa?",o:["Voy tranquilo","Nervios normales","Me bloqueo aunque me lo sepa"]},
+ {k:"Hora de dormir",type:"single",q:"¿A qué hora te duermes entre semana?",h:"Sinceridad. Esto no llega al cole.",o:["Antes de las 22:30","Sobre las 23:00","Sobre las 24:00","Con el móvil hasta caer"]},
+ {k:"Dispuesto",type:"single",q:"Si mejorar no te costara mucho esfuerzo, ¿estarías dispuesto?",o:["Sí, claro","Depende","Ni así"]},
+ {k:"Qué piensan de mí",type:"area",q:"¿Qué crees que piensan los demás de ti?",ph:"Lo primero que se te ocurra"},
+ {k:"Los de buenas notas",type:"single",q:"Los que sacan mejores notas… ¿son marcianos?",h:"O sea, ¿son verdes y tienen antenas?",o:["Sí, verdes y con antenas","No, son como yo","Nunca lo había pensado"]},
+ {k:"Me inspira",type:"text",q:"¿Tienes algo o alguien que te inspire?",ph:"Una persona, un equipo, lo que sea"},
+ {k:"Me gusta",type:"multi",q:"Fuera de clase, ¿qué te gusta?",wrap:1,o:["Deporte","Videojuegos","Música","Dibujar","Series","Amigos","Leer"]},
+ {k:"Mis tardes",type:"multi",q:"¿Qué ocupa tus tardes entre semana?",h:"Marca todo lo que tengas fijo.",wrap:1,o:["Deporte","Academia o clases","Idiomas","Música o baile","Cuidar de alguien en casa","Nada fijo"]},
+ {k:"A qué juego / qué sigo",type:"text",q:"¿A qué juegas, qué ves, qué equipo sigues?",h:"Para explicarte las cosas con tus ejemplos, no con los míos.",ph:"Sé concreto"},
+ {k:"Cuando nadie me mira",type:"area",q:"¿Qué te gusta hacer cuando nadie te mira?",h:"Lo que haces por gusto, sin que nadie te lo mande. Aparte de pantallas.",ph:"Lo que sea"},
+ {k:"En junio estaría haciendo distinto",type:"area",q:"Imagina que llega junio y ha ido bien. ¿Qué estarías haciendo distinto de lo que haces ahora?",h:"No hace falta que hables de notas. Piensa en un día normal tuyo.",ph:"Lo que se te ocurra"},
+ {k:"Confianza en que puedo mejorar",type:"scale10",q:"Del 1 al 10, ¿cuánta confianza tienes en que puedes mejorar si alguien te echa una mano?",h:"No es cuántas ganas tienes. Es cuánto crees que puedes.",lo:"Nada",hi:"Del todo"},
+ {k:"Por qué no un número más bajo",type:"area",q:"__CONF__",ph:"Lo primero que pienses"},
+ {t:"fin"}
+];
+
+var A={}, i=0, TOTAL=Q.length-2;
+var stage=document.getElementById("stage"), nav=document.getElementById("nav"),
+    fill=document.getElementById("fill"), count=document.getElementById("count");
+
+function answered(){
+  var n=0;
+  Q.forEach(function(q){
+    if(!q.k)return;var v=A[q.k];
+    if(v===undefined||v===null||v==="")return;
+    if(q.type==="rows"){if(Object.keys(v).length)n++;return;}
+    if(Array.isArray(v)){if(v.length)n++;return;}
+    if(String(v).length)n++;
+  });
+  return n;
+}
+
+function set(k,v){A[k]=v;paint();}
+
+function has(q){var v=A[q.k];return v!==undefined&&String(v).length>0;}
+
+function next(){if(i<Q.length-1){i++;render();}}
+function prev(){if(i>0){i--;render();}}
+
+function paint(){
+  var n=answered();
+  fill.style.width=Math.round(n/TOTAL*100)+"%";
+  count.textContent=n+(n===1?" contestada":" contestadas");
+}
+
+function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e;}
+
+function render(){
+  var q=Q[i];
+  stage.innerHTML="";nav.innerHTML="";
+  var c=el("div","card");
+
+  if(q.t==="intro"){
+    c.appendChild(el("p","kicker","Punto de partida · 2026-27"));
+    var h=el("h1","big","No es un examen.");h.className="big";c.appendChild(h);
+    var l=el("p","lead");l.innerHTML="No puntúa, no hay respuestas buenas ni malas y no lo ve nadie más. Solo sirve para que sepa por dónde empezar contigo. <b>Cuanto más sincero seas, más cortas serán las sesiones.</b>";
+    c.appendChild(l);
+    var c1=el("div","chk");c1.innerHTML="<span>·</span><div>Una pregunta por pantalla. Unos 6 minutos.</div>";c.appendChild(c1);
+    var c2=el("div","chk");c2.innerHTML="<span>·</span><div>Puedes saltarte lo que no quieras contestar.</div>";c.appendChild(c2);
+    var c3=el("div","chk");c3.innerHTML="<span>·</span><div>Al final se manda solo por WhatsApp.</div>";c.appendChild(c3);
+    stage.appendChild(c);
+    var b=el("button","next go","Empezar");b.onclick=next;nav.appendChild(b);
+    paint();return;
+  }
+
+  if(q.t==="fin"){
+    var n=answered();
+    c.appendChild(el("p","kicker","Ya está"));
+    var hf=el("h1","big","Hecho.");hf.className="big";c.appendChild(hf);
+    var lf=el("p","lead");lf.innerHTML="Has contestado <b>"+n+" de "+TOTAL+"</b>. Dale al botón y se abre WhatsApp con todo escrito: solo tienes que enviarlo.";
+    c.appendChild(lf);
+    c.appendChild(el("p","small","Esto lo leo solo yo. Guardo un resumen para preparar tus sesiones y nada más: no va al cole, no va a ninguna app y no puntúa. Si un día quieres que lo borre, me lo dices."));
+    stage.appendChild(c);
+    var back=el("button","back","Atrás");back.onclick=prev;nav.appendChild(back);
+    var cop=el("button","back","Copiar");
+    cop.onclick=function(){navigator.clipboard.writeText(build()).then(function(){cop.textContent="Copiado";});};
+    nav.appendChild(cop);
+    var send=el("button","next go","Enviar por WhatsApp");
+    send.onclick=function(){window.open("https://wa.me/"+TEL+"?text="+encodeURIComponent(build()),"_blank");};
+    nav.appendChild(send);
+    paint();return;
+  }
+
+  c.appendChild(el("p","kicker","Pregunta "+i+" de "+TOTAL));
+  var texto=q.q;
+  if(texto==="__CONF__"){
+    var cf=parseInt(A["Confianza en que puedo mejorar"]||"0",10);
+    texto = cf<=1 ? "¿Qué haría falta para que en vez de un 1 fuera un 2?"
+                  : "¿Y por qué un "+(cf||"…")+" y no un número más bajo?";
+  }
+  c.appendChild(el("h1",null,texto));
+  if(q.h)c.appendChild(el("p","hint",q.h));
+
+  if(q.type==="single"||q.type==="multi"){
+    var box=el("div","opts"+(q.wrap?" wrap":""));
+    q.o.forEach(function(o){
+      var b=el("button","opt",o);b.type="button";
+      var on = q.type==="multi" ? (A[q.k]||[]).indexOf(o)>-1 : A[q.k]===o;
+      b.setAttribute("aria-pressed",on?"true":"false");
+      b.onclick=function(){
+        if(q.type==="multi"){
+          var cur=A[q.k]||[],p=cur.indexOf(o);
+          if(p>-1)cur.splice(p,1);else cur.push(o);
+          set(q.k,cur.length?cur:"");
+          b.setAttribute("aria-pressed",p>-1?"false":"true");
+        }else{
+          box.querySelectorAll(".opt").forEach(function(x){x.setAttribute("aria-pressed","false");});
+          b.setAttribute("aria-pressed","true");set(q.k,o);
+          setTimeout(next,300);
+        }
+      };
+      box.appendChild(b);
     });
-    return {text:out.join("\n"), missing:missing};
+    c.appendChild(box);
   }
-  function warn(t){var m=document.getElementById("msg");m.textContent=t;m.style.display=t?"block":"none";}
-  var btn=document.getElementById("btn-wa");
-  function refresh(){
-    var r=collect();
-    if(r.missing.length){btn.setAttribute("href","#faltan");}
-    else{btn.setAttribute("href","https://wa.me/"+WA+"?text="+encodeURIComponent(r.text));}
+
+  if(q.type==="scale10"){
+    var d10=el("div","dots ten");
+    for(var m=1;m<=10;m++){(function(v){
+      var b=el("button","dot",v);b.type="button";
+      b.setAttribute("aria-pressed",A[q.k]===String(v)?"true":"false");
+      b.onclick=function(){
+        d10.querySelectorAll(".dot").forEach(function(x){x.setAttribute("aria-pressed","false");});
+        b.setAttribute("aria-pressed","true");set(q.k,String(v));setTimeout(next,320);
+      };
+      d10.appendChild(b);
+    })(m);}
+    c.appendChild(d10);
+    var e10=el("div","ends");e10.appendChild(el("span",null,q.lo));e10.appendChild(el("span",null,q.hi));
+    c.appendChild(e10);
   }
-  document.addEventListener("input",refresh,true);
-  document.addEventListener("change",refresh,true);
-  refresh();
-  btn.addEventListener("click",function(e){
-    var r=collect();
-    if(r.missing.length){e.preventDefault();warn("Te falta poner "+r.missing[0]+".");return;}
-    warn("");
+
+  if(q.type==="scale"){
+    var d=el("div","dots");
+    for(var n2=1;n2<=5;n2++){(function(v){
+      var b=el("button","dot",v);b.type="button";
+      b.setAttribute("aria-pressed",A[q.k]===v+"/5"?"true":"false");
+      b.onclick=function(){
+        d.querySelectorAll(".dot").forEach(function(x){x.setAttribute("aria-pressed","false");});
+        b.setAttribute("aria-pressed","true");set(q.k,v+"/5");setTimeout(next,300);
+      };
+      d.appendChild(b);
+    })(n2);}
+    c.appendChild(d);
+    var e=el("div","ends");e.appendChild(el("span",null,q.lo));e.appendChild(el("span",null,q.hi));
+    c.appendChild(e);
+  }
+
+  if(q.type==="rows"){
+    var wrapR=el("div","rows");
+    A[q.k]=A[q.k]||{};
+    q.r.forEach(function(r){
+      var row=el("div","rw");
+      var nm=el("div","rw-name",r[0]);
+      if(r[1]){var s=el("small",null,r[1]);nm.appendChild(s);}
+      row.appendChild(nm);
+      var dd=el("div","rw-dots");
+      for(var v=1;v<=5;v++){(function(val){
+        var b=el("button","mini",val);b.type="button";
+        b.setAttribute("aria-label",r[0]+": "+val);
+        b.setAttribute("aria-pressed",A[q.k][r[0]]===val?"true":"false");
+        b.onclick=function(){
+          dd.querySelectorAll(".mini").forEach(function(x){x.setAttribute("aria-pressed","false");});
+          b.setAttribute("aria-pressed","true");A[q.k][r[0]]=val;paint();
+        };
+        dd.appendChild(b);
+      })(v);}
+      row.appendChild(dd);wrapR.appendChild(row);
+    });
+    c.appendChild(wrapR);
+  }
+
+  if(q.type==="text"||q.type==="area"){
+    var f=q.type==="area"?el("textarea","field"):el("input","field");
+    if(q.type==="area")f.rows=3;else f.type="text";
+    f.placeholder=q.ph||"";f.value=A[q.k]||"";
+    f.oninput=function(){A[q.k]=f.value.trim();paint();};
+    f.onkeydown=function(e2){if(q.type==="text"&&e2.key==="Enter"){e2.preventDefault();next();}};
+    c.appendChild(f);
+    setTimeout(function(){f.focus();},220);
+  }
+
+  stage.appendChild(c);
+  var back2=el("button","back","Atrás");back2.onclick=prev;nav.appendChild(back2);
+  var nx=el("button","next"+(has(q)?"":" quiet"),has(q)?"Siguiente":"Saltar");
+  nx.onclick=next;nav.appendChild(nx);
+  paint();
+}
+
+function build(){
+  var nombre=A["Nombre"]||"(sin nombre)";
+  var t="CUESTIONARIO ALUMNO — Punto de partida\n"+nombre+"\n\n";
+  Q.forEach(function(q){
+    if(!q.k)return;var v=A[q.k];
+    if(v===undefined||v===""||v===null)return;
+    if(q.k==="Nombre")return;
+    if(q.type==="rows"){
+      var parts=[];q.r.forEach(function(r){if(v[r[0]])parts.push(r[0]+" "+v[r[0]]);});
+      if(parts.length)t+="· Se pone: "+parts.join(" · ")+"\n";
+    }else if(Array.isArray(v)){ if(v.length) t+="· "+q.k+": "+v.join(", ")+"\n"; }
+    else t+="· "+q.k+": "+v+(q.type==="scale10"?"/10":"")+"\n";
   });
-  document.getElementById("btn-copy").addEventListener("click",function(){
-    var r=collect();
-    try{navigator.clipboard.writeText(r.text);warn("");this.textContent="Copiado ✓";
-      var b=this;setTimeout(function(){b.textContent="Copiar"},1600);}catch(e){warn("No se pudo copiar; usa el botón verde.");}
-  });
+  return t;
+}
+
+render();
 })();
 </script>
-
 </body>
 </html>
