@@ -205,6 +205,25 @@ footer{padding:34px 0 40px;font-family:var(--sans);font-size:13px;color:var(--gr
       </div>
 
       <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">¿En qué centro estudia? <span class="req">*</span></p></div>
+        <p class="q-hint">Necesito el nombre exacto. Con él consigo sus libros, el temario del departamento y cómo evalúan, que es la mitad del trabajo hecho antes de empezar.</p>
+        <div class="q-body"><input class="txt" type="text" data-label="Centro" placeholder="Nombre del colegio o instituto, y localidad"></div>
+      </div>
+
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">¿En qué idioma da las asignaturas?</p></div>
+        <p class="q-hint">En la Comunitat hay asignaturas que van en valenciano aunque el alumno esté en línea castellana. Cambia mucho cómo le preparo el material.</p>
+        <div class="q-body">
+          <div class="chips" data-label="Idioma de las asignaturas">
+            <button type="button" class="chip" aria-pressed="false">Todo en castellano</button>
+            <button type="button" class="chip" aria-pressed="false">Todo en valenciano</button>
+            <button type="button" class="chip" aria-pressed="false">Mezcla: algunas en valenciano</button>
+            <button type="button" class="chip" aria-pressed="false">No lo sé con seguridad</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="q">
         <div class="q-head"><span class="q-num">·</span><p class="q-text">¿Quién contesta esto?</p></div>
         <div class="q-body"><input class="txt" type="text" data-label="Responde" placeholder="Nombre y si eres madre, padre o tutor/a"></div>
       </div>
@@ -472,6 +491,39 @@ footer{padding:34px 0 40px;font-family:var(--sans);font-size:13px;color:var(--gr
       </div>
 
       <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">Cuando NO hay ningún problema, ¿de qué habláis en casa sobre los estudios?</p></div>
+        <p class="q-hint">Cuando no hay bronca ni examen a la vista. Si la respuesta sincera es «de nada», es la respuesta más útil que me podéis dar, y no tiene nada de malo.</p>
+        <div class="q-body"><textarea class="txt" data-label="De qué hablamos sin problema" rows="2" placeholder="De nada, del futuro, de lo que él quiere hacer, de una asignatura que le gusta…"></textarea></div>
+      </div>
+
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">¿Sabe vuestro hijo/a para qué creéis VOSOTROS que sirve estudiar?</p></div>
+        <p class="q-hint">No lo que se supone que hay que decir: lo que de verdad pensáis, y si alguna vez se lo habéis dicho con esas palabras.</p>
+        <div class="q-body">
+          <div class="chips" data-label="Sabe para qué sirve estudiar">
+            <button type="button" class="chip" aria-pressed="false">Se lo hemos dicho, y con estas palabras</button>
+            <button type="button" class="chip" aria-pressed="false">Se lo imagina, pero nunca lo hemos hablado</button>
+            <button type="button" class="chip" aria-pressed="false">Creo que no lo sabe</button>
+            <button type="button" class="chip" aria-pressed="false">Ni nosotros lo tenemos claro</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="q">
+        <div class="q-head"><span class="q-num">·</span><p class="q-text">¿Cuánto tiempo dedicáis VOSOTROS al día a sus deberes?</p></div>
+        <p class="q-hint">Sentados con él o encima de él. Pregunto porque una de las cosas que quiero conseguir es que ese número baje.</p>
+        <div class="q-body">
+          <div class="chips" data-label="Tiempo que dedican los padres">
+            <button type="button" class="chip" aria-pressed="false">Nada, va solo</button>
+            <button type="button" class="chip" aria-pressed="false">Menos de 15 minutos</button>
+            <button type="button" class="chip" aria-pressed="false">Media hora</button>
+            <button type="button" class="chip" aria-pressed="false">Una hora o más</button>
+            <button type="button" class="chip" aria-pressed="false">Depende mucho del día</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="q">
         <div class="q-head"><span class="q-num">·</span><p class="q-text">Cuando algo se le da mal, ¿qué soléis decirle?</p></div>
         <p class="q-hint">Tal cual, aunque suene mal escrito. Lo que oye en casa pesa más que lo que le diga yo.</p>
         <div class="q-body"><textarea class="txt" data-label="Qué le decimos" rows="2" placeholder="Lo que de verdad se dice en casa, con esas palabras"></textarea></div>
@@ -522,11 +574,6 @@ footer{padding:34px 0 40px;font-family:var(--sans);font-size:13px;color:var(--gr
             <button type="button" class="chip" aria-pressed="false">Depende de lo importante que sea</button>
           </div>
         </div>
-      </div>
-
-      <div class="q">
-        <div class="q-head"><span class="q-num">·</span><p class="q-text">¿Hay algún premio que prefiráis NO usar?</p></div>
-        <div class="q-body"><input class="txt" type="text" data-label="Premio vetado" placeholder="Si no hay ninguno, escribe «ninguno»"></div>
       </div>
 
       <div class="q">
