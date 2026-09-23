@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Las 50 en una noche</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;700&family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#F4F5F7; --surface:#FFFFFF; --edge:#DDE0E6;
+  --ink:#141821; --mut:#666E7E; --faint:#9AA2B1;
+  --ok:#0B7F72; --okbg:#E2F3F0;
+  --no:#B4462C; --nobg:#FBE9E3;
+  --hard:#8A5A00; --hardbg:#FBF0DA;
+  --disp:'Familjen Grotesk',Georgia,serif;
+  --body:'IBM Plex Sans',system-ui,-apple-system,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  color-scheme:dark;
+  --bg:#0E1117; --surface:#171C25; --edge:#2A313D;
+  --ink:#E9ECF2; --mut:#98A1B2; --faint:#6B7486;
+  --ok:#5AD6C2; --okbg:#10322E;
+  --no:#FF9077; --nobg:#3A1E16;
+  --hard:#E7B65A; --hardbg:#332714;
+}}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0E1117; --surface:#171C25; --edge:#2A313D;
+  --ink:#E9ECF2; --mut:#98A1B2; --faint:#6B7486;
+  --ok:#5AD6C2; --okbg:#10322E;
+  --no:#FF9077; --nobg:#3A1E16;
+  --hard:#E7B65A; --hardbg:#332714;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);
+     font-size:16px;line-height:1.5;-webkit-text-size-adjust:100%}
+.wrap{max-width:560px;margin:0 auto;padding-inline:20px;padding-block:24px 48px;
+      display:flex;flex-direction:column;gap:20px;min-height:100%}
+h1{font-family:var(--disp);font-weight:700;font-size:clamp(28px,7vw,38px);line-height:1.05;
+   margin:0;letter-spacing:-.02em;text-wrap:balance}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+         color:var(--faint);margin:0 0 6px}
+p{margin:0}
+.lead{color:var(--mut);font-size:15px}
+.card{background:var(--surface);border:1px solid var(--edge);border-radius:14px;padding:22px}
+
+/* ---- portada ---- */
+.dato{display:flex;gap:14px;align-items:baseline;margin-top:4px}
+.dato .n{font-family:var(--mono);font-size:34px;font-weight:500;color:var(--ok);line-height:1}
+.dato .n.warn{color:var(--hard)}
+.dato .t{font-size:14px;color:var(--mut);line-height:1.35}
+.botones{display:flex;flex-direction:column;gap:10px}
+button{font:inherit;font-weight:600;cursor:pointer;border-radius:11px;padding:14px 18px;
+       border:1px solid var(--edge);background:var(--surface);color:var(--ink);
+       text-align:left;transition:transform .08s ease}
+button:active{transform:scale(.99)}
+button:focus-visible{outline:2px solid var(--ok);outline-offset:2px}
+button.main{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+button small{display:block;font-weight:400;font-size:13px;opacity:.72;margin-top:2px}
+
+/* ---- ronda ---- */
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;
+     font-family:var(--mono);font-size:12px;color:var(--faint);letter-spacing:.06em}
+.pips{display:flex;flex-wrap:wrap;gap:4px}
+.pip{width:9px;height:9px;border-radius:2px;background:var(--edge)}
+.pip.done{background:var(--ok)}
+.pip.now{background:var(--ink);transform:scale(1.15)}
+.prov{font-family:var(--disp);font-weight:700;font-size:clamp(32px,9vw,46px);line-height:1.05;
+      letter-spacing:-.02em;margin:2px 0 2px}
+.pregunta{font-size:14px;color:var(--mut)}
+.marca{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.12em;
+       text-transform:uppercase;padding:3px 8px;border-radius:99px;
+       background:var(--hardbg);color:var(--hard);margin-bottom:10px}
+input[type=text]{width:100%;font:inherit;font-size:19px;padding:14px 16px;border-radius:11px;
+  border:1.5px solid var(--edge);background:var(--bg);color:var(--ink);margin-top:14px}
+input[type=text]:focus{outline:none;border-color:var(--ink)}
+.fila{display:flex;gap:10px;margin-top:12px}
+.fila button{flex:1;text-align:center}
+.veredicto{margin-top:14px;border-radius:11px;padding:14px 16px;font-size:15px;line-height:1.45}
+.veredicto.bien{background:var(--okbg);color:var(--ok)}
+.veredicto.mal{background:var(--nobg);color:var(--no)}
+.veredicto b{font-weight:600}
+.copiala{font-size:13px;margin-top:6px;opacity:.9}
+
+/* ---- final ---- */
+ul{margin:10px 0 0;padding-left:18px}
+li{margin-bottom:4px;font-size:15px}
+li span{font-family:var(--mono);font-size:12px;color:var(--faint);margin-left:6px}
+.pie{font-family:var(--mono);font-size:11px;color:var(--faint);letter-spacing:.08em;
+     text-align:center;margin-top:auto;padding-top:20px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head><body>
+
+<div class="wrap">
+
+<div id="portada">
+  <p class="eyebrow">Geografía · 2.º ESO</p>
+  <h1>Las 50 en una noche</h1>
+  <p class="lead" style="margin-top:12px">Provincias de España y sus capitales. Se escribe la respuesta: aquí no hay cuatro opciones donde acertar de rebote.</p>
+
+  <div class="card" style="margin-top:18px">
+    <div class="dato"><span class="n">42</span><span class="t">provincias en las que la capital <b>se llama igual que la provincia</b>. Esas son gratis.</span></div>
+    <div class="dato" style="margin-top:16px"><span class="n warn">8</span><span class="t">provincias en las que <b>no</b>. Esas ocho son el examen de verdad.</span></div>
+  </div>
+
+  <div class="botones" style="margin-top:18px">
+    <button class="main" data-modo="dificiles">Empezar por las 8 difíciles<small>Cinco minutos. Es donde se pierden los puntos.</small></button>
+    <button data-modo="todas">Las 50 seguidas<small>Barrido completo. Quince o veinte minutos.</small></button>
+    <button data-modo="falladas" id="btnFall" hidden>Solo las que fallé<small id="btnFallSub"></small></button>
+  </div>
+
+  <p class="lead" style="margin-top:16px;font-size:13.5px">Cada provincia sale de la pila cuando la aciertas <b>dos veces seguidas</b>. Si fallas, vuelve más adelante. No hay reloj y no hay marcador: solo se acaba cuando están todas.</p>
+</div>
+
+<div id="ronda" hidden>
+  <div class="top"><span id="quedan"></span><span id="ronda-n"></span></div>
+  <div class="pips" id="pips"></div>
+  <div class="card">
+    <span class="marca" id="marca" hidden>De las 8 difíciles</span>
+    <p class="pregunta">¿Cuál es la capital de…</p>
+    <p class="prov" id="prov"></p>
+    <input type="text" id="resp" autocomplete="off" autocorrect="off" autocapitalize="words"
+           spellcheck="false" placeholder="Escribe la capital" aria-label="Capital">
+    <div class="fila"><button class="main" id="comprobar">Comprobar</button></div>
+    <div class="veredicto" id="vered" hidden></div>
+  </div>
+</div>
+
+<div id="final" hidden>
+  <p class="eyebrow">Terminado</p>
+  <h1 id="finalTit">Ya están las 50</h1>
+  <div class="card" style="margin-top:16px">
+    <p class="lead" id="resumen"></p>
+    <div id="listaCostaron"></div>
+  </div>
+  <div class="botones" style="margin-top:18px">
+    <button class="main" id="repetirFall" hidden>Repasar solo las que costaron</button>
+    <button id="volver">Volver al principio</button>
+  </div>
+</div>
+
+<p class="pie">enseño a estudiar</p>
+</div>
+
+<script>
+const DATA=[
+ ["Álava",["vitoria","vitoria gasteiz","vitoria-gasteiz","gasteiz"],"Vitoria-Gasteiz",1],
+ ["Asturias",["oviedo","uvieu"],"Oviedo",1],
+ ["Baleares",["palma","palma de mallorca"],"Palma",1],
+ ["Cantabria",["santander"],"Santander",1],
+ ["Guipúzcoa",["san sebastian","donostia","donostia san sebastian","donostia-san sebastian"],"San Sebastián",1],
+ ["Navarra",["pamplona","iruna","iruña"],"Pamplona",1],
+ ["La Rioja",["logrono","logroño"],"Logroño",1],
+ ["Vizcaya",["bilbao","bilbo"],"Bilbao",1],
+ ["Albacete",["albacete"],"Albacete",0],
+ ["Alicante",["alicante","alacant"],"Alicante",0],
+ ["Almería",["almeria"],"Almería",0],
+ ["Ávila",["avila"],"Ávila",0],
+ ["Badajoz",["badajoz"],"Badajoz",0],
+ ["Barcelona",["barcelona"],"Barcelona",0],
+ ["Burgos",["burgos"],"Burgos",0],
+ ["Cáceres",["caceres"],"Cáceres",0],
+ ["Cádiz",["cadiz"],"Cádiz",0],
+ ["Castellón",["castellon","castellon de la plana","castello","castello de la plana"],"Castellón de la Plana",0],
+ ["Ciudad Real",["ciudad real"],"Ciudad Real",0],
+ ["Córdoba",["cordoba"],"Córdoba",0],
+ ["A Coruña",["a coruna","la coruna","coruna","a coruña","la coruña","coruña"],"A Coruña",0],
+ ["Cuenca",["cuenca"],"Cuenca",0],
+ ["Girona",["girona","gerona"],"Girona",0],
+ ["Granada",["granada"],"Granada",0],
+ ["Guadalajara",["guadalajara"],"Guadalajara",0],
+ ["Huelva",["huelva"],"Huelva",0],
+ ["Huesca",["huesca"],"Huesca",0],
+ ["Jaén",["jaen"],"Jaén",0],
+ ["León",["leon"],"León",0],
+ ["Lleida",["lleida","lerida"],"Lleida",0],
+ ["Lugo",["lugo"],"Lugo",0],
+ ["Madrid",["madrid"],"Madrid",0],
+ ["Málaga",["malaga"],"Málaga",0],
+ ["Murcia",["murcia"],"Murcia",0],
+ ["Ourense",["ourense","orense"],"Ourense",0],
+ ["Palencia",["palencia"],"Palencia",0],
+ ["Las Palmas",["las palmas","las palmas de gran canaria"],"Las Palmas de Gran Canaria",0],
+ ["Pontevedra",["pontevedra"],"Pontevedra",0],
+ ["Salamanca",["salamanca"],"Salamanca",0],
+ ["Santa Cruz de Tenerife",["santa cruz de tenerife","santa cruz"],"Santa Cruz de Tenerife",0],
+ ["Segovia",["segovia"],"Segovia",0],
+ ["Sevilla",["sevilla"],"Sevilla",0],
+ ["Soria",["soria"],"Soria",0],
+ ["Tarragona",["tarragona"],"Tarragona",0],
+ ["Teruel",["teruel"],"Teruel",0],
+ ["Toledo",["toledo"],"Toledo",0],
+ ["Valencia",["valencia","valència"],"Valencia",0],
+ ["Valladolid",["valladolid"],"Valladolid",0],
+ ["Zamora",["zamora"],"Zamora",0],
+ ["Zaragoza",["zaragoza"],"Zaragoza",0]
+];
+
+const K='cap50-falladas';
+const $=id=>document.getElementById(id);
+const norm=s=>s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'')
+  .replace(/[^a-z0-9ñ ]/g,' ').replace(/\s+/g,' ').trim();
+
+let pila=[], actual=null, corrigiendo=false, total=0, fallos={}, ronda=0;
+
+function leerFall(){try{return JSON.parse(localStorage.getItem(K))||[]}catch(e){return[]}}
+function guardarFall(l){try{localStorage.setItem(K,JSON.stringify(l))}catch(e){}}
+
+function pintarPortada(){
+  const f=leerFall();
+  $('btnFall').hidden = f.length===0;
+  $('btnFallSub').textContent = f.length+(f.length===1?' provincia de la última vez':' provincias de la última vez');
+}
+
+function arrancar(modo){
+  let base;
+  if(modo==='dificiles') base=DATA.filter(d=>d[3]===1);
+  else if(modo==='falladas'){const f=leerFall(); base=DATA.filter(d=>f.includes(d[0])); if(!base.length)base=DATA.slice();}
+  else base=DATA.slice();
+  pila=base.map(d=>({d,aciertos:0}));
+  for(let i=pila.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[pila[i],pila[j]]=[pila[j],pila[i]]}
+  total=pila.length; fallos={}; ronda=0;
+  $('portada').hidden=true; $('final').hidden=true; $('ronda').hidden=false;
+  siguiente();
+}
+
+function siguiente(){
+  if(!pila.length) return terminar();
+  ronda++;
+  actual=pila[0]; corrigiendo=false;
+  $('marca').hidden = actual.d[3]!==1;
+  $('prov').textContent=actual.d[0];
+  $('vered').hidden=true;
+  $('resp').value=''; $('resp').disabled=false;
+  $('comprobar').textContent='Comprobar';
+  const hechas=total-pila.length;
+  $('quedan').textContent='QUEDAN '+pila.length+' DE '+total;
+  $('ronda-n').textContent='PREGUNTA '+ronda;
+  let html='';
+  for(let i=0;i<total;i++) html+='<span class="pip'+(i<hechas?' done':(i===hechas?' now':''))+'"></span>';
+  $('pips').innerHTML=html;
+  setTimeout(()=>$('resp').focus(),40);
+}
+
+function comprobar(){
+  if(corrigiendo){ // segunda fase: ha de teclear la correcta
+    if(norm($('resp').value)===norm(actual.d[2]) || actual.d[1].includes(norm($('resp').value))){
+      pila.shift(); pila.splice(Math.min(3,pila.length),0,actual); siguiente();
+    } else {
+      $('resp').value=''; $('resp').focus();
+    }
+    return;
+  }
+  const v=norm($('resp').value);
+  if(!v){$('resp').focus();return}
+  const bien=actual.d[1].includes(v);
+  const ve=$('vered'); ve.hidden=false;
+  if(bien){
+    actual.aciertos++;
+    ve.className='veredicto bien';
+    ve.innerHTML= actual.aciertos>=2
+      ? '<b>'+actual.d[2]+'.</b> Dos seguidas: fuera de la pila.'
+      : '<b>'+actual.d[2]+'.</b> Bien. Vuelve una vez más para darla por sabida.';
+    pila.shift();
+    if(actual.aciertos<2) pila.splice(Math.min(5,pila.length),0,actual);
+    $('resp').disabled=true;
+    setTimeout(siguiente,850);
+  } else {
+    fallos[actual.d[0]]=(fallos[actual.d[0]]||0)+1;
+    actual.aciertos=0;
+    ve.className='veredicto mal';
+    ve.innerHTML='Es <b>'+actual.d[2]+'</b>.<div class="copiala">Escríbela tú ahora y sigue.</div>';
+    corrigiendo=true;
+    $('resp').value=''; $('comprobar').textContent='Sigue'; $('resp').focus();
+  }
+}
+
+function terminar(){
+  $('ronda').hidden=true; $('final').hidden=false;
+  const lista=Object.keys(fallos).sort((a,b)=>fallos[b]-fallos[a]);
+  guardarFall(lista);
+  $('finalTit').textContent = lista.length? 'Terminado' : 'Terminado, sin un fallo';
+  if(!lista.length){
+    $('resumen').textContent='Las has dado todas a la primera. No hay nada que repasar.';
+    $('listaCostaron').innerHTML=''; $('repetirFall').hidden=true;
+  } else {
+    $('resumen').innerHTML='Estas <b>'+lista.length+'</b> te costaron. Son las únicas que hay que volver a mirar mañana antes de entrar:';
+    $('listaCostaron').innerHTML='<ul>'+lista.map(n=>{
+      const d=DATA.find(x=>x[0]===n);
+      return '<li>'+n+' → <b>'+d[2]+'</b><span>'+fallos[n]+(fallos[n]===1?' fallo':' fallos')+'</span></li>';
+    }).join('')+'</ul>';
+    $('repetirFall').hidden=false;
+  }
+  pintarPortada();
+}
+
+document.querySelectorAll('[data-modo]').forEach(b=>b.addEventListener('click',()=>arrancar(b.dataset.modo)));
+$('comprobar').addEventListener('click',comprobar);
+$('resp').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();comprobar()}});
+$('repetirFall').addEventListener('click',()=>arrancar('falladas'));
+$('volver').addEventListener('click',()=>{$('final').hidden=true;$('portada').hidden=false;pintarPortada()});
+pintarPortada();
+</script>
+
+</body></html>
