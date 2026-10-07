@@ -1,0 +1,222 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"></head><body>
+<title>Raíces: ¿cuántas soluciones?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: una ficha estrecha. Arriba la regla en una tabla 2x2 que se puede consultar; debajo, la raíz grande y tres botones. */
+:root{
+  --bg:#E1F1FC; --card:#FFFFFF; --ink:#1C1C1C; --soft:#4a5560;
+  --blue:#93C9F2; --green:#B9E1D2; --yellow:#F8E595; --salmon:#F4C9B6; --lila:#C9CDEB;
+  --ok:#1f7a55; --bad:#b4472b;
+  --display:"Fredoka",system-ui,sans-serif; --body:"Nunito",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#132230; --card:#1c2f40; --ink:#eef4f9; --soft:#a9b8c5;
+  --blue:#2f5f86; --green:#2e5a4b; --yellow:#6b5d1e; --salmon:#6e3f2e; --lila:#3e4570;
+  --ok:#7fd6ad; --bad:#f09a82; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#132230; --card:#1c2f40; --ink:#eef4f9; --soft:#a9b8c5;
+  --blue:#2f5f86; --green:#2e5a4b; --yellow:#6b5d1e; --salmon:#6e3f2e; --lila:#3e4570;
+  --ok:#7fd6ad; --bad:#f09a82; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.45;margin:0}
+.wrap{max-width:580px;margin:0 auto;padding-inline:16px;padding-block:22px 40px;display:flex;flex-direction:column;gap:16px}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin:0}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(30px,8vw,42px);line-height:1.05;margin:2px 0 0;text-wrap:balance}
+.lead{margin:0;color:var(--soft)}
+.card{background:var(--card);border:2.5px solid var(--ink);border-radius:18px;padding:18px;box-shadow:4px 4px 0 var(--ink)}
+.regla{display:grid;grid-template-columns:auto 1fr 1fr;border:2px solid var(--ink);border-radius:12px;overflow:hidden;font-size:15px}
+.regla div{padding:8px 10px;border-right:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink)}
+.regla div:nth-child(3n){border-right:0}.regla div:nth-last-child(-n+3){border-bottom:0}
+.regla .hd{font-family:var(--display);font-weight:600;background:var(--lila)}
+.regla .dos{background:var(--green)}.regla .no{background:var(--salmon)}.regla .una{background:var(--yellow)}
+.regla b{font-family:var(--display);font-size:17px;display:block}
+.nota{font-size:14px;color:var(--soft);margin:10px 0 0}
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+button{font-family:var(--display);font-weight:600;font-size:17px;border:2.5px solid var(--ink);border-radius:14px;padding:12px 14px;cursor:pointer;color:var(--ink);background:var(--blue)}
+button.alt{background:var(--green)}button.y{background:var(--yellow)}button.s{background:var(--salmon)}
+button:focus-visible,input:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.q-top{display:flex;justify-content:space-between;gap:8px;font-size:13px;color:var(--soft)}
+.bar{height:10px;border:2px solid var(--ink);border-radius:8px;overflow:hidden;background:var(--card);margin-top:8px}
+.bar i{display:block;height:100%;background:var(--yellow);width:0;transition:width .3s}
+.raiz{font-family:var(--display);font-weight:600;font-size:clamp(46px,14vw,64px);text-align:center;margin:18px 0 8px;white-space:nowrap}
+.raiz sup{font-size:.42em;vertical-align:1.35em;margin-right:-.18em}
+.raiz .rad{border-top:.07em solid currentColor;padding:0 .08em 0 .06em}
+.pide{text-align:center;color:var(--soft);font-size:15px;margin:0}
+.opts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:14px}
+.opts button{font-size:16px;padding:12px 6px}
+input{width:100%;font-family:var(--display);font-size:26px;padding:10px 14px;border:2.5px solid var(--ink);border-radius:14px;background:var(--bg);color:var(--ink);margin-top:12px;text-align:center}
+.keys{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px}
+.keys button{font-size:16px;padding:10px 4px}
+.fb{margin-top:14px;padding:12px 14px;border-radius:14px;border:2px solid var(--ink);font-size:15.5px}
+.fb.ok{background:var(--green)}.fb.bad{background:var(--salmon)}
+.fb b{font-family:var(--display)}
+.row{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}.row button{flex:1}
+.small{font-size:13px;color:var(--soft)}
+.end li{margin:4px 0}
+details summary{cursor:pointer;font-family:var(--display);font-weight:600}
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}}
+@media (max-width:420px){.modes{grid-template-columns:1fr}.regla{font-size:13.5px}.regla div{padding:6px 7px}}
+</style>
+
+<div class="wrap">
+  <div>
+    <p class="eyebrow">Matemáticas · 2.º ESO · examen del martes 13</p>
+    <h1>Raíces: ¿cuántas soluciones?</h1>
+  </div>
+  <p class="lead">Antes de calcular, mira dos cosas: <b>el índice</b> (el numerito de fuera) y <b>el signo</b> de lo de dentro. Con eso ya sabes si hay dos soluciones, una o ninguna.</p>
+
+  <div class="card" id="reglaCard">
+    <div class="regla" role="table" aria-label="La regla de las raíces">
+      <div class="hd"></div><div class="hd">Dentro, positivo</div><div class="hd">Dentro, negativo</div>
+      <div class="hd">Índice par<br><span class="small">2, 4, 6…</span></div>
+      <div class="dos"><b>Dos</b>√49 = ±7</div>
+      <div class="no"><b>Ninguna</b>√−49 no existe</div>
+      <div class="hd">Índice impar<br><span class="small">3, 5…</span></div>
+      <div class="una"><b>Una</b>∛27 = 3</div>
+      <div class="una"><b>Una</b>∛−27 = −3</div>
+    </div>
+    <p class="nota">Si no ves numerito, el índice es 2: es par. Tus apuntes lo dicen así: «las raíces cuadradas de un número positivo tienen <b>2 soluciones, una positiva y una negativa</b>».</p>
+    <div class="modes">
+      <button id="m1" type="button">Nivel 1 · ¿Cuántas?</button>
+      <button id="m2" class="alt" type="button">Nivel 2 · Escríbela</button>
+    </div>
+  </div>
+
+  <div id="juego" class="card" hidden>
+    <div class="q-top"><span id="cuenta"></span><span id="nivel"></span></div>
+    <div class="bar"><i id="prog"></i></div>
+    <div class="raiz" id="raiz" aria-live="polite"></div>
+    <p class="pide" id="pide"></p>
+    <div id="zona1" class="opts">
+      <button type="button" class="alt" data-k="2">Dos</button>
+      <button type="button" class="y" data-k="1">Una</button>
+      <button type="button" class="s" data-k="0">Ninguna</button>
+    </div>
+    <form id="zona2" autocomplete="off" hidden>
+      <label for="resp" class="small">Tu respuesta</label>
+      <input id="resp" inputmode="text" autocapitalize="off" autocorrect="off" spellcheck="false">
+      <div class="keys">
+        <button type="button" data-ins="±">±</button>
+        <button type="button" data-ins="−">−</button>
+        <button type="button" data-ins="no existe">no existe</button>
+      </div>
+      <div class="row"><button type="submit">Comprobar</button></div>
+    </form>
+    <div id="fb" hidden></div>
+    <div class="row" id="sigRow" hidden><button type="button" id="sig">Siguiente</button></div>
+  </div>
+
+  <div id="fin" class="card" hidden>
+    <p class="raiz" style="font-size:36px;margin:0 0 8px;text-align:left">¡Hecho!</p>
+    <p id="resumen"></p>
+    <ul class="end" id="fallos"></ul>
+    <div class="row"><button id="otra" type="button">Volver al principio</button><button id="n2" class="alt" type="button">Nivel 2</button></div>
+  </div>
+
+  <p class="small">Si fallas una, vuelve dentro de poco. Se acaba cuando has acertado las 12. sergio vega · enseño a estudiar</p>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+// [índice, base]: el radicando es base^índice, con signo + o −
+const PAR=[[2,2],[2,3],[2,4],[2,5],[2,6],[2,7],[2,8],[2,9],[2,10],[2,11],[2,12],[2,15],[2,20],[2,50],[4,2],[4,3],[4,10],[6,2]];
+const IMPAR=[[3,1],[3,2],[3,3],[3,4],[3,5],[3,10],[5,2],[5,3]];
+function mk(n,b,neg){return{n,b,neg,v:Math.pow(b,n)}}
+function lote(){ // 12: 4 par+, 3 par−, 3 impar+/−, 2 «al cuadrado dentro»
+  const pick=a=>a[Math.floor(Math.random()*a.length)];
+  const L=[];
+  for(let i=0;i<4;i++){const[n,b]=pick(PAR);L.push(mk(n,b,false))}
+  for(let i=0;i<3;i++){const[n,b]=pick(PAR);L.push(mk(n,b,true))}
+  for(let i=0;i<3;i++){const[n,b]=pick(IMPAR);L.push(mk(n,b,Math.random()<.6))}
+  for(let i=0;i<2;i++){const b=pick([5,7,9,12,15,50]);L.push({n:2,b,neg:false,v:b*b,cuad:true})}
+  return L.sort(()=>Math.random()-.5);
+}
+const fmt=x=>x.toLocaleString('es-ES').replace(/ /g,'.');
+function dibuja(q){
+  const sup=q.n===2?'':`<sup>${q.n}</sup>`;
+  const dentro=q.cuad?`${q.b}<sup style="font-size:.5em;vertical-align:.8em">2</sup>`:(q.neg?'−':'')+fmt(q.v);
+  return `${sup}√<span class="rad">${dentro}</span>`;
+}
+function cuantas(q){ if(q.n%2===0) return q.neg?0:2; return 1 }
+function solucion(q){
+  const k=cuantas(q);
+  if(k===0) return 'no existe';
+  if(k===2) return '±'+q.b;
+  return (q.neg?'−':'')+q.b;
+}
+function porque(q){
+  const par=q.n%2===0, idx=q.n===2?'No hay numerito: índice 2, par':`Índice ${q.n}, ${par?'par':'impar'}`;
+  if(par&&q.neg) return `${idx}, y dentro hay un negativo. Ningún número multiplicado ${q.n} veces por sí mismo da negativo: <b>no existe</b>.`;
+  if(par) return `${idx}, y dentro hay un positivo: <b>dos soluciones</b>, ${q.b} y −${q.b}, porque ${q.b}${q.n===2?'²':'^'+q.n} y (−${q.b})${q.n===2?'²':'^'+q.n} dan ${fmt(q.v)}. Se escribe <b>±${q.b}</b>.`+(q.cuad?` (${q.b}² es ${fmt(q.v)}: es lo mismo que √${fmt(q.v)}.)`:'');
+  return `${idx}: <b>una sola solución</b>, con el mismo signo que lo de dentro: <b>${solucion(q)}</b>.`;
+}
+function lee(s){ // normaliza lo que escribe
+  s=s.toLowerCase().replace(/\s+/g,'').replace(/[−–—]/g,'-').replace(/\+-|-\+|\+\/-/g,'±');
+  if(/^(no|noexiste|notiene|ninguna|nohay|noexisten)$/.test(s)) return 'NO';
+  let m=s.match(/^±(\d+)$/); if(m) return 'PM'+m[1];
+  m=s.match(/^\+?(\d+)(y|,|;|\/)-(\d+)$/); if(m&&m[1]===m[3]) return 'PM'+m[1];
+  m=s.match(/^-(\d+)(y|,|;|\/)\+?(\d+)$/); if(m&&m[1]===m[3]) return 'PM'+m[1];
+  m=s.match(/^(-?)\+?(\d+)$/); if(m) return (m[1]?'N':'P')+m[2];
+  return '?';
+}
+function clave(q){const k=cuantas(q); if(k===0)return'NO'; if(k===2)return'PM'+q.b; return (q.neg?'N':'P')+q.b}
+
+let modo=1,cola=[],actual=null,total=12,hechas=0,fallos=[],espera=false;
+function empezar(m){
+  modo=m; cola=lote(); hechas=0; fallos=[]; espera=false;
+  $('reglaCard').hidden=true; $('fin').hidden=true; $('juego').hidden=false;
+  $('nivel').textContent=m===1?'Nivel 1 · ¿cuántas soluciones?':'Nivel 2 · escribe el resultado';
+  $('zona1').hidden=m!==1; $('zona2').hidden=m!==2;
+  siguiente();
+}
+function siguiente(){
+  $('fb').hidden=true; $('sigRow').hidden=true; espera=false;
+  if(!cola.length) return terminar();
+  actual=cola[0];
+  $('raiz').innerHTML=dibuja(actual);
+  $('pide').textContent=modo===1?'¿Cuántas soluciones tiene?':'Escribe el resultado (usa ± si hay dos)';
+  $('cuenta').textContent=`${hechas} de ${total}`;
+  $('prog').style.width=(hechas/total*100)+'%';
+  if(modo===2){$('resp').value='';$('resp').focus()}
+}
+function corrige(ok,txtMal){
+  const fb=$('fb'); fb.hidden=false; cola.shift();
+  if(ok){hechas++; fb.className='fb ok'; fb.innerHTML='<b>Bien.</b> '+porque(actual);}
+  else{
+    fallos.push({q:actual,dijo:txtMal}); cola.splice(Math.min(3,cola.length),0,actual);
+    fb.className='fb bad'; fb.innerHTML='<b>Solución: '+solucion(actual)+'.</b> '+porque(actual)+'<div class="small" style="margin-top:6px">Esta vuelve dentro de poco.</div>';
+  }
+  $('cuenta').textContent=`${hechas} de ${total}`; $('prog').style.width=(hechas/total*100)+'%';
+  espera=true; $('sigRow').hidden=false; $('sig').focus();
+}
+document.querySelectorAll('#zona1 button').forEach(b=>b.onclick=()=>{
+  if(espera)return; const k=+b.dataset.k; const ok=k===cuantas(actual);
+  corrige(ok,['ninguna','una','dos'][k]);
+});
+document.querySelectorAll('.keys button').forEach(b=>b.onclick=()=>{
+  const i=$('resp'); i.value = b.dataset.ins==='no existe' ? 'no existe' : i.value+b.dataset.ins; i.focus();
+});
+$('zona2').addEventListener('submit',e=>{
+  e.preventDefault(); if(espera) return siguiente();
+  const v=$('resp').value; if(!v.trim()) return;
+  const r=lee(v); corrige(r===clave(actual), v);
+});
+$('sig').onclick=siguiente;
+function terminar(){
+  $('juego').hidden=true; $('fin').hidden=false;
+  const n=fallos.length;
+  $('resumen').innerHTML=n?`Las 12 hechas. Te costaron estas (son las que tienes que mirar):`:`Las 12 a la primera. ${modo===1?'Ahora prueba el nivel 2: escribir el resultado.':'Esto ya es nivel de examen.'}`;
+  const vistos=new Set();
+  $('fallos').innerHTML=fallos.filter(f=>{const k=dibuja(f.q);if(vistos.has(k))return false;vistos.add(k);return true})
+    .map(f=>`<li><span style="font-family:var(--display);font-size:20px">${dibuja(f.q).replace('class="rad"','class="rad" style="border-top:2px solid currentColor"')}</span> = <b>${solucion(f.q)}</b> <span class="small">(pusiste: ${f.dijo.replace(/</g,'&lt;')})</span></li>`).join('');
+  $('n2').hidden=modo===2;
+}
+$('m1').onclick=()=>empezar(1); $('m2').onclick=()=>empezar(2);
+$('n2').onclick=()=>empezar(2);
+$('otra').onclick=()=>{$('fin').hidden=true;$('reglaCard').hidden=false};
+</script>
+
+</body></html>
