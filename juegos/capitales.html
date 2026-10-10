@@ -1,5 +1,4 @@
-<!doctype html>
-<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Las 50 en una noche</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -68,14 +67,13 @@ li span{font-size:12px;color:var(--faint);margin-left:6px}
 .pie{font-family:var(--hand);font-size:15px;color:var(--blue);text-align:center;margin-top:auto;padding-top:20px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
-</head><body>
 
 <div class="wrap">
 
 <div id="portada">
   <p class="eyebrow">Geografía · 2.º ESO</p>
   <h1>Las 50 en una noche</h1>
-  <p class="lead" style="margin-top:12px">Provincias de España y sus capitales. Se escribe la respuesta: aquí no hay cuatro opciones donde acertar de rebote.</p>
+  <p class="lead" style="margin-top:12px">Provincias de España y sus capitales. Se escribe la respuesta: aquí no hay cuatro opciones donde acertar de rebote. <b>Y las tildes cuentan</b>, como en el examen.</p>
 
   <div class="card" style="margin-top:18px">
     <div class="dato"><span class="n">42</span><span class="t">provincias en las que la capital <b>se llama igual que la provincia</b>. Esas son gratis.</span></div>
@@ -180,7 +178,16 @@ const $=id=>document.getElementById(id);
 const norm=s=>s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'')
   .replace(/[^a-z0-9ñ ]/g,' ').replace(/\s+/g,' ').trim();
 
-let pila=[], actual=null, corrigiendo=false, total=0, fallos={}, ronda=0;
+// Cómo se escriben de verdad: con tildes. El examen las cuenta (Sergio, 28/09: le bajaron nota por ortografía).
+const ESCRITAS={'Álava':['Vitoria-Gasteiz','Vitoria','Gasteiz'],'Asturias':['Oviedo','Uviéu'],'Illes Balears':['Palma','Palma de Mallorca'],
+ 'Guipúzcoa':['San Sebastián','Donostia','Donostia-San Sebastián'],'Navarra':['Pamplona','Iruña'],'Vizcaya':['Bilbao','Bilbo'],
+ 'Alicante':['Alicante','Alacant'],'Castellón':['Castellón de la Plana','Castellón','Castelló','Castelló de la Plana'],
+ 'A Coruña':['A Coruña','La Coruña'],'Girona':['Girona','Gerona'],'Lleida':['Lleida','Lérida'],'Ourense':['Ourense','Orense'],
+ 'Las Palmas':['Las Palmas de Gran Canaria','Las Palmas'],'Santa Cruz de Tenerife':['Santa Cruz de Tenerife','Santa Cruz'],
+ 'Valencia':['Valencia','València']};
+const exacta=s=>s.normalize('NFC').toLowerCase().replace(/-/g,' ').replace(/\s+/g,' ').trim();
+const bienEscrita=(d,v)=>(ESCRITAS[d[0]]||[d[2]]).some(x=>exacta(x)===exacta(v));
+let pila=[], actual=null, corrigiendo=false, total=0, fallos={}, tildes={}, ronda=0;
 
 function leerFall(){try{return JSON.parse(localStorage.getItem(K))||[]}catch(e){return[]}}
 function guardarFall(l){try{localStorage.setItem(K,JSON.stringify(l))}catch(e){}}
@@ -198,7 +205,7 @@ function arrancar(modo){
   else base=DATA.slice();
   pila=base.map(d=>({d,aciertos:0}));
   for(let i=pila.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[pila[i],pila[j]]=[pila[j],pila[i]]}
-  total=pila.length; fallos={}; ronda=0;
+  total=pila.length; fallos={}; tildes={}; ronda=0;
   $('portada').hidden=true; $('final').hidden=true; $('ronda').hidden=false;
   siguiente();
 }
@@ -223,7 +230,7 @@ function siguiente(){
 
 function comprobar(){
   if(corrigiendo){ // segunda fase: ha de teclear la correcta
-    if(norm($('resp').value)===norm(actual.d[2]) || actual.d[1].includes(norm($('resp').value))){
+    if(bienEscrita(actual.d,$('resp').value)){
       pila.shift(); pila.splice(Math.min(3,pila.length),0,actual); siguiente();
     } else {
       $('resp').value=''; $('resp').focus();
@@ -232,8 +239,19 @@ function comprobar(){
   }
   const v=norm($('resp').value);
   if(!v){$('resp').focus();return}
-  const bien=actual.d[1].includes(v);
+  const sabe=actual.d[1].includes(v);
+  const bien=sabe && bienEscrita(actual.d,$('resp').value);
   const ve=$('vered'); ve.hidden=false;
+  if(sabe && !bien){ // la sabe, pero mal escrita: en el examen cuenta como fallo
+    tildes[actual.d[0]]=(tildes[actual.d[0]]||0)+1;
+    fallos[actual.d[0]]=(fallos[actual.d[0]]||0)+1;
+    actual.aciertos=0;
+    ve.className='veredicto mal';
+    ve.innerHTML='Es esa, pero se escribe <b>'+actual.d[2]+'</b>.<div class="copiala">Fíjate en la tilde: en el examen, sin ella te quitan nota. Escríbela bien y sigue.</div>';
+    corrigiendo=true;
+    $('resp').value=''; $('comprobar').textContent='Sigue'; $('resp').focus();
+    return;
+  }
   if(bien){
     actual.aciertos++;
     ve.className='veredicto bien';
@@ -266,7 +284,7 @@ function terminar(){
     $('resumen').innerHTML='Estas <b>'+lista.length+'</b> te costaron. Son las únicas que hay que volver a mirar mañana antes de entrar:';
     $('listaCostaron').innerHTML='<ul>'+lista.map(n=>{
       const d=DATA.find(x=>x[0]===n);
-      return '<li>'+n+' → <b>'+d[2]+'</b><span>'+fallos[n]+(fallos[n]===1?' fallo':' fallos')+'</span></li>';
+      return '<li>'+n+' → <b>'+d[2]+'</b><span>'+fallos[n]+(fallos[n]===1?' fallo':' fallos')+(tildes[n]?' · la tilde':'')+'</span></li>';
     }).join('')+'</ul>';
     $('repetirFall').hidden=false;
   }
@@ -280,5 +298,4 @@ $('repetirFall').addEventListener('click',()=>arrancar('falladas'));
 $('volver').addEventListener('click',()=>{$('final').hidden=true;$('portada').hidden=false;pintarPortada()});
 pintarPortada();
 </script>
-
-</body></html>
+</html>
