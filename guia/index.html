@@ -160,6 +160,13 @@ footer a{color:var(--gris)}
 .latido{animation:latido .7s ease 2}
 .barra a{display:block;max-width:572px;margin:0 auto;text-align:center;font-size:16px;font-weight:700;color:#fff;background:var(--verde);border-radius:10px;padding:14px;text-decoration:none}
 @media(min-width:700px){h1{font-size:44px}h2{font-size:30px}.faq{margin-left:0;margin-right:0;border-radius:12px}}
+.ck{position:fixed;left:0;right:0;bottom:0;z-index:60;background:#fff;border-top:1px solid var(--linea);box-shadow:0 -6px 24px rgba(0,0,0,.12);padding:14px 16px calc(14px + env(safe-area-inset-bottom));display:none}
+.ck.on{display:block}
+.ck p{margin:0 auto 10px;max-width:640px;font-size:14px;line-height:1.45;color:var(--texto)}
+.ck p a{color:var(--verde)}
+.ck div{display:flex;gap:10px;max-width:640px;margin:0 auto}
+.ck button{flex:1;font:inherit;font-size:15px;font-weight:700;padding:11px 10px;border-radius:10px;cursor:pointer;border:2px solid var(--verde)}
+.ck .si{background:var(--verde);color:#fff}.ck .no{background:#fff;color:var(--verde)}
 </style>
 </head>
 <body>
@@ -365,6 +372,31 @@ footer a{color:var(--gris)}
 
 <div class="barra" id="barra"><a href="#guia">Mándame la guía gratis →</a></div>
 
+<div class="ck" id="ck" role="dialog" aria-label="Cookies"><p>Uso una cookie de Meta (Facebook e Instagram) solo para saber si mis anuncios funcionan. ¿Me dejas? <a href="https://formacion.sergiovega.es/privacidad.html#cookies" target="_blank">Más información</a></p><div><button class="no" id="ckNo" type="button">Rechazar</button><button class="si" id="ckSi" type="button">Aceptar</button></div></div>
+
+<script>
+(function(){
+  var PIXEL='2905745056493774',KEY='eae_ck',MAX=180*864e5;
+  var ck=document.getElementById('ck'),barra=document.getElementById('barra');
+  function leer(){try{var v=JSON.parse(localStorage.getItem(KEY));if(v&&Date.now()-v.t<MAX)return v.s;}catch(e){}return null;}
+  function guardar(s){try{localStorage.setItem(KEY,JSON.stringify({s:s,t:Date.now()}));}catch(e){}}
+  function cargar(){
+    if(window.fbq||!/^\d{10,20}$/.test(PIXEL))return;
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init',PIXEL);fbq('track','PageView');
+  }
+  function cerrar(){ck.classList.remove('on');barra.style.visibility='';}
+  window.eaeLead=function(){if(window.fbq)fbq('track','Lead',{content_name:'Guia cuaderno'});};
+  var s=leer();
+  if(s==='si'){cargar();}
+  else if(s===null){ck.classList.add('on');barra.style.visibility='hidden';}
+  document.getElementById('ckSi').addEventListener('click',function(){guardar('si');cerrar();cargar();});
+  document.getElementById('ckNo').addEventListener('click',function(){guardar('no');cerrar();});
+})();
+</script>
+
 <script>
 (function(){
   var f=document.getElementById('f'),p1=document.getElementById('paso1'),p2=document.getElementById('paso2'),
@@ -394,6 +426,7 @@ footer a{color:var(--gris)}
       .then(function(d){
         if(d&&d.success){f.style.display='none';document.querySelector('.caja-top').style.display='none';
           document.getElementById('gracias').style.display='block';
+          if(window.eaeLead)window.eaeLead();
           document.getElementById('barra').style.display='none';caja.scrollIntoView({behavior:'smooth',block:'start'});}
         else{fail('No se ha podido enviar. Revisa el email y prueba otra vez.');}
       })
