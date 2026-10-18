@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>El factor de conversión</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbf8f2;--ink:#17170f;--card:#fff;--line:#d9d4c7;--blue:#1f4fbf;--blue-soft:#e8eefb;--ok:#1d7a3a;--ok-soft:#e3f3e8;--bad:#b3261e;--bad-soft:#fbe9e7;--muted:#5d5d52}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#15171c;--ink:#f1efe9;--card:#1f222a;--line:#3a3e48;--blue:#8fb0ff;--blue-soft:#232c44;--ok:#7fd69b;--ok-soft:#1c3324;--bad:#ff9a8f;--bad-soft:#3a201e;--muted:#aaa79d}}
+:root[data-theme="dark"]{--bg:#15171c;--ink:#f1efe9;--card:#1f222a;--line:#3a3e48;--blue:#8fb0ff;--blue-soft:#232c44;--ok:#7fd69b;--ok-soft:#1c3324;--bad:#ff9a8f;--bad-soft:#3a201e;--muted:#aaa79d}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Nunito",system-ui,sans-serif;font-size:17px;line-height:1.45}
+.wrap{max-width:560px;margin:0 auto;padding:16px 16px 40px}
+h1{font-family:"Fredoka";font-weight:700;font-size:28px;margin:4px 0 2px;line-height:1.1}
+h2{font-family:"Fredoka";font-weight:600;font-size:21px;margin:0 0 8px}
+.kick{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0}
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:16px;margin:12px 0}
+.etq{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;font-size:15px;background:var(--blue-soft);border:2px solid var(--blue);border-radius:12px;padding:12px}
+.etq b{font-family:"Fredoka";color:var(--blue)}
+.btn{display:block;width:100%;font:700 18px "Nunito",sans-serif;padding:14px;border-radius:12px;border:2px solid var(--blue);background:var(--blue);color:#fff;cursor:pointer;margin-top:10px}
+.btn.alt{background:transparent;color:var(--blue)}
+.row{display:grid;gap:10px;margin-top:12px}.row.c2{grid-template-columns:1fr 1fr}.row.c3{grid-template-columns:1fr 1fr 1fr}.row.c4{grid-template-columns:repeat(4,1fr)}
+.opt{font:700 19px "Fredoka",sans-serif;padding:14px 6px;border-radius:12px;border:2px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.opt:active{border-color:var(--blue)}
+.big{font-family:"Fredoka";font-weight:700;font-size:30px;text-align:center;margin:6px 0 2px}
+.q{font-family:"Fredoka";font-weight:600;font-size:20px;margin:10px 0 0}
+.hint{font-size:14px;color:var(--muted);margin:6px 0 0}
+.fb{border-radius:12px;padding:10px 12px;margin-top:12px;font-weight:700}
+.fb.ok{background:var(--ok-soft);color:var(--ok)}.fb.bad{background:var(--bad-soft);color:var(--bad)}
+input.num{width:100%;font:700 24px "Fredoka",sans-serif;padding:12px;border-radius:12px;border:2px solid var(--line);background:var(--bg);color:var(--ink);text-align:center;margin-top:10px}
+.bar{height:8px;background:var(--line);border-radius:6px;overflow:hidden;margin:6px 0 0}.bar i{display:block;height:100%;background:var(--blue);width:0}
+.ladder{display:flex;flex-direction:column;gap:3px;margin:10px auto 0;max-width:220px}
+.ladder span{display:block;text-align:center;font:600 15px "Fredoka",sans-serif;padding:3px;border-radius:8px;border:1.5px solid var(--line)}
+.ladder span.from{background:var(--blue-soft);border-color:var(--blue)}.ladder span.to{background:var(--ok-soft);border-color:var(--ok)}
+.lvl{font-size:13px;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:.08em}
+
+.frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font:700 18px "Fredoka",sans-serif;line-height:1.15;margin:0 4px}
+.frac span:first-child{border-bottom:2px solid currentColor;padding:0 6px 2px}.frac span:last-child{padding:2px 6px 0}
+.opt.wide{padding:10px 6px}
+.work{font:600 17px "Fredoka",sans-serif;text-align:center;margin:8px 0 0;color:var(--muted)}
+</style>
+</head><body>
+<div class="wrap">
+<p class="kick">Física y Química · 2.º ESO · para el examen del martes</p>
+<h1>El factor de conversión</h1>
+<section id="intro">
+<div class="etq">
+<b>Para qué</b><span>Para hacer los cambios de unidad del examen como en tus apuntes, con el factor escrito. Y sobre todo para lo que dijiste que no entiendes: de cm³ a litros y de litros a cm³.</span>
+<b>Cuándo</b><span>Lunes, 15 minutos, después del audio de los cambios de unidad y antes del examen de prueba.</span>
+<b>Cómo</b><span>En cada ejercicio decides, una cosa por pantalla: ¿más o menos?, ¿qué factor?, ¿qué exponente? Y escribes el resultado. Si fallas, lee por qué.</span>
+<b>Por qué así</b><span>Corregirte en el momento hace que se quede el paso bien hecho, y no el mal hecho.</span>
+<b>Al acabar</b><span>Haz captura de la pantalla final y mándasela a Sergio con <b>HECHO</b> y una palabra: fácil, normal o difícil.</span>
+</div>
+<div class="card"><h2>Las cuatro reglas</h2>
+<p style="margin:0 0 6px">1) La unidad que quieres <b>quitar</b> va <b>abajo</b> en el factor, para que se tache.</p>
+<p style="margin:0 0 6px">2) En la unidad grande, un 1. En la pequeña, <b>10 elevado a los escalones</b>. Superficie (²): escalones <b>× 2</b>. Volumen (³): escalones <b>× 3</b>.</p>
+<p style="margin:0 0 6px">3) El puente: <b>1 cm³ = 1 mL · 1 dm³ = 1 L · 1 m³ = 1 kL</b>.</p>
+<p style="margin:0">4) El tiempo no va de 10 en 10: <b>1 h = 3600 s</b> · 1 min = 60 s.</p></div>
+<button class="btn" id="go">Empezar</button>
+</section>
+<section id="game" hidden>
+<div class="lvl" id="lvl"></div><div class="bar"><i id="prog"></i></div>
+<div class="card"><div class="big" id="prompt"></div><div class="work" id="work"></div><div id="step"></div><div id="fb"></div></div>
+</section>
+<section id="end" hidden>
+<div class="card" style="text-align:center"><h2>¡Terminado!</h2><div class="big" id="score"></div><p id="endmsg" style="margin:6px 0 0"></p><p class="hint" id="fails"></p></div>
+<div class="etq"><b>Ahora</b><span>Captura de esta pantalla a Sergio con <b>HECHO</b> y fácil, normal o difícil. Después, el examen de prueba.</span></div>
+<button class="btn alt" id="again">Otra ronda</button>
+</section>
+</div>
+<script>
+const LAD={L:['km','hm','dam','m','dm','cm','mm'],M:['kg','hg','dag','g','dg','cg','mg'],C:['kL','hL','daL','L','dL','cL','mL'],
+ S:['km²','hm²','dam²','m²','dm²','cm²','mm²'],V:['km³','hm³','dam³','m³','dm³','cm³','mm³']};
+const MUL={L:1,M:1,C:1,S:2,V:3};
+const NAME={L:'longitud',M:'masa',C:'capacidad',S:'superficie (²)',V:'volumen (³)'};
+const BRIDGE={'cm³':'mL','dm³':'L','m³':'kL','mL':'cm³','L':'dm³','kL':'m³'};
+const magOf=u=>Object.keys(LAD).find(k=>LAD[k].includes(u));
+const SUP='⁰¹²³⁴⁵⁶⁷⁸⁹';const pw=n=>'10'+String(n).split('').map(d=>SUP[+d]).join('');
+const fr=(a,b)=>`<span class="frac"><span>${a}</span><span>${b}</span></span>`;
+const fmt=n=>Number(n.toPrecision(12)).toLocaleString('es-ES',{maximumFractionDigits:10});
+function parse(s){s=s.trim().replace(/\s/g,'');if(!s)return NaN;if(s.includes(',')){s=s.replace(/\./g,'').replace(',','.');}else if(/^\d{1,3}(\.\d{3})+$/.test(s)){s=s.replace(/\./g,'');}return Number(s);}
+const same=(a,b)=>Math.abs(a-b)<=Math.abs(b)*1e-9+1e-12;
+const L1='Nivel 1 · lo que se memoriza',L2='Nivel 2 · longitud, masa y tiempo',L3='Nivel 3 · superficie (²)',L4='Nivel 4 · volumen (³)',L5='Nivel 5 · el puente: cm³ y litros',L6='Nivel 6 · ordenar',L7='Nivel 7 · ¿está bien?';
+const ITEMS=[
+ {lvl:L1,t:'mc',q:'Unidad de masa del Sistema Internacional',o:['gramo (g)','kilogramo (kg)','litro (L)'],a:1,why:'El kilogramo. No el gramo.'},
+ {lvl:L1,t:'mc',q:'Unidad de temperatura del Sistema Internacional',o:['grado Celsius (°C)','kelvin (K)','termómetro'],a:1,why:'El kelvin. El termómetro es el aparato, no la unidad.'},
+ {lvl:L1,t:'mc',q:'¿Con qué se mide el peso?',o:['con la balanza, en kg','con el dinamómetro, en newtons','con el termómetro'],a:1,why:'El peso es una fuerza: dinamómetro y newtons (N). La masa es la de la balanza y los kilogramos.'},
+ {lvl:L2,t:'fac',v:3.2,from:'km',to:'m'},
+ {lvl:L2,t:'fac',v:850,from:'g',to:'kg'},
+ {lvl:L2,t:'fac',v:0.015,from:'kg',to:'dag'},
+ {lvl:L2,t:'time',v:2,from:'h',to:'s'},
+ {lvl:L3,t:'fac',v:6,from:'m²',to:'dm²'},
+ {lvl:L3,t:'fac',v:35000,from:'cm²',to:'m²'},
+ {lvl:L3,t:'fac',v:0.4,from:'hm²',to:'m²'},
+ {lvl:L4,t:'fac',v:2,from:'m³',to:'dm³'},
+ {lvl:L4,t:'fac',v:8000,from:'cm³',to:'dm³'},
+ {lvl:L4,t:'fac',v:0.3,from:'m³',to:'cm³'},
+ {lvl:L5,t:'br',v:250,from:'cm³',to:'mL'},
+ {lvl:L5,t:'br',v:500,from:'cm³',to:'L'},
+ {lvl:L5,t:'br',v:3,from:'L',to:'cm³'},
+ {lvl:L5,t:'br',v:2,from:'dm³',to:'cL'},
+ {lvl:L5,t:'br',v:0.8,from:'m³',to:'L'},
+ {lvl:L6,t:'mc',q:'Ordena de menor a mayor: 2 L · 1800 cm³ · 0,0025 m³',o:['1800 cm³ < 2 L < 0,0025 m³','0,0025 m³ < 2 L < 1800 cm³','2 L < 1800 cm³ < 0,0025 m³'],a:0,why:'Todo a litros: 1800 cm³ = 1,8 L · 2 L · 0,0025 m³ = 2,5 L. Primero todo a la misma unidad; nunca a ojo.'},
+ {lvl:L7,t:'chk',txt:'324 g = 324 000 kg',ok:false,why:'De g a kg (más grande) tienen que salir MENOS: 324 g · (1 kg / 10³ g) = 0,324 kg.'},
+ {lvl:L7,t:'chk',txt:'5 m² = 500 cm²',ok:false,why:'De m² a cm²: 2 escalones × 2 = 10⁴. Son 50 000 cm².'},
+ {lvl:L7,t:'chk',txt:'1 L = 1000 cm³',ok:true,why:'Bien: 1 L = 1 dm³ = 1000 cm³. Un litro es una caja de 10 cm de lado.'},
+ {lvl:L7,t:'chk',txt:'7,5 dam² · (10² dm² / 1 dam²)',ok:false,why:'Es superficie: 2 escalones × 2 = 10⁴, no 10². Así lo tienes en tus apuntes del 6 de octubre.'}
+];
+let i=0,score=0,fails=[],tries=0;const $=id=>document.getElementById(id);
+function miss(){if(!fails.includes(i))fails.push(i);}
+function good(m,next){$('fb').innerHTML=`<div class="fb ok">✓ ${m}</div>`;setTimeout(()=>{$('fb').innerHTML='';next();},950);}
+function bad(m){$('fb').innerHTML=`<div class="fb bad">✗ ${m}</div>`;}
+function opts(html,cls,cb){$('step').innerHTML=html;$('step').querySelectorAll('.opt').forEach(b=>b.onclick=()=>cb(b));}
+function show(){
+ if(i>=ITEMS.length)return end();
+ const it=ITEMS[i];tries=0;$('lvl').textContent=it.lvl;$('prog').style.width=(i/ITEMS.length*100)+'%';$('fb').innerHTML='';$('work').innerHTML='';
+ if(it.t==='mc'){$('prompt').textContent=it.q;$('prompt').style.fontSize='22px';
+  opts(`<div class="row">${it.o.map((x,k)=>`<button class="opt wide" data-k="${k}">${x}</button>`).join('')}</div>`,0,b=>{
+   const ok=+b.dataset.k===it.a;if(ok&&!fails.includes(i))score++;if(!ok)miss();
+   $('fb').innerHTML=`<div class="fb ${ok?'ok':'bad'}">${ok?'✓':'✗'} ${it.why}</div><button class="btn" id="nx">Siguiente</button>`;
+   $('step').querySelectorAll('.opt').forEach(x=>x.disabled=true);$('nx').onclick=()=>{i++;show()};});return;}
+ $('prompt').style.fontSize='';
+ if(it.t==='chk'){$('prompt').textContent=it.txt;
+  opts(`<p class="q">¿Está bien?</p><div class="row c2"><button class="opt" data-v="1">✓ Está bien</button><button class="opt" data-v="0">✗ Tiene un error</button></div>`,0,b=>{
+   const ok=(b.dataset.v==='1')===it.ok;if(ok)score++;else miss();
+   $('fb').innerHTML=`<div class="fb ${ok?'ok':'bad'}">${ok?'✓':'✗'} ${it.why}</div><button class="btn" id="nx">Siguiente</button>`;
+   $('step').querySelectorAll('.opt').forEach(x=>x.disabled=true);$('nx').onclick=()=>{i++;show()};});return;}
+ $('prompt').textContent=`${fmt(it.v)} ${it.from} → ${it.to}`;
+ if(it.t==='time'){it.ans=it.v*3600;stepMore(it,true,()=>stepTime(it));return;}
+ if(it.t==='br'){stepBridge(it);return;}
+ setupFac(it,it.v,it.from,it.to);stepMore(it,it.more,()=>stepOrient(it));
+}
+function setupFac(it,v,from,to){const m=magOf(to),a=LAD[m].indexOf(from),b=LAD[m].indexOf(to);
+ it.m=m;it.cur=v;it.cf=from;it.ct=to;it.steps=Math.abs(b-a);it.n=it.steps*MUL[m];it.more=b>a;it.ans=it.more?v*Math.pow(10,it.n):v/Math.pow(10,it.n);}
+function stepMore(it,more,next){
+ opts(`<p class="q">¿Saldrá un número más grande o más pequeño?</p><div class="row c2"><button class="opt" data-v="1">Más grande</button><button class="opt" data-v="0">Más pequeño</button></div>`,0,b=>{
+  if((b.dataset.v==='1')===more)good(more?'Vas a una unidad más pequeña: salen más.':'Vas a una unidad más grande: salen menos.',next);
+  else{miss();bad(more?'Vas a una unidad más pequeña: tienen que salir MÁS.':'Vas a una unidad más grande: tienen que salir MENOS. Si no, pasa lo de 324 000 kg.');}});
+}
+function rightFrac(it,n){return it.more?[`${n} ${it.ct}`,`1 ${it.cf}`]:[`1 ${it.ct}`,`${n} ${it.cf}`];}
+function stepOrient(it){
+ const r=rightFrac(it,'10ⁿ'),w=[r[1],r[0]],first=Math.random()<.5;
+ const A=first?r:w,B=first?w:r;
+ opts(`<p class="q">¿Cuál es el factor bien puesto?</p><div class="row c2"><button class="opt wide" data-r="${first?1:0}">${fr(A[0],A[1])}</button><button class="opt wide" data-r="${first?0:1}">${fr(B[0],B[1])}</button></div>`,0,b=>{
+  if(b.dataset.r==='1')good(`${it.cf} abajo, para que se tache.`,()=>stepN(it));
+  else{miss();bad(`La unidad que quieres quitar (${it.cf}) tiene que ir ABAJO para tacharse con la de arriba.`);}});
+}
+function stepN(it){
+ const mul=MUL[it.m];let c=[...new Set([it.steps,it.n,it.n+mul,Math.max(1,it.n-mul)].filter(x=>x>0))].sort((a,b)=>a-b).slice(0,4);
+ if(!c.includes(it.n))c[c.length-1]=it.n;c.sort((a,b)=>a-b);
+ const lad='<div class="ladder">'+LAD[it.m].map(u=>`<span class="${u===it.cf?'from':u===it.ct?'to':''}">${u}</span>`).join('')+'</div>';
+ opts(`<p class="q">Es ${NAME[it.m]}. ¿Cuánto vale el exponente n?</p><p class="hint">${mul>1?`Cuenta los escalones y multiplica por ${mul}.`:'Cuenta los escalones entre la casilla azul y la verde.'}</p>${lad}<div class="row c4">${c.map(x=>`<button class="opt" data-n="${x}">${x}</button>`).join('')}</div>`,0,b=>{
+  const v=+b.dataset.n;
+  if(v===it.n){const f=rightFrac(it,pw(it.n));$('work').innerHTML=(it.work0?it.work0+'<br>':'')+`${fmt(it.cur)} ${it.cf} · ${fr(f[0],f[1])}`;good(mul>1?`${it.steps} escalón${it.steps>1?'es':''} × ${mul} = ${it.n}.`:`${it.n} escalón${it.n>1?'es':''}.`,()=>stepResult(it));}
+  else{miss();bad(mul>1&&v===it.steps?`Te has comido el ${mul===2?'²':'³'}: son ${it.steps} escalones, pero en ${NAME[it.m]} se multiplica por ${mul}.`:'Cuenta otra vez los saltos de la escalera.');}});
+}
+function stepTime(it){
+ const o=[[fr('3600 s','1 h'),1],[fr('1 h','3600 s'),0],[fr('100 s','1 h'),0]].sort(()=>Math.random()-.5);
+ opts(`<p class="q">¿Qué factor?</p><div class="row c3">${o.map(x=>`<button class="opt wide" data-r="${x[1]}">${x[0]}</button>`).join('')}</div>`,0,b=>{
+  if(b.dataset.r==='1'){$('work').innerHTML=`${fmt(it.v)} h · ${fr('3600 s','1 h')}`;good('1 h = 3600 s, y la hora va abajo para tacharse.',()=>stepResult(it));}
+  else{miss();bad('El tiempo no va de 10 en 10: 1 h = 3600 s. Y la h que quitas, abajo.');}});
+}
+function stepBridge(it){
+ const fromVol=magOf(it.from)==='V',b=BRIDGE[it.from];it.bu=b;
+ const cands=fromVol?[[fr('1 mL','1 cm³'),'cm³'],[fr('1 L','1 dm³'),'dm³'],[fr('1 kL','1 m³'),'m³']]:[[fr('1 cm³','1 mL'),'mL'],[fr('1 dm³','1 L'),'L'],[fr('1 m³','1 kL'),'kL']];
+ opts(`<p class="q">Primero, cruza el puente. ¿Qué factor?</p><p class="hint">1 cm³ = 1 mL · 1 dm³ = 1 L · 1 m³ = 1 kL</p><div class="row c3">${cands.map(x=>`<button class="opt wide" data-u="${x[1]}">${x[0]}</button>`).join('')}</div>`,0,btn=>{
+  if(btn.dataset.u===it.from){
+   $('work').innerHTML=`${fmt(it.v)} ${it.from} · ${fr('1 '+b,'1 '+it.from)} = ${fmt(it.v)} ${b}`;
+   if(b===it.to){it.ans=it.v;good(`El número no cambia: ${fmt(it.v)} ${it.from} = ${fmt(it.v)} ${b}.`,()=>stepResult(it));}
+   else good(`Ya tienes ${fmt(it.v)} ${b}. Ahora, de ${b} a ${it.to}.`,()=>{setupFac(it,it.v,b,it.to);it.work0=$('work').innerHTML;stepOrient(it);});
+  }else{miss();bad(`Tienes ${it.from}: su puente es 1 ${it.from} = 1 ${b}.`);}});
+}
+function stepResult(it){
+ opts(`<p class="q">Escribe el resultado</p><input class="num" id="ans" inputmode="decimal" autocomplete="off" placeholder="resultado en ${it.to}"><button class="btn" id="ok">Comprobar</button>`,0,()=>{});
+ const go=()=>{const v=parse($('ans').value);if(isNaN(v)){bad('Escribe un número (usa coma para los decimales).');return;}
+  if(same(v,it.ans)){if(!fails.includes(i))score++;good(`${fmt(it.v)} ${it.from} = ${fmt(it.ans)} ${it.to}`,()=>{i++;show()});}
+  else{miss();tries++;if(tries>=2){bad(`Es ${fmt(it.ans)} ${it.to}.`);$('ok').textContent='Siguiente';$('ok').onclick=()=>{i++;show()};}
+   else bad(Math.abs(v)>Math.abs(it.ans)*1.0001!==it.more&&it.t!=='time'?'Fíjate: ¿tenía que salir más o menos?':'No. Haz la cuenta en el papel, sin prisa.');}};
+ $('ok').onclick=go;$('ans').onkeydown=e=>{if(e.key==='Enter')go();};
+}
+function end(){$('game').hidden=true;$('end').hidden=false;
+ $('score').textContent=`${score} de ${ITEMS.length} a la primera`;
+ $('endmsg').textContent=score>=20?'Lo tienes. Ahora el examen de prueba.':score>=15?'Bien. Repite los que fallaste antes del examen de prueba.':'Otra ronda antes del examen de prueba: fíjate en el puente y en el ² y el ³.';
+ $('fails').textContent=fails.length?'Fallaste: '+fails.map(k=>{const t=ITEMS[k];return t.q||t.txt||`${fmt(t.v)} ${t.from} → ${t.to}`}).join(' · '):'Ningún fallo.';}
+$('go').onclick=()=>{$('intro').hidden=true;$('game').hidden=false;show();};
+$('again').onclick=()=>{i=0;score=0;fails=[];$('end').hidden=true;$('game').hidden=false;show();};
+</script></body></html>
