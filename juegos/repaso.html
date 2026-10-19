@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Repaso exprés FyQ</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbf8f2;--ink:#17170f;--card:#fff;--line:#d9d4c7;--blue:#1f4fbf;--blue-soft:#e8eefb;--ok:#1d7a3a;--ok-soft:#e3f3e8;--bad:#b3261e;--bad-soft:#fbe9e7;--muted:#5d5d52}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#15171c;--ink:#f1efe9;--card:#1f222a;--line:#3a3e48;--blue:#8fb0ff;--blue-soft:#232c44;--ok:#7fd69b;--ok-soft:#1c3324;--bad:#ff9a8f;--bad-soft:#3a201e;--muted:#aaa79d}}
+:root[data-theme="dark"]{--bg:#15171c;--ink:#f1efe9;--card:#1f222a;--line:#3a3e48;--blue:#8fb0ff;--blue-soft:#232c44;--ok:#7fd69b;--ok-soft:#1c3324;--bad:#ff9a8f;--bad-soft:#3a201e;--muted:#aaa79d}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Nunito",system-ui,sans-serif;font-size:17px;line-height:1.45}
+.wrap{max-width:560px;margin:0 auto;padding:16px 16px 40px}
+h1{font-family:"Fredoka";font-weight:700;font-size:28px;margin:4px 0 2px;line-height:1.1}
+h2{font-family:"Fredoka";font-weight:600;font-size:21px;margin:0 0 8px}
+.kick{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0}
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:16px;margin:12px 0}
+.etq{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;font-size:15px;background:var(--blue-soft);border:2px solid var(--blue);border-radius:12px;padding:12px}
+.etq b{font-family:"Fredoka";color:var(--blue)}
+.btn{display:block;width:100%;font:700 18px "Nunito",sans-serif;padding:14px;border-radius:12px;border:2px solid var(--blue);background:var(--blue);color:#fff;cursor:pointer;margin-top:10px}
+.btn.alt{background:transparent;color:var(--blue)}
+.row{display:grid;gap:10px;margin-top:12px}.row.c2{grid-template-columns:1fr 1fr}.row.c3{grid-template-columns:1fr 1fr 1fr}.row.c4{grid-template-columns:repeat(4,1fr)}
+.opt{font:700 19px "Fredoka",sans-serif;padding:14px 6px;border-radius:12px;border:2px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.opt:active{border-color:var(--blue)}
+.big{font-family:"Fredoka";font-weight:700;font-size:30px;text-align:center;margin:6px 0 2px}
+.q{font-family:"Fredoka";font-weight:600;font-size:20px;margin:10px 0 0}
+.hint{font-size:14px;color:var(--muted);margin:6px 0 0}
+.fb{border-radius:12px;padding:10px 12px;margin-top:12px;font-weight:700}
+.fb.ok{background:var(--ok-soft);color:var(--ok)}.fb.bad{background:var(--bad-soft);color:var(--bad)}
+input.num{width:100%;font:700 24px "Fredoka",sans-serif;padding:12px;border-radius:12px;border:2px solid var(--line);background:var(--bg);color:var(--ink);text-align:center;margin-top:10px}
+.bar{height:8px;background:var(--line);border-radius:6px;overflow:hidden;margin:6px 0 0}.bar i{display:block;height:100%;background:var(--blue);width:0}
+.ladder{display:flex;flex-direction:column;gap:3px;margin:10px auto 0;max-width:220px}
+.ladder span{display:block;text-align:center;font:600 15px "Fredoka",sans-serif;padding:3px;border-radius:8px;border:1.5px solid var(--line)}
+.ladder span.from{background:var(--blue-soft);border-color:var(--blue)}.ladder span.to{background:var(--ok-soft);border-color:var(--ok)}
+.lvl{font-size:13px;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:.08em}
+
+.frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font:700 18px "Fredoka",sans-serif;line-height:1.15;margin:0 4px}
+.frac span:first-child{border-bottom:2px solid currentColor;padding:0 6px 2px}.frac span:last-child{padding:2px 6px 0}
+.opt.wide{padding:10px 6px}
+.work{font:600 17px "Fredoka",sans-serif;text-align:center;margin:8px 0 0;color:var(--muted)}
+</style>
+</head><body>
+<div class="wrap">
+<p class="kick">Física y Química · 2.º ESO · para el examen de mañana</p>
+<h1>Repaso exprés</h1>
+<section id="intro">
+<div class="etq">
+<b>Para qué</b><span>Para lo que dijiste que sale: magnitudes, símbolos de las unidades, cambio físico o químico, factores y volumen-capacidad.</span>
+<b>Cuándo</b><span>Hoy, 10 minutos. Si te da tiempo, otra ronda mañana antes del examen.</span>
+<b>Cómo</b><span>Contesta y lee siempre el porqué, aciertes o falles.</span>
+<b>Por qué así</b><span>Sacarlo de memoria y corregirte en el momento es lo que lo fija.</span>
+<b>Al acabar</b><span>Captura de la pantalla final a Sergio con <b>HECHO</b>.</span>
+</div>
+<button class="btn" id="go">Empezar</button>
+</section>
+<section id="game" hidden>
+<div class="lvl" id="lvl"></div><div class="bar"><i id="prog"></i></div>
+<div class="card"><div class="big" id="prompt" style="font-size:22px"></div><div id="step"></div><div id="fb"></div></div>
+</section>
+<section id="end" hidden>
+<div class="card" style="text-align:center"><h2>¡Terminado!</h2><div class="big" id="score"></div><p id="endmsg" style="margin:6px 0 0"></p><p class="hint" id="fails"></p></div>
+<div class="etq"><b>Ahora</b><span>Captura de esta pantalla a Sergio con <b>HECHO</b>.</span></div>
+<button class="btn alt" id="again">Otra ronda</button>
+</section>
+</div>
+<script>
+const fr=(a,b)=>`<span class="frac"><span>${a}</span><span>${b}</span></span>`;
+const M='1 · Magnitudes',S='2 · Símbolos de las unidades',Q='3 · ¿Físico o químico?',FA='4 · Factores',VC='5 · Volumen y capacidad';
+const ITEMS=[
+{l:M,t:'mc',q:'¿Qué es una magnitud?',o:['Una propiedad que se puede medir: un número y una unidad','Cualquier cosa que se puede ver','Un aparato para medir'],a:0,w:'Magnitud = lo que se puede medir y expresar con un número y una unidad: 3 kg, 20 s.'},
+{l:M,t:'mc',q:'¿Cuál NO es una magnitud?',o:['La masa','La simpatía','El tiempo'],a:1,w:'La simpatía no se mide con un número y una unidad. La masa y el tiempo, sí.'},
+{l:M,t:'mc',q:'¿Cuál es una magnitud FUNDAMENTAL?',o:['La superficie','La masa','La velocidad'],a:1,w:'Fundamentales: longitud, masa, tiempo, temperatura… La superficie y la velocidad son derivadas.'},
+{l:M,t:'mc',q:'La superficie es una magnitud derivada porque…',o:['Se saca de otras: longitud × longitud','Es muy grande','No tiene unidad'],a:0,w:'Derivada = se calcula a partir de las fundamentales. Superficie: m · m = m².'},
+{l:M,t:'mc',q:'Unidad de temperatura del Sistema Internacional',o:['grado Celsius (°C)','kelvin (K)','termómetro'],a:1,w:'El kelvin, K. El termómetro es el aparato.'},
+{l:S,t:'wr',q:'Escribe el símbolo del <b>segundo</b>',a:['s'],w:'s, en minúscula y sin punto. «S» o «seg.» están mal.'},
+{l:S,t:'wr',q:'Escribe el símbolo del <b>kilogramo</b>',a:['kg'],w:'kg, todo en minúscula. «Kg» o «KG» están mal.'},
+{l:S,t:'wr',q:'Escribe el símbolo del <b>kelvin</b>',a:['K'],w:'K, en mayúscula (lleva nombre de persona, Lord Kelvin). Sin el símbolo de grado.'},
+{l:S,t:'wr',q:'Escribe el símbolo de la <b>hora</b>',a:['h'],w:'h, minúscula y sin punto.'},
+{l:S,t:'wr',q:'Escribe el símbolo del <b>litro</b>',a:['L','l'],w:'L (o l). Se usa mucho la L mayúscula para no confundirla con el 1.'},
+{l:S,t:'wr',q:'Escribe el símbolo del <b>centímetro cúbico</b>',a:['cm³','cm3'],w:'cm³, con el 3 pequeño arriba.'},
+{l:S,t:'chk',q:'¿Está bien escrito?',txt:'5 Kg',ok:false,w:'Mal: es «5 kg», con k minúscula.'},
+{l:S,t:'chk',q:'¿Está bien escrito?',txt:'3 s.',ok:false,w:'Mal: los símbolos no llevan punto. «3 s».'},
+{l:S,t:'chk',q:'¿Está bien escrito?',txt:'20 kms',ok:false,w:'Mal: los símbolos no tienen plural. «20 km».'},
+{l:S,t:'chk',q:'¿Está bien escrito?',txt:'7 m²',ok:true,w:'Bien: número, espacio y símbolo con su ².'},
+{l:Q,t:'fq',txt:'Un hielo que se derrite',ok:'F',w:'Físico: sigue siendo agua.'},
+{l:Q,t:'fq',txt:'Un papel que se quema',ok:'Q',w:'Químico: salen ceniza y gases nuevos.'},
+{l:Q,t:'fq',txt:'Azúcar que se disuelve en agua',ok:'F',w:'Físico: el azúcar sigue ahí (si evaporas el agua, vuelve a aparecer).'},
+{l:Q,t:'fq',txt:'Un clavo que se oxida',ok:'Q',w:'Químico: el óxido es una sustancia nueva.'},
+{l:Q,t:'fq',txt:'Vinagre con bicarbonato: salen burbujas',ok:'Q',w:'Químico: las burbujas son un gas nuevo. Es una de las señales.'},
+{l:Q,t:'fq',txt:'Un vaso que se rompe',ok:'F',w:'Físico: sigue siendo vidrio, en trozos.'},
+{l:FA,t:'mc',q:'2,5 km → m. ¿Qué factor?',o:[fr('10³ m','1 km'),fr('1 km','10³ m')],a:0,w:'Los km que quitas van abajo para tacharse: 2,5 km · (10³ m / 1 km) = 2500 m.'},
+{l:FA,t:'num',q:'8500 g → kg',a:8.5,u:'kg',w:'8500 g · (1 kg / 10³ g) = 8,5 kg. Más grande la unidad, menos número.'},
+{l:FA,t:'num',q:'2 h → s',a:7200,u:'s',w:'2 h · (3600 s / 1 h) = 7200 s. El tiempo no va de 10 en 10.'},
+{l:FA,t:'num',q:'5 m² → dm²',a:500,u:'dm²',w:'1 escalón × 2 = 10²: 5 m² · (10² dm² / 1 m²) = 500 dm².'},
+{l:VC,t:'num',q:'1 L = ¿cuántos cm³?',a:1000,u:'cm³',w:'1 L = 1 dm³ = 1000 cm³. Un brik de leche.'},
+{l:VC,t:'num',q:'500 cm³ → L',a:0.5,u:'L',w:'Puente: 500 cm³ = 500 mL. Y 500 mL · (1 L / 10³ mL) = 0,5 L.'},
+{l:VC,t:'num',q:'3 dm³ → L',a:3,u:'L',w:'1 dm³ = 1 L: el número no cambia.'},
+{l:VC,t:'num',q:'2 m³ → L',a:2000,u:'L',w:'Puente: 2 m³ = 2 kL. Y 2 kL · (10³ L / 1 kL) = 2000 L.'}
+];
+function parse(s){s=s.trim().replace(/\s/g,'');if(!s)return NaN;if(s.includes(',')){s=s.replace(/\./g,'').replace(',','.');}else if(/^\d{1,3}(\.\d{3})+$/.test(s)){s=s.replace(/\./g,'');}return Number(s);}
+let i=0,score=0,fails=[];const $=id=>document.getElementById(id);
+function done(ok,w){if(ok)score++;else fails.push(i);
+ $('fb').innerHTML=`<div class="fb ${ok?'ok':'bad'}">${ok?'✓':'✗'} ${w}</div><button class="btn" id="nx">Siguiente</button>`;
+ $('step').querySelectorAll('button,input').forEach(x=>x.disabled=true);$('nx').onclick=()=>{i++;show()};}
+function show(){if(i>=ITEMS.length)return end();const it=ITEMS[i];$('lvl').textContent=it.l;$('prog').style.width=(i/ITEMS.length*100)+'%';$('fb').innerHTML='';
+ if(it.t==='mc'){$('prompt').innerHTML=it.q;$('step').innerHTML=`<div class="row">${it.o.map((x,k)=>`<button class="opt wide" data-k="${k}">${x}</button>`).join('')}</div>`;
+  $('step').querySelectorAll('.opt').forEach(b=>b.onclick=()=>done(+b.dataset.k===it.a,it.w));}
+ else if(it.t==='chk'){$('prompt').innerHTML=`${it.q}<div class="big" style="margin-top:8px">${it.txt}</div>`;$('step').innerHTML=`<div class="row c2"><button class="opt" data-v="1">✓ Bien</button><button class="opt" data-v="0">✗ Mal</button></div>`;
+  $('step').querySelectorAll('.opt').forEach(b=>b.onclick=()=>done((b.dataset.v==='1')===it.ok,it.w));}
+ else if(it.t==='fq'){$('prompt').innerHTML=it.txt;$('step').innerHTML=`<p class="q">¿Sale una sustancia nueva?</p><div class="row c2"><button class="opt" data-v="F">Físico</button><button class="opt" data-v="Q">Químico</button></div>`;
+  $('step').querySelectorAll('.opt').forEach(b=>b.onclick=()=>done(b.dataset.v===it.ok,it.w));}
+ else{$('prompt').innerHTML=it.q;$('step').innerHTML=`<input class="num" id="ans" autocomplete="off" autocapitalize="off" spellcheck="false" ${it.t==='num'?'inputmode="decimal"':''} placeholder="${it.t==='num'?'resultado en '+it.u:'símbolo'}"><button class="btn" id="ok">Comprobar</button>`;
+  const go=()=>{const v=$('ans').value.trim();if(!v)return;const ok=it.t==='num'?Math.abs(parse(v)-it.a)<=Math.abs(it.a)*1e-9:it.a.includes(v.replace(/\.$/,'')===v?v:'__');done(ok,it.w);};
+  $('ok').onclick=go;$('ans').onkeydown=e=>{if(e.key==='Enter')go();};}
+}
+function end(){$('game').hidden=true;$('end').hidden=false;$('score').textContent=`${score} de ${ITEMS.length}`;
+ $('endmsg').textContent=score>=26?'Listo para mañana.':score>=20?'Bien. Mira los fallos y otra ronda mañana.':'Otra ronda ahora, mirando bien cada porqué.';
+ $('fails').textContent=fails.length?'Fallaste: '+fails.map(k=>{const t=ITEMS[k];return (t.txt||t.q).replace(/<[^>]+>/g,'')}).join(' · '):'Ningún fallo.';}
+$('go').onclick=()=>{$('intro').hidden=true;$('game').hidden=false;show();};
+$('again').onclick=()=>{i=0;score=0;fails=[];$('end').hidden=true;$('game').hidden=false;show();};
+</script></body></html>
