@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Feelings, letra a letra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout: una sola columna estrecha tipo ficha; la palabra a escribir manda, todo lo demás es callado */
+:root{
+  --bg:#E1F1FC; --card:#FFFFFF; --ink:#1C1C1C; --soft:#4a5560;
+  --blue:#93C9F2; --green:#B9E1D2; --yellow:#F8E595; --salmon:#F4C9B6; --lila:#C9CDEB;
+  --ok:#1f7a55; --bad:#b4472b;
+  --display:"Fredoka",system-ui,sans-serif; --body:"Poppins",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#132230; --card:#1c2f40; --ink:#eef4f9; --soft:#a9b8c5;
+  --blue:#2f5f86; --green:#2e5a4b; --yellow:#6b5d1e; --salmon:#6e3f2e; --lila:#3e4570;
+  --ok:#7fd6ad; --bad:#f09a82; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#132230; --card:#1c2f40; --ink:#eef4f9; --soft:#a9b8c5;
+  --blue:#2f5f86; --green:#2e5a4b; --yellow:#6b5d1e; --salmon:#6e3f2e; --lila:#3e4570;
+  --ok:#7fd6ad; --bad:#f09a82; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.45;margin:0}
+.wrap{max-width:560px;margin:0 auto;padding-inline:16px;padding-block:22px 40px;display:flex;flex-direction:column;gap:16px}
+.eyebrow{font-family:var(--body);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin:0}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(30px,8vw,42px);line-height:1.05;margin:2px 0 0;text-wrap:balance}
+.lead{margin:0;color:var(--soft)}
+.card{background:var(--card);border:2.5px solid var(--ink);border-radius:18px;padding:18px;box-shadow:4px 4px 0 var(--ink)}
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+button{font-family:var(--display);font-weight:600;font-size:17px;border:2.5px solid var(--ink);border-radius:14px;padding:12px 14px;cursor:pointer;color:var(--ink);background:var(--blue)}
+button.alt{background:var(--green)}
+button:focus-visible,input:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.list{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px;font-size:14px;margin:0;padding:0;list-style:none}
+.list b{font-family:var(--display);font-weight:600}
+.q-top{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:13px;color:var(--soft)}
+.ask{font-family:var(--display);font-size:clamp(28px,8vw,40px);font-weight:700;margin:6px 0 2px;overflow-wrap:anywhere}
+.dir{font-size:13px;color:var(--soft);margin:0}
+input{width:100%;font-family:var(--display);font-size:24px;padding:12px 14px;border:2.5px solid var(--ink);border-radius:14px;background:var(--bg);color:var(--ink);margin-top:12px}
+.row{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+.row button{flex:1}
+.fb{margin-top:12px;padding:12px 14px;border-radius:14px;border:2px solid var(--ink);font-size:15px}
+.fb.ok{background:var(--green)}.fb.bad{background:var(--salmon)}
+.diff{font-family:var(--display);font-size:22px;letter-spacing:.04em}
+.diff .x{color:var(--bad);text-decoration:underline;text-decoration-thickness:3px}
+.bar{height:10px;border:2px solid var(--ink);border-radius:8px;overflow:hidden;background:var(--card)}
+.bar i{display:block;height:100%;background:var(--yellow);width:0;transition:width .3s}
+.end li{margin:4px 0}
+.small{font-size:13px;color:var(--soft)}
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}}
+@media (max-width:420px){.modes,.list{grid-template-columns:1fr}}
+</style>
+</head><body>
+
+<div class="wrap">
+  <div>
+    <p class="eyebrow">Inglés · 2.º ESO · vocabulario del lunes 5</p>
+    <h1>Feelings, letra a letra</h1>
+  </div>
+  <p class="lead">Las once palabras de tu hoja. Se escriben enteras, y en inglés <b>cada letra cuenta</b>: embarra<b>ss</b>ed, e<b>xc</b>ited, bo<b>r</b>ed. Si fallas una, vuelve al final hasta que la escribas bien dos veces seguidas.</p>
+
+  <div id="portada" class="card">
+    <ul class="list" id="lista"></ul>
+    <div class="modes" style="margin-top:16px">
+      <button id="m-en" type="button">Español → inglés</button>
+      <button id="m-es" class="alt" type="button">Inglés → español</button>
+    </div>
+  </div>
+
+  <div id="juego" class="card" hidden>
+    <div class="q-top"><span id="cuenta"></span><span id="dirtxt"></span></div>
+    <div class="bar" style="margin-top:8px"><i id="prog"></i></div>
+    <p class="ask" id="ask"></p>
+    <p class="dir" id="hint"></p>
+    <form id="f" autocomplete="off">
+      <label for="resp" class="small">Tu respuesta</label>
+      <input id="resp" autocapitalize="off" autocorrect="off" spellcheck="false">
+      <div class="row"><button type="submit">Comprobar</button></div>
+    </form>
+    <div id="fb" hidden></div>
+  </div>
+
+  <div id="fin" class="card" hidden>
+    <p class="ask" style="font-size:30px">¡Hecho!</p>
+    <p id="resumen"></p>
+    <ul class="end" id="fallos"></ul>
+    <div class="row"><button id="otra" type="button">Otra vez</button><button id="fallad" class="alt" type="button">Solo las falladas</button></div>
+  </div>
+</div>
+
+<script>
+const W=[
+ ["embarrassed",["avergonzado","avergonzada"]],
+ ["happy",["feliz","contento","contenta"]],
+ ["unhappy",["infeliz","triste","descontento","descontenta"]],
+ ["annoyed",["molesto","molesta"]],
+ ["excited",["emocionado","emocionada","ilusionado","ilusionada"]],
+ ["scared",["asustado","asustada"]],
+ ["surprised",["sorprendido","sorprendida"]],
+ ["bored",["aburrido","aburrida"]],
+ ["angry",["enfadado","enfadada","enojado","enojada"]],
+ ["worried",["preocupado","preocupada"]],
+ ["cheerful",["animado","animada","alegre"]]
+];
+const $=id=>document.getElementById(id);
+const clean=s=>s.normalize('NFC').toLowerCase().replace(/\s+/g,' ').trim();
+$('lista').innerHTML=W.map(w=>`<li><b>${w[0]}</b> · ${w[1][0]}</li>`).join('');
+let modo='en',pila=[],actual=null,total=0,hechas=0,fallos={},bloqueo=false;
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function empezar(m,solo){
+  modo=m; const base=solo?W.filter(w=>fallos[w[0]]):W;
+  fallos={}; pila=shuffle(base.map(w=>({w,seguidas:0}))); total=pila.length; hechas=0;
+  $('portada').hidden=true;$('fin').hidden=true;$('juego').hidden=false;
+  $('dirtxt').textContent=m==='en'?'Escríbela en inglés':'Escríbela en español';
+  siguiente();
+}
+function siguiente(){
+  $('fb').hidden=true;bloqueo=false;
+  if(!pila.length){return terminar()}
+  actual=pila[0];
+  $('ask').textContent=modo==='en'?actual.w[1][0]:actual.w[0];
+  $('hint').textContent=actual.seguidas===1?'Una vez más, para fijarla.':'';
+  $('cuenta').textContent=`${hechas} de ${total} dominadas`;
+  $('prog').style.width=(hechas/total*100)+'%';
+  $('resp').value='';$('resp').focus();
+}
+function marca(bien,mal){ // muestra la palabra correcta subrayando dónde se separa lo escrito
+  let o='';for(let i=0;i<bien.length;i++){o+=(mal[i]===bien[i])?bien[i]:`<span class="x">${bien[i]}</span>`}return o;
+}
+$('f').addEventListener('submit',e=>{
+  e.preventDefault(); if(bloqueo){return siguiente()}
+  const v=clean($('resp').value); if(!v)return;
+  const ok=modo==='en'? v===actual.w[0] : actual.w[1].includes(v);
+  const fb=$('fb'); fb.hidden=false;
+  pila.shift();
+  if(ok){
+    actual.seguidas++;
+    if(actual.seguidas>=2||(!fallos[actual.w[0]]&&actual.seguidas>=1)){hechas++;fb.className='fb ok';fb.innerHTML='Bien escrita.';}
+    else{pila.push(actual);fb.className='fb ok';fb.innerHTML='Bien. Vuelve una vez más al final.';}
+  }else{
+    fallos[actual.w[0]]=(fallos[actual.w[0]]||0)+1; actual.seguidas=0; pila.splice(Math.min(2,pila.length),0,actual);
+    const correcta=modo==='en'?actual.w[0]:actual.w[1][0];
+    fb.className='fb bad';
+    fb.innerHTML=`Se escribe <span class="diff">${modo==='en'?marca(correcta,v):correcta}</span>`+(modo==='en'?'<div class="small" style="margin-top:4px">Lo subrayado es donde tu palabra se separa. Va a volver dentro de poco.</div>':'');
+  }
+  bloqueo=true; $('cuenta').textContent=`${hechas} de ${total} dominadas`;$('prog').style.width=(hechas/total*100)+'%';
+  setTimeout(()=>{if(bloqueo&&ok)siguiente()},900);
+});
+function terminar(){
+  $('juego').hidden=true;$('fin').hidden=false;
+  const f=Object.keys(fallos);
+  $('resumen').textContent=f.length?`Las ${total} dominadas. Estas te costaron:`:`Las ${total} a la primera. Ni una letra mal.`;
+  $('fallos').innerHTML=f.map(k=>`<li><b>${k}</b> · ${fallos[k]} ${fallos[k]===1?'fallo':'fallos'}</li>`).join('');
+  $('fallad').hidden=!f.length;
+}
+$('m-en').onclick=()=>empezar('en');$('m-es').onclick=()=>empezar('es');
+$('otra').onclick=()=>{$('fin').hidden=true;$('portada').hidden=false};
+$('fallad').onclick=()=>empezar(modo,true);
+</script>
+</body></html>
