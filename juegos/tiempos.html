@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Inglés: tiempos y opuestos</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbf8f2;--ink:#17170f;--card:#fff;--line:#d9d4c7;--blue:#1f4fbf;--blue-soft:#e8eefb;--ok:#1d7a3a;--ok-soft:#e3f3e8;--bad:#b3261e;--bad-soft:#fbe9e7;--muted:#5d5d52}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#15171c;--ink:#f1efe9;--card:#1f222a;--line:#3a3e48;--blue:#8fb0ff;--blue-soft:#232c44;--ok:#7fd69b;--ok-soft:#1c3324;--bad:#ff9a8f;--bad-soft:#3a201e;--muted:#aaa79d}}
+:root[data-theme="dark"]{--bg:#15171c;--ink:#f1efe9;--card:#1f222a;--line:#3a3e48;--blue:#8fb0ff;--blue-soft:#232c44;--ok:#7fd69b;--ok-soft:#1c3324;--bad:#ff9a8f;--bad-soft:#3a201e;--muted:#aaa79d}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Nunito",system-ui,sans-serif;font-size:17px;line-height:1.45}
+.wrap{max-width:560px;margin:0 auto;padding:16px 16px 40px}
+h1{font-family:"Fredoka";font-weight:700;font-size:28px;margin:4px 0 2px;line-height:1.1}
+h2{font-family:"Fredoka";font-weight:600;font-size:21px;margin:0 0 8px}
+.kick{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0}
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:16px;margin:12px 0}
+.etq{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;font-size:15px;background:var(--blue-soft);border:2px solid var(--blue);border-radius:12px;padding:12px}
+.etq b{font-family:"Fredoka";color:var(--blue)}
+.btn{display:block;width:100%;font:700 18px "Nunito",sans-serif;padding:14px;border-radius:12px;border:2px solid var(--blue);background:var(--blue);color:#fff;cursor:pointer;margin-top:10px}
+.btn.alt{background:transparent;color:var(--blue)}
+.row{display:grid;gap:10px;margin-top:12px}.row.c2{grid-template-columns:1fr 1fr}.row.c3{grid-template-columns:1fr 1fr 1fr}.row.c4{grid-template-columns:repeat(4,1fr)}
+.opt{font:700 19px "Fredoka",sans-serif;padding:14px 6px;border-radius:12px;border:2px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.opt:active{border-color:var(--blue)}
+.big{font-family:"Fredoka";font-weight:700;font-size:30px;text-align:center;margin:6px 0 2px}
+.q{font-family:"Fredoka";font-weight:600;font-size:20px;margin:10px 0 0}
+.hint{font-size:14px;color:var(--muted);margin:6px 0 0}
+.fb{border-radius:12px;padding:10px 12px;margin-top:12px;font-weight:700}
+.fb.ok{background:var(--ok-soft);color:var(--ok)}.fb.bad{background:var(--bad-soft);color:var(--bad)}
+input.num{width:100%;font:700 24px "Fredoka",sans-serif;padding:12px;border-radius:12px;border:2px solid var(--line);background:var(--bg);color:var(--ink);text-align:center;margin-top:10px}
+.bar{height:8px;background:var(--line);border-radius:6px;overflow:hidden;margin:6px 0 0}.bar i{display:block;height:100%;background:var(--blue);width:0}
+.ladder{display:flex;flex-direction:column;gap:3px;margin:10px auto 0;max-width:220px}
+.ladder span{display:block;text-align:center;font:600 15px "Fredoka",sans-serif;padding:3px;border-radius:8px;border:1.5px solid var(--line)}
+.ladder span.from{background:var(--blue-soft);border-color:var(--blue)}.ladder span.to{background:var(--ok-soft);border-color:var(--ok)}
+.lvl{font-size:13px;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:.08em}
+
+.frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font:700 18px "Fredoka",sans-serif;line-height:1.15;margin:0 4px}
+.frac span:first-child{border-bottom:2px solid currentColor;padding:0 6px 2px}.frac span:last-child{padding:2px 6px 0}
+.opt.wide{padding:10px 6px}
+.work{font:600 17px "Fredoka",sans-serif;text-align:center;margin:8px 0 0;color:var(--muted)}
+</style>
+</head><body>
+<div class="wrap">
+<p class="kick">Inglés · 2.º ESO · para el examen de mañana</p>
+<h1>Tiempos y opuestos</h1>
+<section id="intro">
+<div class="etq">
+<b>Para qué</b><span>Para lo que dijiste que sale mañana: presente simple, pasado continuo y pasado simple, y los verbos opuestos del vocabulario.</span>
+<b>Cuándo</b><span>Esta noche, 15 minutos, después de la hoja del pasado.</span>
+<b>Cómo</b><span>Contesta y lee siempre el porqué, aciertes o falles.</span>
+<b>Por qué así</b><span>Sacarlo de memoria y corregirte en el momento es lo que lo fija.</span>
+<b>Al acabar</b><span>Captura de la pantalla final a Sergio con <b>HECHO</b>.</span>
+</div>
+<button class="btn" id="go">Empezar</button>
+</section>
+<section id="game" hidden>
+<div class="lvl" id="lvl"></div><div class="bar"><i id="prog"></i></div>
+<div class="card"><div class="big" id="prompt" style="font-size:22px"></div><div id="step"></div><div id="fb"></div></div>
+</section>
+<section id="end" hidden>
+<div class="card" style="text-align:center"><h2>¡Terminado!</h2><div class="big" id="score"></div><p id="endmsg" style="margin:6px 0 0"></p><p class="hint" id="fails"></p></div>
+<div class="etq"><b>Ahora</b><span>Captura de esta pantalla a Sergio con <b>HECHO</b>.</span></div>
+<button class="btn alt" id="again">Otra ronda</button>
+</section>
+</div>
+<script>
+const P='1 · Presente simple',C='2 · Pasado continuo',S='3 · ¿Simple o continuo?',O='4 · Verbos opuestos';
+const ITEMS=[
+{l:P,t:'mc',q:'She ___ football every Saturday.',o:['play','plays','playing'],a:1,w:'Con he, she, it, el verbo lleva -s: she plays.'},
+{l:P,t:'wr',q:'watch → he ___',a:['watches'],w:'Acaba en -ch: se añade -es. He watches.'},
+{l:P,t:'wr',q:'study → she ___',a:['studies'],w:'Consonante + y → -ies: she studies.'},
+{l:P,t:'mc',q:'They ___ like pizza.',o:["doesn't","don't","aren't"],a:1,w:"I, you, we, they → don't. He, she, it → doesn't."},
+{l:P,t:'mc',q:'___ your brother study English?',o:['Do','Does','Is'],a:1,w:'Your brother = he → Does. Y el verbo va sin -s: Does he study…?'},
+{l:P,t:'chk',q:'¿Está bien?',txt:"He don't watch TV.",ok:false,w:"Mal: con he, doesn't. He doesn't watch TV."},
+{l:C,t:'mc',q:'I ___ TV at 9 o\'clock last night.',o:['was watching','were watching','watched'],a:0,w:'Algo que estaba pasando a una hora concreta: pasado continuo. I → was + -ing.'},
+{l:C,t:'mc',q:'They ___ in the park when it started to rain.',o:['was playing','were playing','played'],a:1,w:'They → were. Were playing: la acción larga que estaba pasando.'},
+{l:C,t:'mc',q:'___ you sleeping at midnight?',o:['Was','Were','Did'],a:1,w:'You → were. La pregunta del pasado continuo empieza por was/were, sin did.'},
+{l:C,t:'chk',q:'¿Está bien?',txt:'She were reading a book.',ok:false,w:'Mal: she → was. She was reading a book.'},
+{l:C,t:'wr',q:'run → I was ___',a:['running'],w:'Vocal + consonante al final: se dobla. Running.'},
+{l:C,t:'wr',q:'swim → they were ___',a:['swimming'],w:'Se dobla la m: swimming.'},
+{l:C,t:'chk',q:'¿Está bien?',txt:"We wasn't studying.",ok:false,w:"Mal: we → weren't. We weren't studying."},
+{l:S,t:'mc',q:'Para la acción larga que estaba pasando, ¿qué tiempo?',o:['pasado continuo','pasado simple'],a:0,w:'La larga, de fondo: was/were + -ing.'},
+{l:S,t:'mc',q:'Y para la acción corta que la interrumpe…',o:['pasado continuo','pasado simple'],a:1,w:'La corta, la que corta: pasado simple.'},
+{l:S,t:'mc',q:'I was having a shower ___ the phone rang.',o:['when','while'],a:0,w:'When + la acción corta (pasado simple): when the phone rang.'},
+{l:S,t:'mc',q:'While I was studying, my friend ___ .',o:['called','was calling','calls'],a:0,w:'La que interrumpe, corta: pasado simple. My friend called.'},
+{l:S,t:'mc',q:'I ___ to school every day.',o:['go','went','was going'],a:0,w:'Every day = costumbre → presente simple.'},
+{l:S,t:'mc',q:'Yesterday I ___ to the cinema.',o:['go','went','was going'],a:1,w:'Yesterday, algo terminado → pasado simple: went.'},
+{l:O,t:'wr',q:'El opuesto de <b>agree</b>',a:['disagree'],w:'agree ↔ disagree.'},
+{l:O,t:'wr',q:'El opuesto de <b>lend</b> (prestar)',a:['borrow'],w:'lend (prestar) ↔ borrow (pedir prestado).'},
+{l:O,t:'wr',q:'El opuesto de <b>sell</b>',a:['buy'],w:'sell ↔ buy.'},
+{l:O,t:'wr',q:'El opuesto de <b>send</b>',a:['receive'],w:'send ↔ receive. Ojo: receive, «ei».'},
+{l:O,t:'wr',q:'El opuesto de <b>save</b> (ahorrar)',a:['spend'],w:'save ↔ spend.'},
+{l:O,t:'wr',q:'El opuesto de <b>appear</b>',a:['disappear'],w:'appear ↔ disappear: una s y dos p.'},
+{l:O,t:'wr',q:'«Did you win the match?» «No, we ___ it.»',a:['lost'],w:'win ↔ lose, y en pasado: lost.'},
+{l:O,t:'wr',q:'«Did they sell anything?» «No, but they ___ some clothes.»',a:['bought'],w:'sell ↔ buy, y en pasado: bought.'}
+];
+function parse(s){s=s.trim().replace(/\s/g,'');if(!s)return NaN;if(s.includes(',')){s=s.replace(/\./g,'').replace(',','.');}else if(/^\d{1,3}(\.\d{3})+$/.test(s)){s=s.replace(/\./g,'');}return Number(s);}
+let i=0,score=0,fails=[],given={};const $=id=>document.getElementById(id);
+function done(ok,w,ans){if(ok)score++;else{fails.push(i);given[i]=ans;}
+ $('fb').innerHTML=`<div class="fb ${ok?'ok':'bad'}">${ok?'✓':'✗'} ${w}</div><button class="btn" id="nx">Siguiente</button>`;
+ $('step').querySelectorAll('button,input').forEach(x=>x.disabled=true);$('nx').onclick=()=>{i++;show()};}
+function show(){if(i>=ITEMS.length)return end();const it=ITEMS[i];$('lvl').textContent=it.l;$('prog').style.width=(i/ITEMS.length*100)+'%';$('fb').innerHTML='';
+ if(it.t==='mc'){$('prompt').innerHTML=it.q;$('step').innerHTML=`<div class="row">${it.o.map((x,k)=>`<button class="opt wide" data-k="${k}">${x}</button>`).join('')}</div>`;
+  $('step').querySelectorAll('.opt').forEach(b=>b.onclick=()=>done(+b.dataset.k===it.a,it.w,b.textContent));}
+ else if(it.t==='chk'){$('prompt').innerHTML=`${it.q}<div class="big" style="margin-top:8px">${it.txt}</div>`;$('step').innerHTML=`<div class="row c2"><button class="opt" data-v="1">✓ Bien</button><button class="opt" data-v="0">✗ Mal</button></div>`;
+  $('step').querySelectorAll('.opt').forEach(b=>b.onclick=()=>done((b.dataset.v==='1')===it.ok,it.w,b.textContent));}
+ else if(it.t==='fq'){$('prompt').innerHTML=it.txt;$('step').innerHTML=`<p class="q">¿Sale una sustancia nueva?</p><div class="row c2"><button class="opt" data-v="F">Físico</button><button class="opt" data-v="Q">Químico</button></div>`;
+  $('step').querySelectorAll('.opt').forEach(b=>b.onclick=()=>done(b.dataset.v===it.ok,it.w,b.textContent));}
+ else{$('prompt').innerHTML=it.q;$('step').innerHTML=`<input class="num" id="ans" autocomplete="off" autocapitalize="off" spellcheck="false" ${it.t==='num'?'inputmode="decimal"':''} placeholder="escribe la palabra"><button class="btn" id="ok">Comprobar</button>`;
+  const go=()=>{const v=$('ans').value.trim();if(!v)return;const ok=it.a.includes(v.toLowerCase().replace(/[’`]/g,"'"));done(ok,it.w,v);};
+  $('ok').onclick=go;$('ans').onkeydown=e=>{if(e.key==='Enter')go();};}
+}
+function end(){$('game').hidden=true;$('end').hidden=false;$('score').textContent=`${score} de ${ITEMS.length}`;
+ $('endmsg').textContent=score>=24?'Listo para mañana.':score>=19?'Bien. Mira los fallos y otra ronda mañana.':'Otra ronda ahora, mirando bien cada porqué.';
+ $('fails').innerHTML=fails.length?'<b>Fallaste:</b><br>'+fails.map(k=>{const t=ITEMS[k];return (t.txt||t.q).replace(/<[^>]+>/g,'')+' → pusiste «'+String(given[k]).replace(/[<>]/g,'')+'» · era «'+(t.t==='mc'?t.o[t.a]:t.t==='chk'?(t.ok?'✓ Bien':'✗ Mal'):t.a[0])+'»'}).join('<br>'):'Ningún fallo.';}
+$('go').onclick=()=>{$('intro').hidden=true;$('game').hidden=false;show();};
+$('again').onclick=()=>{i=0;score=0;fails=[];given={};$('end').hidden=true;$('game').hidden=false;show();};
+</script></body></html>
