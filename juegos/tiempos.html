@@ -30,6 +30,9 @@ input.num{width:100%;font:700 24px "Fredoka",sans-serif;padding:12px;border-radi
 .ladder{display:flex;flex-direction:column;gap:3px;margin:10px auto 0;max-width:220px}
 .ladder span{display:block;text-align:center;font:600 15px "Fredoka",sans-serif;padding:3px;border-radius:8px;border:1.5px solid var(--line)}
 .ladder span.from{background:var(--blue-soft);border-color:var(--blue)}.ladder span.to{background:var(--ok-soft);border-color:var(--ok)}
+.do{background:var(--blue-soft);border-left:5px solid var(--blue);border-radius:10px;padding:10px 12px;font-weight:700;font-size:17px;margin:0 0 10px}
+.es{font-size:15px;color:var(--muted);margin:6px 0 0}
+.rule{font-size:18px;font-weight:700;margin:8px 0}.ex{background:var(--ok-soft);border-radius:10px;padding:10px 12px;margin:8px 0;font-size:16px}
 .lvl{font-size:13px;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:.08em}
 
 .frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font:700 18px "Fredoka",sans-serif;line-height:1.15;margin:0 4px}
@@ -42,18 +45,25 @@ input.num{width:100%;font:700 24px "Fredoka",sans-serif;padding:12px;border-radi
 <p class="kick">Inglés · 2.º ESO · para el examen de mañana</p>
 <h1>Tiempos y opuestos</h1>
 <section id="intro">
+<div class="card">
+<h2>Cómo se juega</h2>
+<p style="margin:4px 0"><b>1.</b> Lee el recuadro azul: te dice <b>qué tienes que hacer</b>.</p>
+<p style="margin:4px 0"><b>2.</b> Toca la respuesta, o escríbela y pulsa <b>Comprobar</b>.</p>
+<p style="margin:4px 0"><b>3.</b> Lee siempre la explicación, aciertes o falles.</p>
+<p style="margin:4px 0"><b>4.</b> Si fallas, no pasa nada: al final ves tus fallos y lo correcto.</p>
+<p class="hint">Hay 4 partes. Antes de cada una te explico la regla con ejemplos resueltos.</p>
+</div>
 <div class="etq">
-<b>Para qué</b><span>Para lo que dijiste que sale mañana: presente simple, pasado continuo y pasado simple, y los verbos opuestos del vocabulario.</span>
-<b>Cuándo</b><span>Esta noche, 15 minutos, después de la hoja del pasado.</span>
-<b>Cómo</b><span>Contesta y lee siempre el porqué, aciertes o falles.</span>
-<b>Por qué así</b><span>Sacarlo de memoria y corregirte en el momento es lo que lo fija.</span>
-<b>Al acabar</b><span>Captura de la pantalla final a Sergio con <b>HECHO</b>.</span>
+<b>Para qué</b><span>Para el examen de Inglés de mañana: presente simple, pasado continuo y los verbos opuestos.</span>
+<b>Cuándo</b><span>Esta noche, 15 minutos.</span>
+<b>Al acabar</b><span>Captura de la pantalla final con <b>HECHO</b>.</span>
 </div>
 <button class="btn" id="go">Empezar</button>
 </section>
+<section id="rulebox" hidden><div class="lvl" id="rlvl"></div><div class="card" id="rcard"></div><button class="btn" id="rgo">Entendido, a jugar</button></section>
 <section id="game" hidden>
 <div class="lvl" id="lvl"></div><div class="bar"><i id="prog"></i></div>
-<div class="card"><div class="big" id="prompt" style="font-size:22px"></div><div id="step"></div><div id="fb"></div></div>
+<div class="card"><div class="do" id="do"></div><div class="big" id="prompt" style="font-size:22px"></div><div class="es" id="es"></div><div id="step"></div><div id="fb"></div></div>
 </section>
 <section id="end" hidden>
 <div class="card" style="text-align:center"><h2>¡Terminado!</h2><div class="big" id="score"></div><p id="endmsg" style="margin:6px 0 0"></p><p class="hint" id="fails"></p></div>
@@ -62,49 +72,56 @@ input.num{width:100%;font:700 24px "Fredoka",sans-serif;padding:12px;border-radi
 </section>
 </div>
 <script>
-const P='1 · Presente simple',C='2 · Pasado continuo',S='3 · ¿Simple o continuo?',O='4 · Verbos opuestos';
+const P='Parte 1 · Presente simple',C='Parte 2 · Pasado continuo',S='Parte 3 · ¿Simple o continuo?',O='Parte 4 · Verbos opuestos';
+const RULES={
+[P]:{t:'Presente simple: lo que haces siempre',rule:'Con <b>he, she, it</b> (él, ella, eso) el verbo lleva <b>-s</b>.<br>Para decir NO: <b>don\'t</b>, y con he/she/it <b>doesn\'t</b>.',ex:['I <b>play</b> · She <b>plays</b> (ella juega)','watch → he <b>watches</b> · study → she <b>studies</b>','She <b>doesn\'t play</b>. (doesn\'t ya lleva la -s: play sin -s)'],do:'elegir la palabra que falta, escribir el verbo con -s o decir si una frase está bien.'},
+[C]:{t:'Pasado continuo: «estaba haciendo algo»',rule:'<b>was / were + verbo con -ing</b>.<br>I, he, she, it → <b>was</b> · you, we, they → <b>were</b>.',ex:['I <b>was watching</b> TV. (Yo estaba viendo la tele)','They <b>were playing</b>. (Ellos estaban jugando)','run → runn<b>ing</b> · swim → swimm<b>ing</b> (se dobla la última letra)'],do:'elegir was o were, escribir el verbo con -ing o decir si una frase está bien.'},
+[S]:{t:'La acción larga y la corta',rule:'La <b>larga</b> (estaba pasando) → <b>was/were + -ing</b>.<br>La <b>corta</b> (la interrumpe) → <b>pasado simple</b>.',ex:['I <b>was having</b> a shower (larga) <b>when</b> the phone <b>rang</b> (corta).','<b>when</b> + la corta · <b>while</b> + la larga','Lo de cada día (every day) → presente · Lo de ayer (yesterday) → pasado'],do:'elegir la forma correcta del verbo o la palabra que falta.'},
+[O]:{t:'Verbos opuestos',rule:'Escribe en inglés el verbo <b>contrario</b>.',ex:['agree (estar de acuerdo) ↔ <b>disagree</b> (no estar de acuerdo)','win (ganar) ↔ <b>lose</b> (perder) · en pasado: won ↔ <b>lost</b>'],do:'escribir en inglés el verbo contrario. Si la frase es de pasado, escríbelo en pasado.'}
+};
 const ITEMS=[
-{l:P,t:'mc',q:'She ___ football every Saturday.',o:['play','plays','playing'],a:1,w:'Con he, she, it, el verbo lleva -s: she plays.'},
-{l:P,t:'wr',q:'watch → he ___',a:['watches'],w:'Acaba en -ch: se añade -es. He watches.'},
-{l:P,t:'wr',q:'study → she ___',a:['studies'],w:'Consonante + y → -ies: she studies.'},
-{l:P,t:'mc',q:'They ___ like pizza.',o:["doesn't","don't","aren't"],a:1,w:"I, you, we, they → don't. He, she, it → doesn't."},
-{l:P,t:'mc',q:'___ your brother study English?',o:['Do','Does','Is'],a:1,w:'Your brother = he → Does. Y el verbo va sin -s: Does he study…?'},
-{l:P,t:'chk',q:'¿Está bien?',txt:"He don't watch TV.",ok:false,w:"Mal: con he, doesn't. He doesn't watch TV."},
-{l:C,t:'mc',q:'I ___ TV at 9 o\'clock last night.',o:['was watching','were watching','watched'],a:0,w:'Algo que estaba pasando a una hora concreta: pasado continuo. I → was + -ing.'},
-{l:C,t:'mc',q:'They ___ in the park when it started to rain.',o:['was playing','were playing','played'],a:1,w:'They → were. Were playing: la acción larga que estaba pasando.'},
-{l:C,t:'mc',q:'___ you sleeping at midnight?',o:['Was','Were','Did'],a:1,w:'You → were. La pregunta del pasado continuo empieza por was/were, sin did.'},
-{l:C,t:'chk',q:'¿Está bien?',txt:'She were reading a book.',ok:false,w:'Mal: she → was. She was reading a book.'},
-{l:C,t:'wr',q:'run → I was ___',a:['running'],w:'Vocal + consonante al final: se dobla. Running.'},
-{l:C,t:'wr',q:'swim → they were ___',a:['swimming'],w:'Se dobla la m: swimming.'},
-{l:C,t:'chk',q:'¿Está bien?',txt:"We wasn't studying.",ok:false,w:"Mal: we → weren't. We weren't studying."},
-{l:S,t:'mc',q:'Para la acción larga que estaba pasando, ¿qué tiempo?',o:['pasado continuo','pasado simple'],a:0,w:'La larga, de fondo: was/were + -ing.'},
-{l:S,t:'mc',q:'Y para la acción corta que la interrumpe…',o:['pasado continuo','pasado simple'],a:1,w:'La corta, la que corta: pasado simple.'},
-{l:S,t:'mc',q:'I was having a shower ___ the phone rang.',o:['when','while'],a:0,w:'When + la acción corta (pasado simple): when the phone rang.'},
-{l:S,t:'mc',q:'While I was studying, my friend ___ .',o:['called','was calling','calls'],a:0,w:'La que interrumpe, corta: pasado simple. My friend called.'},
-{l:S,t:'mc',q:'I ___ to school every day.',o:['go','went','was going'],a:0,w:'Every day = costumbre → presente simple.'},
-{l:S,t:'mc',q:'Yesterday I ___ to the cinema.',o:['go','went','was going'],a:1,w:'Yesterday, algo terminado → pasado simple: went.'},
-{l:O,t:'wr',q:'El opuesto de <b>agree</b>',a:['disagree'],w:'agree ↔ disagree.'},
-{l:O,t:'wr',q:'El opuesto de <b>lend</b> (prestar)',a:['borrow'],w:'lend (prestar) ↔ borrow (pedir prestado).'},
-{l:O,t:'wr',q:'El opuesto de <b>sell</b>',a:['buy'],w:'sell ↔ buy.'},
-{l:O,t:'wr',q:'El opuesto de <b>send</b>',a:['receive'],w:'send ↔ receive. Ojo: receive, «ei».'},
-{l:O,t:'wr',q:'El opuesto de <b>save</b> (ahorrar)',a:['spend'],w:'save ↔ spend.'},
-{l:O,t:'wr',q:'El opuesto de <b>appear</b>',a:['disappear'],w:'appear ↔ disappear: una s y dos p.'},
-{l:O,t:'wr',q:'«Did you win the match?» «No, we ___ it.»',a:['lost'],w:'win ↔ lose, y en pasado: lost.'},
-{l:O,t:'wr',q:'«Did they sell anything?» «No, but they ___ some clothes.»',a:['bought'],w:'sell ↔ buy, y en pasado: bought.'}
+{l:P,t:'mc',h:'Toca la palabra que va en el hueco.',q:'She ___ football every Saturday.',es:'Ella juega al fútbol cada sábado.',o:['play','plays','playing'],a:1,w:'She = ella → el verbo lleva -s: she plays.'},
+{l:P,t:'wr',h:'Escribe el verbo «watch» como va con he (él). Ejemplo: play → he plays.',q:'watch → he ___',es:'ver → él ve',a:['watches'],w:'Acaba en -ch: se añade -es. He watches.'},
+{l:P,t:'wr',h:'Escribe el verbo «study» como va con she (ella).',q:'study → she ___',es:'estudiar → ella estudia',a:['studies'],w:'Consonante + y → -ies: she studies.'},
+{l:P,t:'mc',h:'Toca la palabra que va en el hueco para decir NO.',q:'They ___ like pizza.',es:'A ellos no les gusta la pizza.',o:["doesn't","don't","aren't"],a:1,w:"They (ellos) → don't. He, she, it → doesn't."},
+{l:P,t:'mc',h:'Toca la palabra que va al principio de la pregunta.',q:'___ your brother study English?',es:'¿Tu hermano estudia inglés?',o:['Do','Does','Is'],a:1,w:'Your brother = él → Does. Y el verbo va sin -s: Does he study…?'},
+{l:P,t:'chk',h:'Lee la frase. ¿Está bien escrita? Toca ✓ Bien o ✗ Mal.',q:'',txt:"He don't watch TV.",es:'Él no ve la tele.',ok:false,w:"Mal: con he va doesn't. He doesn't watch TV."},
+{l:C,t:'mc',h:'Toca lo que va en el hueco.',q:"I ___ TV at 9 o'clock last night.",es:'Yo estaba viendo la tele a las 9 anoche.',o:['was watching','were watching','watched'],a:0,w:'Estaba viendo, a una hora concreta: pasado continuo. I → was + -ing.'},
+{l:C,t:'mc',h:'Toca lo que va en el hueco.',q:'They ___ in the park when it started to rain.',es:'Ellos estaban jugando en el parque cuando empezó a llover.',o:['was playing','were playing','played'],a:1,w:'They (ellos) → were. Were playing.'},
+{l:C,t:'mc',h:'Toca la palabra que va al principio de la pregunta.',q:'___ you sleeping at midnight?',es:'¿Estabas durmiendo a medianoche?',o:['Was','Were','Did'],a:1,w:'You → were. Esta pregunta empieza por was/were, sin did.'},
+{l:C,t:'chk',h:'Lee la frase. ¿Está bien escrita? Toca ✓ Bien o ✗ Mal.',q:'',txt:'She were reading a book.',es:'Ella estaba leyendo un libro.',ok:false,w:'Mal: she (ella) → was. She was reading a book.'},
+{l:C,t:'wr',h:'Escribe el verbo «run» acabado en -ing. Ojo: se dobla la última letra.',q:'run → I was ___',es:'correr → yo estaba corriendo',a:['running'],w:'Se dobla la n: running.'},
+{l:C,t:'wr',h:'Escribe el verbo «swim» acabado en -ing. Ojo: se dobla la última letra.',q:'swim → they were ___',es:'nadar → ellos estaban nadando',a:['swimming'],w:'Se dobla la m: swimming.'},
+{l:C,t:'chk',h:'Lee la frase. ¿Está bien escrita? Toca ✓ Bien o ✗ Mal.',q:'',txt:"We wasn't studying.",es:'Nosotros no estábamos estudiando.',ok:false,w:"Mal: we (nosotros) → weren't. We weren't studying."},
+{l:S,t:'mc',h:'Toca la respuesta.',q:'La acción LARGA, la que estaba pasando, va en…',o:['pasado continuo (was/were + -ing)','pasado simple (-ed)'],a:0,w:'La larga, de fondo: was/were + -ing.'},
+{l:S,t:'mc',h:'Toca la respuesta.',q:'Y la acción CORTA, la que la interrumpe, va en…',o:['pasado continuo (was/were + -ing)','pasado simple (-ed)'],a:1,w:'La corta, la que corta: pasado simple.'},
+{l:S,t:'mc',h:'Toca la palabra que va en el hueco. Pista: después viene la acción corta.',q:'I was having a shower ___ the phone rang.',es:'Me estaba duchando cuando sonó el teléfono.',o:['when','while'],a:0,w:'When + la acción corta: when the phone rang.'},
+{l:S,t:'mc',h:'Toca lo que va en el hueco. ¿Es la acción larga o la corta?',q:'While I was studying, my friend ___ .',es:'Mientras yo estudiaba, mi amigo llamó.',o:['called','was calling','calls'],a:0,w:'Llamar es la corta, la que interrumpe: pasado simple. My friend called.'},
+{l:S,t:'mc',h:'Toca lo que va en el hueco. Pista: every day = cada día.',q:'I ___ to school every day.',es:'Voy al instituto cada día.',o:['go','went','was going'],a:0,w:'Cada día = lo de siempre → presente simple: go.'},
+{l:S,t:'mc',h:'Toca lo que va en el hueco. Pista: yesterday = ayer.',q:'Yesterday I ___ to the cinema.',es:'Ayer fui al cine.',o:['go','went','was going'],a:1,w:'Ayer, algo terminado → pasado simple: went.'},
+{l:O,t:'wr',h:'Escribe en inglés lo contrario de este verbo.',q:'agree',es:'estar de acuerdo → no estar de acuerdo',a:['disagree'],w:'agree ↔ disagree.'},
+{l:O,t:'wr',h:'Escribe en inglés lo contrario de este verbo.',q:'lend',es:'prestar → pedir prestado',a:['borrow'],w:'lend (prestar) ↔ borrow (pedir prestado).'},
+{l:O,t:'wr',h:'Escribe en inglés lo contrario de este verbo.',q:'sell',es:'vender → comprar',a:['buy'],w:'sell ↔ buy.'},
+{l:O,t:'wr',h:'Escribe en inglés lo contrario de este verbo.',q:'send',es:'enviar → recibir',a:['receive'],w:'send ↔ receive. Ojo: receive, con «ei».'},
+{l:O,t:'wr',h:'Escribe en inglés lo contrario de este verbo.',q:'save',es:'ahorrar → gastar',a:['spend'],w:'save ↔ spend.'},
+{l:O,t:'wr',h:'Escribe en inglés lo contrario de este verbo.',q:'appear',es:'aparecer → desaparecer',a:['disappear'],w:'appear ↔ disappear: una s y dos p.'},
+{l:O,t:'wr',h:'Escribe la palabra que falta: lo contrario de win (ganar), en pasado.',q:'«Did you win the match?» «No, we ___ it.»',es:'«¿Ganasteis el partido?» «No, lo perdimos.»',a:['lost'],w:'win ↔ lose, y en pasado: lost.'},
+{l:O,t:'wr',h:'Escribe la palabra que falta: lo contrario de sell (vender), en pasado.',q:'«Did they sell anything?» «No, but they ___ some clothes.»',es:'«¿Vendieron algo?» «No, pero compraron ropa.»',a:['bought'],w:'sell ↔ buy, y en pasado: bought.'}
 ];
 function parse(s){s=s.trim().replace(/\s/g,'');if(!s)return NaN;if(s.includes(',')){s=s.replace(/\./g,'').replace(',','.');}else if(/^\d{1,3}(\.\d{3})+$/.test(s)){s=s.replace(/\./g,'');}return Number(s);}
-let i=0,score=0,fails=[],given={};const $=id=>document.getElementById(id);
+let i=0,score=0,fails=[],given={},shownBlock=null;
+function rules(l){const r=RULES[l];$('game').hidden=true;$('rulebox').hidden=false;window.scrollTo(0,0);$('rlvl').textContent=l;$('rcard').innerHTML=`<h2>${r.t}</h2><div class="rule">${r.rule}</div>${r.ex.map(x=>`<div class="ex">${x}</div>`).join('')}<p class="hint"><b>Lo que vas a hacer:</b> ${r.do}</p>`;$('rgo').onclick=()=>{$('rulebox').hidden=true;$('game').hidden=false;show();};}const $=id=>document.getElementById(id);
 function done(ok,w,ans){if(ok)score++;else{fails.push(i);given[i]=ans;}
  $('fb').innerHTML=`<div class="fb ${ok?'ok':'bad'}">${ok?'✓':'✗'} ${w}</div><button class="btn" id="nx">Siguiente</button>`;
  $('step').querySelectorAll('button,input').forEach(x=>x.disabled=true);$('nx').onclick=()=>{i++;show()};}
-function show(){if(i>=ITEMS.length)return end();const it=ITEMS[i];$('lvl').textContent=it.l;$('prog').style.width=(i/ITEMS.length*100)+'%';$('fb').innerHTML='';
+function show(){if(i>=ITEMS.length)return end();const it=ITEMS[i];if(it.l!==shownBlock){shownBlock=it.l;return rules(it.l);}$('do').textContent=it.h;$('es').textContent=it.es?'En español: '+it.es:'';$('lvl').textContent=it.l;$('prog').style.width=(i/ITEMS.length*100)+'%';$('fb').innerHTML='';
  if(it.t==='mc'){$('prompt').innerHTML=it.q;$('step').innerHTML=`<div class="row">${it.o.map((x,k)=>`<button class="opt wide" data-k="${k}">${x}</button>`).join('')}</div>`;
   $('step').querySelectorAll('.opt').forEach(b=>b.onclick=()=>done(+b.dataset.k===it.a,it.w,b.textContent));}
- else if(it.t==='chk'){$('prompt').innerHTML=`${it.q}<div class="big" style="margin-top:8px">${it.txt}</div>`;$('step').innerHTML=`<div class="row c2"><button class="opt" data-v="1">✓ Bien</button><button class="opt" data-v="0">✗ Mal</button></div>`;
+ else if(it.t==='chk'){$('prompt').innerHTML=`<div class="big">${it.txt}</div>`;$('step').innerHTML=`<div class="row c2"><button class="opt" data-v="1">✓ Bien</button><button class="opt" data-v="0">✗ Mal</button></div>`;
   $('step').querySelectorAll('.opt').forEach(b=>b.onclick=()=>done((b.dataset.v==='1')===it.ok,it.w,b.textContent));}
  else if(it.t==='fq'){$('prompt').innerHTML=it.txt;$('step').innerHTML=`<p class="q">¿Sale una sustancia nueva?</p><div class="row c2"><button class="opt" data-v="F">Físico</button><button class="opt" data-v="Q">Químico</button></div>`;
   $('step').querySelectorAll('.opt').forEach(b=>b.onclick=()=>done(b.dataset.v===it.ok,it.w,b.textContent));}
- else{$('prompt').innerHTML=it.q;$('step').innerHTML=`<input class="num" id="ans" autocomplete="off" autocapitalize="off" spellcheck="false" ${it.t==='num'?'inputmode="decimal"':''} placeholder="escribe la palabra"><button class="btn" id="ok">Comprobar</button>`;
+ else{$('prompt').innerHTML=it.q;$('step').innerHTML=`<input class="num" id="ans" autocomplete="off" autocapitalize="off" spellcheck="false" ${it.t==='num'?'inputmode="decimal"':''} placeholder="escribe aquí en inglés"><button class="btn" id="ok">Comprobar</button>`;
   const go=()=>{const v=$('ans').value.trim();if(!v)return;const ok=it.a.includes(v.toLowerCase().replace(/[’`]/g,"'"));done(ok,it.w,v);};
   $('ok').onclick=go;$('ans').onkeydown=e=>{if(e.key==='Enter')go();};}
 }
@@ -112,5 +129,5 @@ function end(){$('game').hidden=true;$('end').hidden=false;$('score').textConten
  $('endmsg').textContent=score>=24?'Listo para mañana.':score>=19?'Bien. Mira los fallos y otra ronda mañana.':'Otra ronda ahora, mirando bien cada porqué.';
  $('fails').innerHTML=fails.length?'<b>Fallaste:</b><br>'+fails.map(k=>{const t=ITEMS[k];return (t.txt||t.q).replace(/<[^>]+>/g,'')+' → pusiste «'+String(given[k]).replace(/[<>]/g,'')+'» · era «'+(t.t==='mc'?t.o[t.a]:t.t==='chk'?(t.ok?'✓ Bien':'✗ Mal'):t.a[0])+'»'}).join('<br>'):'Ningún fallo.';}
 $('go').onclick=()=>{$('intro').hidden=true;$('game').hidden=false;show();};
-$('again').onclick=()=>{i=0;score=0;fails=[];given={};$('end').hidden=true;$('game').hidden=false;show();};
+$('again').onclick=()=>{i=0;score=0;fails=[];given={};shownBlock=null;$('end').hidden=true;$('game').hidden=false;show();};
 </script></body></html>
