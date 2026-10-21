@@ -36,16 +36,17 @@ input.num{width:100%;font:700 24px "Fredoka",sans-serif;padding:12px;border-radi
 .frac span:first-child{border-bottom:2px solid currentColor;padding:0 6px 2px}.frac span:last-child{padding:2px 6px 0}
 .opt.wide{padding:10px 6px}
 .work{font:600 17px "Fredoka",sans-serif;text-align:center;margin:8px 0 0;color:var(--muted)}
+.rule{font-size:18px;font-weight:700;margin:8px 0}.ex{background:var(--ok-soft);border-radius:10px;padding:10px 12px;margin:8px 0;font-size:16px;line-height:1.6}.do{background:var(--blue-soft);border-left:5px solid var(--blue);border-radius:10px;padding:10px 12px;font-weight:700;font-size:16px;margin:0 0 10px}
 </style>
 </head><body>
 <div class="wrap">
-<p class="kick">Física y Química · 2.º ESO · para el examen del martes</p>
+<p class="kick">Física y Química · 2.º ESO · la medida</p>
 <h1>El factor de conversión</h1>
 <section id="intro">
 <div class="etq">
 <b>Para qué</b><span>Para hacer los cambios de unidad del examen como en tus apuntes, con el factor escrito. Y sobre todo para lo que dijiste que no entiendes: de cm³ a litros y de litros a cm³.</span>
-<b>Cuándo</b><span>Lunes, 15 minutos, después del audio de los cambios de unidad y antes del examen de prueba.</span>
-<b>Cómo</b><span>En cada ejercicio decides, una cosa por pantalla: ¿más o menos?, ¿qué factor?, ¿qué exponente? Y escribes el resultado. Si fallas, lee por qué.</span>
+<b>Cuándo</b><span>15 minutos. Otra ronda a los 2 días y otra a la semana: así se queda.</span>
+<b>Cómo</b><span>Antes de cada nivel te explico la regla con un ejemplo resuelto. Luego, en cada ejercicio, decides una cosa por pantalla: ¿más o menos?, ¿qué factor?, ¿qué exponente? Y escribes el resultado. Ten papel y boli al lado.</span>
 <b>Por qué así</b><span>Corregirte en el momento hace que se quede el paso bien hecho, y no el mal hecho.</span>
 <b>Al acabar</b><span>Haz captura de la pantalla final y mándasela a Sergio con <b>HECHO</b> y una palabra: fácil, normal o difícil.</span>
 </div>
@@ -56,13 +57,14 @@ input.num{width:100%;font:700 24px "Fredoka",sans-serif;padding:12px;border-radi
 <p style="margin:0">4) El tiempo no va de 10 en 10: <b>1 h = 3600 s</b> · 1 min = 60 s.</p></div>
 <button class="btn" id="go">Empezar</button>
 </section>
+<section id="rulebox" hidden><div class="lvl" id="rlvl"></div><div class="card" id="rcard"></div><button class="btn" id="rgo">Entendido, a jugar</button></section>
 <section id="game" hidden>
 <div class="lvl" id="lvl"></div><div class="bar"><i id="prog"></i></div>
 <div class="card"><div class="big" id="prompt"></div><div class="work" id="work"></div><div id="step"></div><div id="fb"></div></div>
 </section>
 <section id="end" hidden>
 <div class="card" style="text-align:center"><h2>¡Terminado!</h2><div class="big" id="score"></div><p id="endmsg" style="margin:6px 0 0"></p><p class="hint" id="fails"></p></div>
-<div class="etq"><b>Ahora</b><span>Captura de esta pantalla a Sergio con <b>HECHO</b> y fácil, normal o difícil. Después, el examen de prueba.</span></div>
+<div class="etq"><b>Ahora</b><span>Captura de esta pantalla a Sergio con <b>HECHO</b> y fácil, normal o difícil. </span></div>
 <button class="btn alt" id="again">Otra ronda</button>
 </section>
 </div>
@@ -78,7 +80,7 @@ const fr=(a,b)=>`<span class="frac"><span>${a}</span><span>${b}</span></span>`;
 const fmt=n=>Number(n.toPrecision(12)).toLocaleString('es-ES',{maximumFractionDigits:10});
 function parse(s){s=s.trim().replace(/\s/g,'');if(!s)return NaN;if(s.includes(',')){s=s.replace(/\./g,'').replace(',','.');}else if(/^\d{1,3}(\.\d{3})+$/.test(s)){s=s.replace(/\./g,'');}return Number(s);}
 const same=(a,b)=>Math.abs(a-b)<=Math.abs(b)*1e-9+1e-12;
-const L1='Nivel 1 · lo que se memoriza',L2='Nivel 2 · longitud, masa y tiempo',L3='Nivel 3 · superficie (²)',L4='Nivel 4 · volumen (³)',L5='Nivel 5 · el puente: cm³ y litros',L6='Nivel 6 · ordenar',L7='Nivel 7 · ¿está bien?';
+const L1='Nivel 1 · lo que se memoriza',L2='Nivel 2 · longitud, masa y tiempo',L3='Nivel 3 · superficie (²)',L4='Nivel 4 · volumen (³)',L5='Nivel 5 · el puente: cm³ y litros',L6='Nivel 6 · ordenar',L7='Nivel 7 · ¿está bien?',L8='Nivel 8 · problemas con historia';
 const ITEMS=[
  {lvl:L1,t:'mc',q:'Unidad de masa del Sistema Internacional',o:['gramo (g)','kilogramo (kg)','litro (L)'],a:1,why:'El kilogramo. No el gramo.'},
  {lvl:L1,t:'mc',q:'Unidad de temperatura del Sistema Internacional',o:['grado Celsius (°C)','kelvin (K)','termómetro'],a:1,why:'El kelvin. El termómetro es el aparato, no la unidad.'},
@@ -102,8 +104,39 @@ const ITEMS=[
  {lvl:L7,t:'chk',txt:'324 g = 324 000 kg',ok:false,why:'De g a kg (más grande) tienen que salir MENOS: 324 g · (1 kg / 10³ g) = 0,324 kg.'},
  {lvl:L7,t:'chk',txt:'5 m² = 500 cm²',ok:false,why:'De m² a cm²: 2 escalones × 2 = 10⁴. Son 50 000 cm².'},
  {lvl:L7,t:'chk',txt:'1 L = 1000 cm³',ok:true,why:'Bien: 1 L = 1 dm³ = 1000 cm³. Un litro es una caja de 10 cm de lado.'},
- {lvl:L7,t:'chk',txt:'7,5 dam² · (10² dm² / 1 dam²)',ok:false,why:'Es superficie: 2 escalones × 2 = 10⁴, no 10². Así lo tienes en tus apuntes del 6 de octubre.'}
+ {lvl:L7,t:'chk',txt:'7,5 dam² · (10² dm² / 1 dam²)',ok:false,why:'Es superficie: 2 escalones × 2 = 10⁴, no 10². Así lo tienes en tus apuntes del 6 de octubre.'},
+ {lvl:L8,t:'pb',txt:'Un acuario mide 50 cm de largo, 20 cm de ancho y 30 cm de alto. Está lleno. ¿Cuántos litros tiene?',steps:[
+   {h:'Paso 1 de 2 · El volumen: largo · ancho · alto. Escríbelo en cm³.',u:'cm³',a:30000,w:'50 · 20 · 30 = 30 000 cm³.'},
+   {h:'Paso 2 de 2 · Ahora a litros. Puente: 1 cm³ = 1 mL, y luego de mL a L.',u:'L',a:30,w:'30 000 cm³ = 30 000 mL = 30 L. Menos de lo que parecía: tiene sentido, es un acuario pequeño.'}]},
+ {lvl:L8,t:'pb',txt:'Una piscina mide 4 m de largo, 3 m de ancho y 1,2 m de alto. El agua llega hasta 20 cm del borde. ¿Cuántos litros de agua tiene?',steps:[
+   {h:'Paso 1 de 3 · La altura del agua, en metros. Ojo: 20 cm = 0,2 m. Resta.',u:'m',a:1,w:'1,2 − 0,2 = 1 m de agua. Antes de restar, todo en la misma unidad.'},
+   {h:'Paso 2 de 3 · El volumen del agua: largo · ancho · altura del agua. En m³.',u:'m³',a:12,w:'4 · 3 · 1 = 12 m³.'},
+   {h:'Paso 3 de 3 · A litros. Puente: 1 m³ = 1 kL = 1000 L.',u:'L',a:12000,w:'12 m³ = 12 kL = 12 000 L.'}]},
+ {lvl:L8,t:'pb',txt:'Una probeta tiene agua hasta 40 mL. Echas una piedra y el agua sube hasta 55 mL. ¿Qué volumen tiene la piedra?',steps:[
+   {h:'Paso 1 de 1 · Lo que sube el agua es lo que ocupa la piedra: final − inicial. En cm³.',u:'cm³',a:15,w:'55 − 40 = 15 mL = 15 cm³.'}]},
+ {lvl:L8,t:'pb',txt:'Una botella tiene 1,5 L de zumo. ¿Cuántos vasos de 250 cm³ puedes llenar?',steps:[
+   {h:'Paso 1 de 2 · Pasa la botella a cm³ (las dos cantidades en la misma unidad).',u:'cm³',a:1500,w:'1,5 L = 1,5 dm³ = 1500 cm³.'},
+   {h:'Paso 2 de 2 · ¿Cuántas veces cabe 250 en 1500? Divide.',u:'vasos',a:6,w:'1500 : 250 = 6 vasos.'}]}
 ];
+const RULES={
+ [L1]:{t:'Lo que se memoriza',rule:'Unidades del Sistema Internacional y con qué se mide cada cosa.',ex:['masa → <b>kilogramo (kg)</b>, con la balanza','longitud → <b>metro (m)</b> · tiempo → <b>segundo (s)</b> · temperatura → <b>kelvin (K)</b>','peso (es una fuerza) → <b>newton (N)</b>, con el dinamómetro'],do:'elegir la respuesta correcta.'},
+ [L2]:{t:'El factor de conversión',rule:'Multiplicas por una fracción que vale 1. La unidad que quieres quitar va ABAJO para tacharse.',ex:['Ejemplo: 4,5 km → m','1) ¿Más o menos? El m es más pequeño → sale MÁS.','2) 4,5 km · (10³ m / 1 km): km abajo, se tacha.','3) Escalones de km a m: 3 → 10³.','4) 4,5 · 1000 = <b>4500 m</b>'],do:'para cada cambio: decir más o menos, elegir el factor, el exponente y escribir el resultado.'},
+ [L3]:{t:'Superficie: el ² cuenta doble',rule:'Escalones × 2.',ex:['Ejemplo: 3 m² → dm²','Más pequeña → sale MÁS. De m a dm hay 1 escalón × 2 = 2.','3 m² · (10² dm² / 1 m²) = <b>300 dm²</b>'],do:'lo mismo que antes, multiplicando los escalones por 2.'},
+ [L4]:{t:'Volumen: el ³ cuenta triple',rule:'Escalones × 3.',ex:['Ejemplo: 5 m³ → dm³','Más pequeña → sale MÁS. 1 escalón × 3 = 3.','5 m³ · (10³ dm³ / 1 m³) = <b>5000 dm³</b>'],do:'lo mismo, multiplicando los escalones por 3.'},
+ [L5]:{t:'El puente entre volumen y capacidad',rule:'1 cm³ = 1 mL · 1 dm³ = 1 L · 1 m³ = 1 kL. Primero cruzas el puente, luego cambias la unidad.',ex:['Ejemplo: 750 cm³ → L','1) Puente: 750 cm³ · (1 mL / 1 cm³) = 750 mL','2) De mL a L, más grande → MENOS: 750 mL · (1 L / 10³ mL) = <b>0,75 L</b>'],do:'elegir el puente y después hacer el cambio como en los niveles anteriores.'},
+ [L6]:{t:'Ordenar cantidades',rule:'Primero, todas a la misma unidad. Nunca a ojo.',ex:['1500 cm³ · 2 L → todo a litros: 1,5 L y 2 L → <b>1500 cm³ < 2 L</b>'],do:'elegir el orden correcto.'},
+ [L7]:{t:'¿Está bien?',rule:'Comprueba dos cosas: ¿más o menos? y ¿el exponente cuenta el ² o el ³?',ex:['3 km = 0,003 m ✗ → de km a m tienen que salir MÁS: 3000 m'],do:'decir si está bien o tiene un error, y leer por qué.'},
+ [L8]:{t:'Problemas con historia',rule:'Antes de calcular: 1) dibújalo, 2) apunta los datos con su unidad, 3) subraya lo que te piden, 4) piensa los pasos.',ex:['Acuario 60 × 30 × 40 cm, agua hasta 10 cm del borde. ¿Litros?','Paso 1: altura del agua 40 − 10 = 30 cm','Paso 2: volumen 60 · 30 · 30 = 54 000 cm³','Paso 3: litros: 54 000 cm³ = 54 000 mL = <b>54 L</b>'],do:'te voy pidiendo cada paso, uno por pantalla. Haz las cuentas en el papel.'}
+};
+let shownL=null,given={};
+function rules(l){const r=RULES[l];$('game').hidden=true;$('rulebox').hidden=false;window.scrollTo(0,0);$('rlvl').textContent=l;$('rcard').innerHTML=`<h2>${r.t}</h2><div class="rule">${r.rule}</div><div class="ex">${r.ex.join('<br>')}</div><p class="hint"><b>Lo que vas a hacer:</b> ${r.do}</p>`;$('rgo').onclick=()=>{$('rulebox').hidden=true;$('game').hidden=false;show();};}
+function stepPb(it,k){const st=it.steps[k];
+ $('step').innerHTML=`<div class="do">${st.h}</div><input class="num" id="ans" inputmode="decimal" autocomplete="off" placeholder="resultado en ${st.u}"><button class="btn" id="ok">Comprobar</button>`;
+ let t=0;const go=()=>{const v=parse($('ans').value);if(isNaN(v)){bad('Escribe un número (usa coma para los decimales).');return;}
+  if(same(v,st.a)){$('work').innerHTML+=(($('work').innerHTML)?'<br>':'')+st.w;const nx=()=>{if(k+1<it.steps.length)stepPb(it,k+1);else{if(!fails.includes(i))score++;i++;show();}};good(st.w,nx);}
+  else{miss();given[i]=$('ans').value+' '+st.u;t++;if(t>=2){bad(`Es ${fmt(st.a)} ${st.u}. ${st.w}`);$('ok').textContent='Siguiente';$('ok').onclick=()=>{$('work').innerHTML+=(($('work').innerHTML)?'<br>':'')+st.w;if(k+1<it.steps.length)stepPb(it,k+1);else{i++;show();}};}
+   else bad('No. Vuelve a leer el paso y haz la cuenta en el papel.');}};
+ $('ok').onclick=go;$('ans').onkeydown=e=>{if(e.key==='Enter')go();};}
 let i=0,score=0,fails=[],tries=0;const $=id=>document.getElementById(id);
 function miss(){if(!fails.includes(i))fails.push(i);}
 function good(m,next){$('fb').innerHTML=`<div class="fb ok">✓ ${m}</div>`;setTimeout(()=>{$('fb').innerHTML='';next();},950);}
@@ -111,13 +144,14 @@ function bad(m){$('fb').innerHTML=`<div class="fb bad">✗ ${m}</div>`;}
 function opts(html,cls,cb){$('step').innerHTML=html;$('step').querySelectorAll('.opt').forEach(b=>b.onclick=()=>cb(b));}
 function show(){
  if(i>=ITEMS.length)return end();
- const it=ITEMS[i];tries=0;$('lvl').textContent=it.lvl;$('prog').style.width=(i/ITEMS.length*100)+'%';$('fb').innerHTML='';$('work').innerHTML='';
+ const it=ITEMS[i];if(it.lvl!==shownL){shownL=it.lvl;return rules(it.lvl);}tries=0;$('lvl').textContent=it.lvl;$('prog').style.width=(i/ITEMS.length*100)+'%';$('fb').innerHTML='';$('work').innerHTML='';
  if(it.t==='mc'){$('prompt').textContent=it.q;$('prompt').style.fontSize='22px';
   opts(`<div class="row">${it.o.map((x,k)=>`<button class="opt wide" data-k="${k}">${x}</button>`).join('')}</div>`,0,b=>{
    const ok=+b.dataset.k===it.a;if(ok&&!fails.includes(i))score++;if(!ok)miss();
    $('fb').innerHTML=`<div class="fb ${ok?'ok':'bad'}">${ok?'✓':'✗'} ${it.why}</div><button class="btn" id="nx">Siguiente</button>`;
    $('step').querySelectorAll('.opt').forEach(x=>x.disabled=true);$('nx').onclick=()=>{i++;show()};});return;}
  $('prompt').style.fontSize='';
+ if(it.t==='pb'){$('prompt').style.fontSize='19px';$('prompt').textContent=it.txt;stepPb(it,0);return;}
  if(it.t==='chk'){$('prompt').textContent=it.txt;
   opts(`<p class="q">¿Está bien?</p><div class="row c2"><button class="opt" data-v="1">✓ Está bien</button><button class="opt" data-v="0">✗ Tiene un error</button></div>`,0,b=>{
    const ok=(b.dataset.v==='1')===it.ok;if(ok)score++;else miss();
@@ -172,14 +206,14 @@ function stepResult(it){
  opts(`<p class="q">Escribe el resultado</p><input class="num" id="ans" inputmode="decimal" autocomplete="off" placeholder="resultado en ${it.to}"><button class="btn" id="ok">Comprobar</button>`,0,()=>{});
  const go=()=>{const v=parse($('ans').value);if(isNaN(v)){bad('Escribe un número (usa coma para los decimales).');return;}
   if(same(v,it.ans)){if(!fails.includes(i))score++;good(`${fmt(it.v)} ${it.from} = ${fmt(it.ans)} ${it.to}`,()=>{i++;show()});}
-  else{miss();tries++;if(tries>=2){bad(`Es ${fmt(it.ans)} ${it.to}.`);$('ok').textContent='Siguiente';$('ok').onclick=()=>{i++;show()};}
+  else{miss();given[i]=$('ans').value+' '+it.to;tries++;if(tries>=2){bad(`Es ${fmt(it.ans)} ${it.to}.`);$('ok').textContent='Siguiente';$('ok').onclick=()=>{i++;show()};}
    else bad(Math.abs(v)>Math.abs(it.ans)*1.0001!==it.more&&it.t!=='time'?'Fíjate: ¿tenía que salir más o menos?':'No. Haz la cuenta en el papel, sin prisa.');}};
  $('ok').onclick=go;$('ans').onkeydown=e=>{if(e.key==='Enter')go();};
 }
 function end(){$('game').hidden=true;$('end').hidden=false;
  $('score').textContent=`${score} de ${ITEMS.length} a la primera`;
- $('endmsg').textContent=score>=20?'Lo tienes. Ahora el examen de prueba.':score>=15?'Bien. Repite los que fallaste antes del examen de prueba.':'Otra ronda antes del examen de prueba: fíjate en el puente y en el ² y el ³.';
- $('fails').textContent=fails.length?'Fallaste: '+fails.map(k=>{const t=ITEMS[k];return t.q||t.txt||`${fmt(t.v)} ${t.from} → ${t.to}`}).join(' · '):'Ningún fallo.';}
+ $('endmsg').textContent=score>=23?'Lo tienes. Otra ronda dentro de una semana.':score>=18?'Bien. Repite los que fallaste dentro de 2 días.':'Otra ronda mañana, mirando bien cada regla.';
+ $('fails').innerHTML=fails.length?'<b>Repasa estos:</b><br>'+fails.map(k=>{const t=ITEMS[k];const q=(t.q||t.txt||`${fmt(t.v)} ${t.from} → ${t.to}`);const ok=t.t==='mc'?t.o[t.a]:t.t==='chk'?(t.ok?'está bien':'tiene un error'):t.t==='pb'?t.steps.map(x=>fmt(x.a)+' '+x.u).join(' → '):`${fmt(t.ans)} ${t.to}`;return q.replace(/[<>]/g,'')+(given[k]?' · pusiste «'+String(given[k]).replace(/[<>]/g,'')+'»':'')+' · era «'+ok+'»';}).join('<br>'):'Ningún fallo.';}
 $('go').onclick=()=>{$('intro').hidden=true;$('game').hidden=false;show();};
-$('again').onclick=()=>{i=0;score=0;fails=[];$('end').hidden=true;$('game').hidden=false;show();};
+$('again').onclick=()=>{i=0;score=0;fails=[];given={};shownL=null;$('end').hidden=true;$('game').hidden=false;show();};
 </script></body></html>
