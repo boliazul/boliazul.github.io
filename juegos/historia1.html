@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Historia: Unidad 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbf8f2;--ink:#17170f;--card:#fff;--line:#d9d4c7;--blue:#1f4fbf;--blue-soft:#e8eefb;--ok:#1d7a3a;--ok-soft:#e3f3e8;--bad:#b3261e;--bad-soft:#fbe9e7;--muted:#5d5d52}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#15171c;--ink:#f1efe9;--card:#1f222a;--line:#3a3e48;--blue:#8fb0ff;--blue-soft:#232c44;--ok:#7fd69b;--ok-soft:#1c3324;--bad:#ff9a8f;--bad-soft:#3a201e;--muted:#aaa79d}}
+:root[data-theme="dark"]{--bg:#15171c;--ink:#f1efe9;--card:#1f222a;--line:#3a3e48;--blue:#8fb0ff;--blue-soft:#232c44;--ok:#7fd69b;--ok-soft:#1c3324;--bad:#ff9a8f;--bad-soft:#3a201e;--muted:#aaa79d}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Nunito",system-ui,sans-serif;font-size:17px;line-height:1.45}
+.wrap{max-width:560px;margin:0 auto;padding:16px 16px 40px}
+h1{font-family:"Fredoka";font-weight:700;font-size:28px;margin:4px 0 2px;line-height:1.1}
+h2{font-family:"Fredoka";font-weight:600;font-size:21px;margin:0 0 8px}
+.kick{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0}
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:16px;margin:12px 0}
+.etq{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;font-size:15px;background:var(--blue-soft);border:2px solid var(--blue);border-radius:12px;padding:12px}
+.etq b{font-family:"Fredoka";color:var(--blue)}
+.btn{display:block;width:100%;font:700 18px "Nunito",sans-serif;padding:14px;border-radius:12px;border:2px solid var(--blue);background:var(--blue);color:#fff;cursor:pointer;margin-top:10px}
+.btn.alt{background:transparent;color:var(--blue)}
+.row{display:grid;gap:10px;margin-top:12px}.row.c2{grid-template-columns:1fr 1fr}.row.c3{grid-template-columns:1fr 1fr 1fr}.row.c4{grid-template-columns:repeat(4,1fr)}
+.opt{font:700 19px "Fredoka",sans-serif;padding:14px 6px;border-radius:12px;border:2px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.opt:active{border-color:var(--blue)}
+.big{font-family:"Fredoka";font-weight:700;font-size:30px;text-align:center;margin:6px 0 2px}
+.q{font-family:"Fredoka";font-weight:600;font-size:20px;margin:10px 0 0}
+.hint{font-size:14px;color:var(--muted);margin:6px 0 0}
+.fb{border-radius:12px;padding:10px 12px;margin-top:12px;font-weight:700}
+.fb.ok{background:var(--ok-soft);color:var(--ok)}.fb.bad{background:var(--bad-soft);color:var(--bad)}
+input.num{width:100%;font:700 24px "Fredoka",sans-serif;padding:12px;border-radius:12px;border:2px solid var(--line);background:var(--bg);color:var(--ink);text-align:center;margin-top:10px}
+.bar{height:8px;background:var(--line);border-radius:6px;overflow:hidden;margin:6px 0 0}.bar i{display:block;height:100%;background:var(--blue);width:0}
+.ladder{display:flex;flex-direction:column;gap:3px;margin:10px auto 0;max-width:220px}
+.ladder span{display:block;text-align:center;font:600 15px "Fredoka",sans-serif;padding:3px;border-radius:8px;border:1.5px solid var(--line)}
+.ladder span.from{background:var(--blue-soft);border-color:var(--blue)}.ladder span.to{background:var(--ok-soft);border-color:var(--ok)}
+.do{background:var(--blue-soft);border-left:5px solid var(--blue);border-radius:10px;padding:10px 12px;font-weight:700;font-size:17px;margin:0 0 10px}
+.es{font-size:15px;color:var(--muted);margin:6px 0 0}
+.rule{font-size:18px;font-weight:700;margin:8px 0}.ex{background:var(--ok-soft);border-radius:10px;padding:10px 12px;margin:8px 0;font-size:16px}
+.lvl{font-size:13px;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:.08em}
+
+.frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font:700 18px "Fredoka",sans-serif;line-height:1.15;margin:0 4px}
+.frac span:first-child{border-bottom:2px solid currentColor;padding:0 6px 2px}.frac span:last-child{padding:2px 6px 0}
+.opt.wide{padding:10px 6px}
+.work{font:600 17px "Fredoka",sans-serif;text-align:center;margin:8px 0 0;color:var(--muted)}
+</style>
+</head><body>
+<div class="wrap">
+<p class="kick">Geografía e Historia · 2.º ESO · Unidad 1</p>
+<h1>La fragmentación del Mare Nostrum</h1>
+<section id="intro">
+<div class="card">
+<h2>Cómo se juega</h2>
+<p style="margin:4px 0"><b>1.</b> Lee el recuadro azul: te dice <b>qué tienes que hacer</b>.</p>
+<p style="margin:4px 0"><b>2.</b> Toca la respuesta, o escríbela y pulsa <b>Comprobar</b>.</p>
+<p style="margin:4px 0"><b>3.</b> Lee siempre la explicación, aciertes o falles.</p>
+<p style="margin:4px 0"><b>4.</b> Si fallas, no pasa nada: al final ves tus fallos y lo correcto.</p>
+<p class="hint">Hay 7 partes. Antes de cada una tienes una pantalla con lo que tienes que saber.</p>
+</div>
+<div class="etq">
+<b>Para qué</b><span>Para el examen de Historia del jueves 29: todo el tema, sacado del documento de la profe (SA1 de Aules).</span>
+<b>Cuándo</b><span>15 minutos. Una ronda hoy y otra mañana, con los fallos primero.</span>
+<b>Al acabar</b><span>Captura de la pantalla final con <b>HECHO</b>.</span>
+</div>
+<button class="btn" id="go">Empezar</button>
+</section>
+<section id="rulebox" hidden><div class="lvl" id="rlvl"></div><div class="card" id="rcard"></div><button class="btn" id="rgo">Entendido, a jugar</button></section>
+<section id="game" hidden>
+<div class="lvl" id="lvl"></div><div class="bar"><i id="prog"></i></div>
+<div class="card"><div class="do" id="do"></div><div class="big" id="prompt" style="font-size:22px"></div><div class="es" id="es"></div><div id="step"></div><div id="fb"></div></div>
+</section>
+<section id="end" hidden>
+<div class="card" style="text-align:center"><h2>¡Terminado!</h2><div class="big" id="score"></div><p id="endmsg" style="margin:6px 0 0"></p><p class="hint" id="fails"></p></div>
+<div class="etq"><b>Ahora</b><span>Captura de esta pantalla a Sergio con <b>HECHO</b>.</span></div>
+<button class="btn alt" id="again">Otra ronda</button>
+</section>
+</div>
+<script>
+const P='Parte 1 · Las fechas clave',C='Parte 2 · El Imperio bizantino',S='Parte 3 · Germanos y visigodos',O='Parte 4 · El Imperio carolingio',A='Parte 5 · El arte bizantino',M='Parte 6 · Los reinos en el mapa',T='Parte 7 · Las partes del templo ortodoxo';
+const RULES={
+[P]:{t:'Las fechas que ordenan la unidad',rule:'Seis fechas sostienen todo el tema. Si las tienes, lo demás se coloca solo.',ex:['<b>395</b> el Imperio romano se divide en Oriente y Occidente','<b>476</b> cae Occidente → <b>empieza la Edad Media</b>','<b>507</b> Vouillé: los visigodos pasan de Tolosa a Toledo · <b>711</b> llegan los musulmanes','<b>1054</b> Cisma de Oriente · <b>1453</b> cae Constantinopla → <b>fin de la Edad Media</b>'],do:'tocar la fecha correcta.'},
+[C]:{t:'Bizancio: el Imperio de Oriente',rule:'Duró mil años gracias a su riqueza y a su posición.',ex:['Capital: <b>Constantinopla</b> (330) · emperador: <b>basileus</b>, con poder absoluto','<b>Justiniano</b> quiso restaurar el Imperio romano y recopiló las leyes (Código de Justiniano)','Provincias: <b>themas</b>, dirigidas por estrategas','<b>Cisma de Oriente</b> (1054): rechazan al papa → nacen los <b>ortodoxos</b>'],do:'tocar la respuesta correcta o decir si una frase está bien.'},
+[S]:{t:'De los germanos al reino visigodo',rule:'Los germanos entran huyendo de los hunos; los visigodos acaban gobernando Hispania.',ex:['Los visigodos echan a vándalos y alanos (norte de África); los suevos quedan en Galicia','<b>Tolosa</b> → 507 Vouillé → <b>Toledo</b> → 711','Monarquía <b>electiva</b> · 585 suevos · 624 bizantinos · <b>Recaredo</b> católico (587) · <b>Liber Iudiciorum</b> (Recesvinto, 654)','<b>Aula regia</b> aconseja · <b>Concilios de Toledo</b> legislan · <b>Officium palatinum</b> gobierna cada día'],do:'tocar la respuesta correcta, escribir una palabra o decir si una frase está bien.'},
+[O]:{t:'Los carolingios',rule:'Abuelo, padre e hijo: Carlos Martel → Pipino el Breve → Carlomagno.',ex:['<b>732</b> Poitiers: Carlos Martel para a los musulmanes','Carlomagno quiere reconstruir el Imperio romano de Occidente; lo corona el papa <b>León III</b>; corte en <b>Aquisgrán</b>','<b>Marcas</b> (fronteras, un marqués) · <b>condados</b> (un conde) · <b>missi dominici</b> (inspectores)','<b>843 Tratado de Verdún</b>: se reparte en tres reinos'],do:'tocar la respuesta correcta.'},
+[A]:{t:'El arte bizantino',rule:'Tres cosas: el templo, el mosaico y el icono.',ex:['Templo: planta de <b>cruz griega</b> (brazos iguales), <b>cúpula</b> central, arcos de medio punto · Santa Sofía','Mosaico: hecho con <b>teselas</b> de colores','Icono: imagen religiosa en <b>madera</b> con <b>fondo dorado</b>'],do:'tocar la respuesta correcta.'},
+[T]:{t:'Las partes del templo ortodoxo (entran en el examen)',rule:'De fuera adentro y de abajo arriba.',ex:['<b>Nártex</b>: la entrada, el vestíbulo (catecúmenos y no bautizados) → <b>nave central</b>: donde se reúnen los fieles','<b>Transepto</b>: los brazos de la cruz griega → <b>ábside</b>: al fondo, donde está el altar','<b>Tambor</b>: cilindro que sostiene la <b>cúpula</b>, que simboliza el cielo · <b>campanario</b>: la torre de las campanas','<b>Iconostasio</b>: pared de madera con iconos que separa la nave del altar · <b>cruz de 8 brazos</b>'],do:'tocar la parte que corresponde a cada definición.'},
+[M]:{t:'¿Dónde se quedó cada pueblo?',rule:'Es la tabla de la ficha 3: el pueblo germánico y el país actual.',ex:['España → <b>visigodos</b> · Portugal → <b>suevos</b> · Francia → <b>francos</b>','Italia → <b>ostrogodos</b> · Reino Unido → <b>anglosajones</b> · Alemania → <b>alamanes</b>'],do:'tocar el pueblo que se asentó en cada país.'}
+};
+const ITEMS=[
+{l:P,t:'mc',h:'Toca el año correcto.',q:'El Imperio romano se divide en Oriente y Occidente en el…',o:['395','476','330'],a:0,w:'395: división. 476: caída de Occidente. 330: Constantinopla.'},
+{l:P,t:'mc',h:'Toca la respuesta correcta.',q:'¿Qué marca el inicio de la Edad Media?',o:['476, cae el Imperio de Occidente','395, la división del Imperio','1453, cae Constantinopla'],a:0,w:'La caída de Roma (Occidente) en 476 abre la Edad Media.'},
+{l:P,t:'mc',h:'Toca la respuesta correcta.',q:'¿Y qué marca el final de la Edad Media?',o:['1453, cae Constantinopla','1054, el Cisma de Oriente','711, llegan los musulmanes'],a:0,w:'1453: los otomanos toman Constantinopla. Unos 1000 años después de 476.'},
+{l:P,t:'mc',h:'Toca el año correcto.',q:'El Cisma de Oriente fue en el…',o:['1054','1453','587'],a:0,w:'1054: se separan las dos Iglesias y nacen los ortodoxos.'},
+{l:P,t:'mc',h:'Toca el año correcto.',q:'La batalla de Vouillé, en la que los francos vencen a los visigodos, fue en el…',o:['507','711','732'],a:0,w:'507. Después, los visigodos se quedan solo en Hispania (reino de Toledo).'},
+{l:P,t:'mc',h:'Toca la respuesta correcta.',q:'¿Qué pasó en el 711?',o:['Llegan los musulmanes y acaba el reino visigodo','Batalla de Poitiers','Tratado de Verdún'],a:0,w:'711: fin del reino visigodo. Poitiers es 732 y Verdún 843.'},
+{l:P,t:'mc',h:'Toca el orden correcto, de más antiguo a más reciente.',q:'Ordena: 1054 · 476 · 507 · 1453',o:['476 · 507 · 1054 · 1453','507 · 476 · 1453 · 1054','476 · 1054 · 507 · 1453'],a:0,w:'Caída de Roma, Vouillé, Cisma, caída de Constantinopla.'},
+{l:C,t:'mc',h:'Toca la respuesta correcta.',q:'¿Cómo se llamaba el emperador bizantino?',o:['basileus','patriarca','estratega'],a:0,w:'Basileus, con poder absoluto. El patriarca era la autoridad religiosa y el estratega dirigía un thema.'},
+{l:C,t:'mc',h:'Toca la respuesta correcta.',q:'¿Por qué el Imperio de Oriente sobrevivió mil años?',o:['Por su riqueza y su posición geográfica','Porque no tenía fronteras','Porque lo protegían los francos'],a:0,w:'Riqueza (pagaba tributos a los bárbaros) y un lugar estratégico para el comercio y la defensa.'},
+{l:C,t:'mc',h:'Toca la respuesta correcta.',q:'¿Qué emperador quiso restaurar el Imperio romano y recopiló las leyes?',o:['Justiniano','Constantino','Carlomagno'],a:0,w:'Justiniano: Código de Justiniano. Constantino fundó Constantinopla (330).'},
+{l:C,t:'mc',h:'Toca la respuesta correcta.',q:'Las provincias del Imperio bizantino se llamaban…',o:['themas','marcas','condados'],a:0,w:'Themas, dirigidas por estrategas. Marcas y condados son de los carolingios.'},
+{l:C,t:'mc',h:'Toca la respuesta correcta.',q:'¿Quién era la máxima autoridad religiosa en Oriente?',o:['el patriarca','el papa','Justiniano'],a:0,w:'El patriarca, que nombraba el basileus. Oriente rechazaba la autoridad del papa.'},
+{l:C,t:'chk',h:'Lee la frase. ¿Está bien? Toca ✓ Bien o ✗ Mal.',txt:'En el Cisma de Oriente, la Iglesia de Oriente aceptó la autoridad del papa.',ok:false,w:'Mal: la rechazó. Así nacen los ortodoxos (1054).'},
+{l:S,t:'mc',h:'Toca la respuesta correcta.',q:'Los pueblos germánicos entraron en el Imperio huyendo de…',o:['los hunos de Atila','los romanos','los musulmanes'],a:0,w:'Los hunos, un pueblo nómada de Asia dirigido por Atila.'},
+{l:S,t:'mc',h:'Toca la respuesta correcta.',q:'Con las invasiones, ¿qué pasó con las ciudades?',o:['Entraron en crisis y la gente huyó al campo','Crecieron mucho','No cambió nada'],a:0,w:'Saqueos, inseguridad y menos comercio: la gente busca refugio en el campo.'},
+{l:S,t:'mc',h:'Toca la respuesta correcta.',q:'Los visigodos expulsaron a vándalos y alanos hacia…',o:['el norte de África','Galicia','Italia'],a:0,w:'Al norte de África. Los suevos quedaron arrinconados en Galicia.'},
+{l:S,t:'mc',h:'Toca el orden correcto.',q:'Primero el reino de ___ y, tras Vouillé, el reino de ___',o:['Tolosa → Toledo','Toledo → Tolosa','Tolosa → Aquisgrán'],a:0,w:'Tolosa (sur de la Galia e Hispania) y después Toledo (solo Hispania).'},
+{l:S,t:'mc',h:'Toca la respuesta correcta.',q:'La monarquía visigoda era…',o:['electiva: el rey se elegía','hereditaria: el rey era el hijo del anterior','una república'],a:0,w:'Electiva.'},
+{l:S,t:'chk',h:'Lee la frase. ¿Está bien? Toca ✓ Bien o ✗ Mal.',txt:'En el 585 los visigodos expulsaron a los bizantinos.',ok:false,w:'Mal: en el 585, a los suevos; en el 624, a los bizantinos.'},
+{l:S,t:'mc',h:'Toca la respuesta correcta.',q:'¿Qué hizo el rey Recaredo?',o:['Se hizo católico y dejó el arrianismo','Escribió el Liber Iudiciorum','Echó a los bizantinos'],a:0,w:'Recaredo se convierte al catolicismo (en tu tema, en el 587): misma religión para visigodos e hispanorromanos.'},
+{l:S,t:'mc',h:'Toca la respuesta correcta.',q:'La recopilación de leyes del rey Recesvinto (654) se llama…',o:['Liber Iudiciorum','Código de Justiniano','Tratado de Verdún'],a:0,w:'Liber Iudiciorum: las mismas leyes para todos.'},
+{l:S,t:'mc',h:'Toca la institución correcta.',q:'Asamblea de nobles y clérigos que aconseja al rey en asuntos políticos, militares y judiciales:',o:['Aula regia','Concilios de Toledo','Officium palatinum'],a:0,w:'El Aula regia aconseja.'},
+{l:S,t:'mc',h:'Toca la institución correcta.',q:'Obispos y nobles que redactan las leyes y deciden si el rey es legítimo:',o:['Concilios de Toledo','Aula regia','Officium palatinum'],a:0,w:'Los Concilios de Toledo legislan.'},
+{l:S,t:'mc',h:'Toca la institución correcta.',q:'Consejo privado de los nobles de confianza que ayuda en el gobierno de cada día:',o:['Officium palatinum','Aula regia','Concilios de Toledo'],a:0,w:'El Officium palatinum gobierna el día a día.'},
+{l:S,t:'mc',h:'Toca la respuesta correcta.',q:'Los vándalos atacaron Santa Pola, el puerto de…',o:['Ilici (Elche)','Toledo','Constantinopla'],a:0,w:'Ilici, la colonia romana de Elche. Pronto los echaron los visigodos.'},
+{l:S,t:'wr',h:'Escribe la palabra que falta.',q:'San Isidoro de ___',a:['sevilla'],w:'San Isidoro de Sevilla. También San Braulio de Zaragoza.'},
+{l:O,t:'mc',h:'Toca la respuesta correcta.',q:'En el 732, en Poitiers, ¿quién paró a los musulmanes?',o:['Carlos Martel','Carlomagno','Pipino el Breve'],a:0,w:'Carlos Martel, el abuelo de Carlomagno.'},
+{l:O,t:'mc',h:'Toca la respuesta correcta.',q:'¿Quién fundó la dinastía carolingia?',o:['Pipino el Breve','Carlos Martel','Luis el Piadoso'],a:0,w:'Pipino el Breve, padre de Carlomagno.'},
+{l:O,t:'mc',h:'Toca la respuesta correcta.',q:'¿Quién coronó emperador a Carlomagno?',o:['El papa León III','El basileus','Recaredo'],a:0,w:'El papa León III.'},
+{l:O,t:'chk',h:'Lee la frase. ¿Está bien? Toca ✓ Bien o ✗ Mal.',txt:'El objetivo de Carlomagno era reconstruir el Imperio romano de Occidente.',ok:true,w:'Bien: ese era su objetivo.'},
+{l:O,t:'mc',h:'Toca la respuesta correcta.',q:'Territorio de frontera con tropas, dirigido por un marqués:',o:['marca','condado','thema'],a:0,w:'Marca. El condado lo gobierna un conde; el thema es bizantino.'},
+{l:O,t:'mc',h:'Toca la respuesta correcta.',q:'Los missi dominici eran…',o:['inspectores de condes y marqueses','los soldados de las marcas','los obispos del reino'],a:0,w:'Inspectores que vigilaban a condes, marqueses y funcionarios.'},
+{l:O,t:'mc',h:'Toca la respuesta correcta.',q:'¿Cómo acabó el Imperio carolingio?',o:['Tratado de Verdún (843): se reparte en tres reinos','Lo conquistaron los bizantinos','Cayó en la batalla de Poitiers'],a:0,w:'Los nietos de Carlomagno se lo reparten en Verdún, en el 843.'},
+{l:A,t:'mc',h:'Toca la respuesta correcta.',q:'La planta de cruz griega tiene…',o:['los cuatro brazos iguales','un brazo más largo','forma redonda'],a:0,w:'Cruz griega: brazos iguales.'},
+{l:A,t:'mc',h:'Toca la respuesta correcta.',q:'Imagen religiosa pintada en madera con fondo dorado:',o:['icono','mosaico','tesela'],a:0,w:'El icono. Suele ser la Virgen con el Niño o Cristo.'},
+{l:A,t:'mc',h:'Toca la respuesta correcta.',q:'Los mosaicos se hacen con…',o:['teselas de colores','tablas de madera','cúpulas'],a:0,w:'Teselas: piedrecitas de colores vivos.'},
+{l:A,t:'mc',h:'Toca la respuesta correcta.',q:'El templo bizantino más famoso es…',o:['Santa Sofía de Constantinopla','la catedral de Toledo','Aquisgrán'],a:0,w:'Santa Sofía, en la actual Estambul.'},
+{l:M,t:'mc',h:'¿Qué pueblo se asentó en este país? Toca uno.',q:'España',o:['visigodos','francos','ostrogodos'],a:0,w:'Visigodos.'},
+{l:M,t:'mc',h:'¿Qué pueblo se asentó en este país? Toca uno.',q:'Francia',o:['francos','suevos','anglosajones'],a:0,w:'Francos (y burgundios).'},
+{l:M,t:'mc',h:'¿Qué pueblo se asentó en este país? Toca uno.',q:'Italia',o:['ostrogodos','alamanes','visigodos'],a:0,w:'Ostrogodos.'},
+{l:M,t:'mc',h:'¿Qué pueblo se asentó en este país? Toca uno.',q:'Reino Unido',o:['anglosajones','vándalos','suevos'],a:0,w:'Anglosajones.'},
+{l:M,t:'mc',h:'¿Qué pueblo se asentó en este país? Toca uno.',q:'Portugal',o:['suevos','francos','ostrogodos'],a:0,w:'Suevos (con Galicia).'},
+{l:T,t:'mc',h:'Toca la parte del templo que corresponde.',q:'Simboliza el cielo y la unión con Dios:',o:['cúpula','tambor','ábside'],a:0,w:'La cúpula.'},
+{l:T,t:'mc',h:'Toca la parte del templo que corresponde.',q:'Estructura cilíndrica que sostiene la cúpula:',o:['tambor','transepto','campanario'],a:0,w:'El tambor.'},
+{l:T,t:'mc',h:'Toca la parte del templo que corresponde.',q:'Espacio donde se sitúa el altar:',o:['ábside','nártex','nave central'],a:0,w:'El ábside, al fondo (mirando al este).'},
+{l:T,t:'mc',h:'Toca la parte del templo que corresponde.',q:'Brazos que forman la cruz griega:',o:['transepto','nave central','tambor'],a:0,w:'El transepto.'},
+{l:T,t:'mc',h:'Toca la parte del templo que corresponde.',q:'Espacio principal donde se reúnen los fieles:',o:['nave central','ábside','nártex'],a:0,w:'La nave central.'},
+{l:T,t:'mc',h:'Toca la parte del templo que corresponde.',q:'Entrada o vestíbulo, zona de catecúmenos y no bautizados:',o:['nártex','ábside','transepto'],a:0,w:'El nártex. Truco: nártex = entrada, ábside = altar al fondo.'},
+{l:T,t:'mc',h:'Toca la parte del templo que corresponde.',q:'Torre desde la que suenan las campanas:',o:['campanario','tambor','cúpula'],a:0,w:'El campanario.'},
+{l:T,t:'mc',h:'Toca la respuesta correcta.',q:'Pared de madera cubierta de iconos que separa la nave del altar:',o:['iconostasio','nártex','transepto'],a:0,w:'El iconostasio.'}
+];
+
+ITEMS.forEach(it=>{if(it.t==='mc'){const c=it.o[it.a];const o=it.o.slice();for(let k=o.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[o[k],o[j]]=[o[j],o[k]];}it.o=o;it.a=o.indexOf(c);}});
+function parse(s){s=s.trim().replace(/\s/g,'');if(!s)return NaN;if(s.includes(',')){s=s.replace(/\./g,'').replace(',','.');}else if(/^\d{1,3}(\.\d{3})+$/.test(s)){s=s.replace(/\./g,'');}return Number(s);}
+let i=0,score=0,fails=[],given={},shownBlock=null;
+function rules(l){const r=RULES[l];$('game').hidden=true;$('rulebox').hidden=false;window.scrollTo(0,0);$('rlvl').textContent=l;$('rcard').innerHTML=`<h2>${r.t}</h2><div class="rule">${r.rule}</div>${r.ex.map(x=>`<div class="ex">${x}</div>`).join('')}<p class="hint"><b>Lo que vas a hacer:</b> ${r.do}</p>`;$('rgo').onclick=()=>{$('rulebox').hidden=true;$('game').hidden=false;show();};}const $=id=>document.getElementById(id);
+function done(ok,w,ans){if(ok)score++;else{fails.push(i);given[i]=ans;}
+ $('fb').innerHTML=`<div class="fb ${ok?'ok':'bad'}">${ok?'✓':'✗'} ${w}</div><button class="btn" id="nx">Siguiente</button>`;
+ $('step').querySelectorAll('button,input').forEach(x=>x.disabled=true);$('nx').onclick=()=>{i++;show()};}
+function show(){if(i>=ITEMS.length)return end();const it=ITEMS[i];if(it.l!==shownBlock){shownBlock=it.l;return rules(it.l);}$('do').textContent=it.h;$('es').textContent=it.es?'En español: '+it.es:'';$('lvl').textContent=it.l;$('prog').style.width=(i/ITEMS.length*100)+'%';$('fb').innerHTML='';
+ if(it.t==='mc'){$('prompt').innerHTML=it.q;$('step').innerHTML=`<div class="row">${it.o.map((x,k)=>`<button class="opt wide" data-k="${k}">${x}</button>`).join('')}</div>`;
+  $('step').querySelectorAll('.opt').forEach(b=>b.onclick=()=>done(+b.dataset.k===it.a,it.w,b.textContent));}
+ else if(it.t==='chk'){$('prompt').innerHTML=`<div class="big">${it.txt}</div>`;$('step').innerHTML=`<div class="row c2"><button class="opt" data-v="1">✓ Bien</button><button class="opt" data-v="0">✗ Mal</button></div>`;
+  $('step').querySelectorAll('.opt').forEach(b=>b.onclick=()=>done((b.dataset.v==='1')===it.ok,it.w,b.textContent));}
+ else if(it.t==='fq'){$('prompt').innerHTML=it.txt;$('step').innerHTML=`<p class="q">¿Sale una sustancia nueva?</p><div class="row c2"><button class="opt" data-v="F">Físico</button><button class="opt" data-v="Q">Químico</button></div>`;
+  $('step').querySelectorAll('.opt').forEach(b=>b.onclick=()=>done(b.dataset.v===it.ok,it.w,b.textContent));}
+ else{$('prompt').innerHTML=it.q;$('step').innerHTML=`<input class="num" id="ans" autocomplete="off" autocapitalize="off" spellcheck="false" ${it.t==='num'?'inputmode="decimal"':''} placeholder="escribe aquí"><button class="btn" id="ok">Comprobar</button>`;
+  const go=()=>{const v=$('ans').value.trim();if(!v)return;const ok=it.a.includes(v.toLowerCase().replace(/[’`]/g,"'"));done(ok,it.w,v);};
+  $('ok').onclick=go;$('ans').onkeydown=e=>{if(e.key==='Enter')go();};}
+}
+function end(){$('game').hidden=true;$('end').hidden=false;$('score').textContent=`${score} de ${ITEMS.length}`;
+ $('endmsg').textContent=score>=43?'Muy bien. Mañana otra ronda rápida.':score>=35?'Bien. Repasa tus fallos y otra ronda mañana.':'Otra ronda mañana, leyendo despacio cada pantalla de «lo que tienes que saber».';
+ $('fails').innerHTML=fails.length?'<b>Fallaste:</b><br>'+fails.map(k=>{const t=ITEMS[k];return (t.txt||t.q).replace(/<[^>]+>/g,'')+' → pusiste «'+String(given[k]).replace(/[<>]/g,'')+'» · era «'+(t.t==='mc'?t.o[t.a]:t.t==='chk'?(t.ok?'✓ Bien':'✗ Mal'):t.a[0])+'»'}).join('<br>'):'Ningún fallo.';}
+$('go').onclick=()=>{$('intro').hidden=true;$('game').hidden=false;show();};
+$('again').onclick=()=>{i=0;score=0;fails=[];given={};shownBlock=null;$('end').hidden=true;$('game').hidden=false;show();};
+</script></body></html>
