@@ -307,7 +307,7 @@ function pulsar(lane){
 }
 async function empezar(m,seqOverride){
   if(!AC) AC=new (window.AudioContext||window.webkitAudioContext)(); if(AC.state==='suspended') await AC.resume();
-  if(m==='mic'&&!analyser){ const ok=await abrirMic(); if(!ok){ $('msg').textContent='Aquí no se puede usar el micrófono. Abre el juego desde la web (formacion.sergiovega.es/juegos/flauta.html) o juega con los dedos.'; return; } }
+  if(m==='mic'&&!analyser){ const ok=await abrirMic(); if(!ok){ $('msg').textContent='Aquí no se puede usar el micrófono. Abre el juego desde la web (formacion.sergiovega.eu/juegos/flauta.html) o juega con los dedos.'; return; } }
   mode=m; $('pads').hidden=m!=='tap'; $('end').hidden=true;
   paso=$('tempo').value==='paso'; eighth=paso?60/(30*3):60/(+$('tempo').value*3);
   const seq=seqOverride||secuencia($('parte').value);
